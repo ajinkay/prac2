@@ -1,0 +1,713 @@
+<div class="wrapper hideForMenu">
+    <!-- Hotel detail start /-->
+    <div class="htlDtlCnt clearfix">
+        <!-- htlDtlCntIn started /-->
+        <div class="htlDtlCntIn clearfix custamizeStay">
+            <!-- hotelLeft started /-->
+            <div class="hotelLeft">
+                <div class="nmst clearfix" id="welcomeMessageLoggedIn" style="display:none;">
+                </div>
+                <div class="clear"></div>
+                <div class="resChkInOut clearfix">
+                    <p class="font1_4em">{{hotelName}}</p>
+                    <div class="clear"></div>
+                    <p class="font1_2em fL">Check In: {{checkinMonth}} {{checkinDay}}, {{checkinYear}}</p>
+                    <p class="font1_2em fR">Check Out: {{checkOutMonth}} {{checkOutDay}}, {{checkOutYear}}</p>
+                </div>
+                <div class="clear"></div>
+
+                <div class="yourSelReftWrp yrslk">
+                    <div class="yourSelCont clearfix ">
+                        <!-- hotLefInn started /-->
+                        <div class="hotLefInn clearfix">
+                            <p class="font22Bl">YOUR STAY SUMMARY</p>
+                            <div class="clear"></div>
+                            <!--htlInConT Started-->
+                            <div class="htlInConT">
+                                <div class="sumTxt"><p><label>Hotel:</label><span class="font16Bl">{{hotelName}}</span></p></div>
+                                <div class="chInOut">
+                                    <p><label>Check In:</label><span class="font16Bl">{{checkinMonth}} {{checkinDay}}, {{checkinYear}}</span></p>
+                                    <p><label>Check Out:</label> <span class="font16Bl">{{checkOutMonth}} {{checkOutDay}}, {{checkOutYear}}</span></p>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="slctnDtl clearfix">
+                                    <p><label>Room:</label><span class="font16Bl">{{roomCount}}</span></p>
+                                    <p><label>Adult:</label><span class="font16Bl">{{adultCount}}</span></p>
+                                    <p><label>Children:</label><span class="font16Bl">{{childrenCount}}</span></p>
+                                </div>
+
+                                <div class="rmTyPln">
+                                    <p id="disableRoom"><label>Room Type: </label><span class="font16Bl" id="roomNameCus">{{roomName}}</span></p>
+                                    <p><label>Rate Plan: </label><span class="font16Bl" id="ratePlanCus">{{ratePlanName}}</span></p>
+                                </div>
+
+                                <div class="clear"></div>
+                                <!--inclsWp Started -->
+                                <div class="inclsWp">
+                                    <a href="javascript:;" onclick="$(this).next().slideToggle(); $(this).toggleClass('act');" class="lnkGold act"><span class="gldPlusIc"></span>Inclusions</a>
+                                    <div class="inIncls" id="inclusionPoints" style="display:block">
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <!--inclsWp Started -->
+                            </div>
+                            <!--htlInConT Started-->
+                            <div class="adOnWp">
+                                <p class="font16Bl">Add Ons:</p>
+                                <ul class="inAdO" id="addOnCust">
+                                    <li ng-repeat="(key,value) in customizeAddOn">
+                                        <p ng-if="key=='Airport Transfer(Arrival)'">{{key}}*</p>
+                                        <p ng-if="key=='Airport Transfer(Departure)'">{{key}}*</p>
+                                        <p ng-if="key!='Airport Transfer(Arrival)'&& key!='Airport Transfer(Departure)'">{{key}}</p>
+                                        <a href="javascript:;" ng-click="removeThisAddOn(key,value)">Remove</a></li>
+
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="adOnWp upgrd" id="upgradeRoom">
+                                <p class="font16Bl">Upgraded To:</p>
+                                <ul class="inAdO">
+                                    <li><p id="upgradedRoomName" ></p><a href="javascript:;" ng-click="removeThisRoom()">Remove</a></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div class="yrBkAmtWpr clearfix">
+                                <div id="greenPointsTotal" ng-if="planType=='halfPoints'||planType=='fullPoints'">
+                                    <p class="prcHd">Total Points</p>
+                                    <p class="tlPrcHd"><span class=""></span>{{greenPoints | currency:"":0}}</p>
+                                </div>
+                                <div class="clearfix" id="totalAmount" ng-if="planType=='halfPoints'||planType=='fullCash'">
+                                    <p class="prcHd">Total Amount</p>
+                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{totalAmount | currency:"":0}}*</p>
+                                    <p style="font-size:0.875em; color:#d2ac67;">*{{taxMessage}}</p>
+                                </div>
+                            </div>
+                            <div ng-if="airport>0"><p>* PAC - Payable at checkout</p></div>
+
+                            <div class="amtDtWp">
+                                <!--a href="javascript:;" onclick="$(this).closest('.amtDtWp').find('.amtDInWp').slideToggle(); $(this).toggleClass('act');" class="lnkGold"><span class="gldPlusIc"></span>Amount Details</a-->
+                                <div class="clear"></div>
+                                <div class="amtDInWp clearfix">
+                                    <!--<div class="yrBkAmtWpr clearfix">
+                                        <div class="yrBkHd clearfix">
+                                            <p class="prcHd">Room Amount:</p>
+                                            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>40,000</p>
+                                        </div>
+                                        <ul class="ptRdblWpr clearfix">
+                                            <li>
+                                                <p class="mtDt">Feb 20, 2015</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span>20,000</p>
+                                            </li>
+                                            <li>
+                                                <p class="mtDt"> Feb 21, 2015</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span>20,000</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="yrBkAmtWpr clearfix">
+                                        <div class="yrBkHd clearfix">
+                                            <p class="prcHd">Add On Total Amount</p>
+                                            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>2,500</p>
+                                        </div>
+                                        <ul class="ptRdblWpr clearfix">
+                                            <li>
+                                                <p class="mtDt">Airport Transfer</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span>1000</p>
+                                            </li>
+                                            <li>
+                                                <p class="mtDt">24 Hr. Internet Plan</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span>600</p>
+                                            </li>
+                                            <li>
+                                                <p class="mtDt"> Dinner</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span>900</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="yrBkAmtWpr clearfix" id="taxAmount">
+                                        <div class="yrBkHd clearfix">
+                                            <p class="prcHd">Total Taxes</p>
+                                            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{taxAmount | currency:"":0}}</p>
+                                        </div>
+                                        &lt;!&ndash;ul class="ptRdblWpr clearfix">
+                                            <li>
+                                                <p class="mtDt">Luxury tax @ 10%</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span></p>
+                                            </li>
+                                            <li>
+                                                <p class="mtDt"> Service Tax @ 7.42%</p>
+                                                <p class="amt"><span class="WebRupee">Rs.</span></p>
+                                            </li>
+                                        </ul&ndash;&gt;
+                                    </div>
+
+                                    <div class="yrBkAmtWpr dpAmPy clearfix">
+                                        <div class="yrBkHd clearfix">
+                                            <p class="prcHd">Deposite Amount Payable</p>
+                                            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>47,500</p>
+                                        </div>
+                                    </div>-->
+
+                                    <a href="javascript:;" class="lnkGold">Terms</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- hotLefInn end /-->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- hotelLeft end /-->
+            <div class="rfnsrhWp clearfix">
+                <a class="rfnsrh" rel="yrslk" href="javascript:;" onclick="refineSrc(this);">your stay summary</a>
+                <span ng-if="!greenPoints"><div class="tlAmT"><p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{totalAmount | currency:"":0}}</p><p class="prcHd prH"  rel="yrslk" onclick="if( $(window).width()<1264) { refineSrc(this,'totalAmount'); }">Total Amount:</p></div></span>
+                <span ng-if="greenPoints"><div class="tlAmT"><p class="tlPrcHd"><span class=""></span>{{greenPoints | currency:"":0}}</p><p class="prcHd prH"  rel="yrslk" onclick="if( $(window).width()<1264) { refineSrc(this,'totalPoints'); }">Total Points:</p></div></span>
+
+            </div>
+            <!-- hotelRight started /-->
+            <div class="hotelRight">
+                <div class="htlDtl clearfix">
+                    <p class="font1_2em fL">customize your stay</p>
+                    <p class="font1_2em fR">Step 3 of 5</p>
+                </div>
+                <div class="clear"></div>
+                <!-- chkhtlFiltrWp started /-->
+
+                <!-- Upgrade Start /-->
+                <div class="upgdrade clearfix">
+                    <a href="#/personalDetails" class="btn1 likeAddSubmit">continue</a>
+                    <div class="upgrdWp">
+                        <a href="javascript:;" class="upgrdHdr dbl act" onclick="if($(window).width() &lt; 768) { $(this).next().toggle(); $(this).toggleClass('act'); }"><span class="hd1">Would you like to upgrade your experience</span><span class="plsIc2"></span></a>
+                        <!-- dinTab started /-->
+                        <div class="dinTab clearfix">
+                            <p class="font16Bl">Savour absolute luxury with an upgrade to a higher category room and enjoy the finest of services at a bare minimal charge.</p>
+                            <!-- hotels  started /-->
+                            <ul class="hotels clearfix">
+                                <li  ng-repeat="room in upgradeRooms.rooms track by $index">
+                                    <!-- hotlInfo started /-->
+                                    <div class="hotlInfo">
+                                        <div class="galWp">
+                                            <a href="javascript:;" ng-if="!room.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                            <a href="javascript:;" ng-if="room.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                            <div class="rsvGalry" >
+                                                <div class="wrapper">
+                                                    <a ng-if="!room.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                    <a ng-if="room.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                </div>
+                                                <div class="wrapper">
+                                                    <div class="tvs_wrapper" ng-if="room.tavelClickVideo">
+                                                        <div class="tvs_main" ng-bind-html="getVideoUrl(room.tavelClickVideo)">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="glVw" onclick="event.stopPropagation();">
+                                                        <ul class="glVwUl" ng-if="room.tavelClickVideo == null || room.tavelClickVideo == undefined || room.tavelClickVideo == ''">
+                                                            <li ng-repeat="(key, value) in room.galleryImages">
+                                                                <figure>
+                                                                    <img  ng-src="{{value}}" alt="">
+                                                                    <figcaption>
+                                                                        <p style="color:#ffffff; align:right">{{room.hotelName}},{{room.locations}}</p>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lefImg">
+                                            <div class="htImgWp"><img alt="{{room.roomName}}" title="{{room.roomName}}" ng-src="{{room.roomImage}}" class="htlImg"></div>
+                                        </div>
+                                        <div class="rigInfo">
+                                            <div class="logoInf">
+                                                <p class="hd1">{{room.roomName}}</p>
+                                                <p class="font14Bl">Size: {{room.roomSize}}</p>
+                                                <p class="font14Bl">Location: {{room.roomLocation}}</p>
+                                                <p class="font14Bl">Bed Type: {{room.bedType}}</p>
+                                            </div>
+                                            <ul class="lnkGoldWp">
+                                                <li><a class="lnkGold" href="javascript:;"  ng-click="showRoomDetails($event,room.roomInclusionPoints)">Room Details<span class="clsTx">X</span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- hotlInfo end /-->
+                                    <div class="rate" ng-if="planType=='fullPoints'">
+                                        <p class="font14Bl">additional points</p>
+                                        <div class="clbPoints">
+                                            <p class="prc">
+                                                <span class="rps"><span class=""></span>{{room.extraAmount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Points Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a ng-if="roomCode==room.roomTypeCode" style="pointer-events:none !important" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomTypeCode}}" href="javascript:;" ng-click="addThisRoom(room.roomTypeCode,room.roomName,room.pointsPerNight,'greenPoints')">select</a>
+                                        <a ng-if="roomCode!=room.roomTypeCode && isUpgradedToNewRoom == false" class="btn1 likeAdd" id="customizeYourStay{{room.roomTypeCode}}" href="javascript:;" ng-click="addThisRoom(room.roomTypeCode,room.roomName,room.pointsPerNight,'greenPoints')">select</a>
+                                        <a ng-if="roomCode!=room.roomTypeCode && isUpgradedToNewRoom == true" class="btn1 likeAdd" href="javascript:;" data-toggle="popover" data-placement="bottom" data-content="kindly remove the upgraded room & upgrade to this rooms" ng-click="displayThisPopUp($event)">select</a>
+                                    </div>
+                                    <div class="rate" ng-if="planType=='fullCash'">
+                                        <p class="font14Bl">additional amount</p>
+                                        <div class="clbPoints">
+                                            <p class="prc">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{room.extraAmount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a ng-if="roomCode==room.roomTypeCode" style="pointer-events:none !important" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomTypeCode}}" href="javascript:;" ng-click="addThisRoom(room.roomTypeCode,room.roomName,room.ratePlanAmount,'rupees')">select</a>
+                                        <a ng-if="roomCode!=room.roomTypeCode && isUpgradedToNewRoom == false" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomTypeCode}}" href="javascript:;" ng-click="addThisRoom(room.roomTypeCode,room.roomName,room.ratePlanAmount,'rupees')">select</a>
+                                        <a ng-if="roomCode!=room.roomTypeCode && isUpgradedToNewRoom == true" class="btn1 likeAdd btn1_mbl" data-toggle="popover" data-placement="bottom" data-content="kindly remove the upgraded room & upgrade to this rooms" href="javascript:;" ng-click="displayThisPopUp($event)">select</a>
+                                    </div>
+                                    <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions">
+                                        <p class="rmDtlsPara" ng-bind-html="room.roomDescription"></p>
+                                        <div class="inclsnCnt">
+                                            <p class="inclsnHdng" id="roomInclusionHeading" ng-bind-html="room.roomInclusionHeading"></p>
+                                            <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+
+                                </li>
+
+                                <!-- code for offline hotels start-->
+                                <li  ng-repeat="room in upgradeRoomsOffline.upgradeRooms track by $index">
+                                    <!-- hotlInfo started /-->
+                                    <div class="hotlInfo">
+                                        <div class="galWp">
+                                            <a href="javascript:;" ng-if="!room.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                            <a href="javascript:;" ng-if="room.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                            <div class="rsvGalry" >
+                                                <div class="wrapper">
+                                                    <a ng-if="!room.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                    <a ng-if="room.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                </div>
+                                                <div class="wrapper">
+                                                    <div class="tvs_wrapper" ng-if="room.tavelClickVideo">
+                                                        <div class="tvs_main" ng-bind-html="getVideoUrl(room.tavelClickVideo)">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="glVw" onclick="event.stopPropagation();">
+                                                        <ul class="glVwUl" ng-if="room.tavelClickVideo == null || room.tavelClickVideo == undefined || room.tavelClickVideo == ''">
+                                                            <li ng-repeat="(key, value) in room.viewGallery">
+                                                                <figure>
+                                                                    <img  ng-src="{{value}}" alt="">
+                                                                    <figcaption>
+                                                                        <p style="color:#ffffff; align:right">{{room.hotelName}},{{room.locations}}</p>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lefImg">
+                                            <div class="htImgWp"><img alt="{{room.roomDesc}}" title="{{room.roomDesc}}" ng-src="{{room.roomImage}}" class="htlImg"></div>
+                                        </div>
+                                        <div class="rigInfo">
+                                            <div class="logoInf">
+                                                <p class="hd1">{{room.roomDesc}}</p>
+                                                <p class="font14Bl">Size: {{room.size}}</p>
+                                                <p class="font14Bl">Location: {{room.location}}</p>
+                                                <p class="font14Bl">Bed Type: {{room.bedType}}</p>
+                                            </div>
+                                            <ul class="lnkGoldWp">
+                                                <li><a class="lnkGold" href="javascript:;" id="amountDetails" ng-click="showRoomDetails($event,room.roomInclusionPoints)">Room Details<span class="clsTx">X</span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- hotlInfo end /-->
+                                    <div class="rate" ng-if="room.flagRedemption=='N'">
+                                        <p class="font14Bl">additional amount</p>
+                                        <div class="clbPoints">
+                                            <p class="prc">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{room.differentialAmount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a ng-if="roomCode==room.roomId" style="pointer-events:none !important" class="btn1 likeAdd" id="customizeYourStay{{room.roomId}}" href="javascript:;" ng-click="addThisRoom(room.roomId,room.roomDesc,room.rate,'rupees')">select</a>
+                                        <a ng-if="roomCode!=room.roomId && isUpgradedToNewRoom == false" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomId}}" href="javascript:;" ng-click="addThisRoom(room.roomId,room.roomDesc,room.rate,'rupees')">select</a>
+                                        <a ng-if="roomCode!=room.roomId && isUpgradedToNewRoom ==true" data-toggle="popover" data-placement="bottom" data-content="kindly remove the upgraded room & upgrade to this rooms" class="btn1 likeAdd" href="javascript:;" ng-click="displayThisPopUp($event)">select</a>
+                                    </div>
+                                    <div class="rate" ng-if="room.flagRedemption=='Y'">
+                                        <p class="font14Bl">additional Points</p>
+                                        <div class="clbPoints">
+                                            <p class="prc">
+                                                <span class="rps">{{room.differentialAmount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Points Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a ng-if="roomCode==room.roomId" style="pointer-events:none !important" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomId}}" href="javascript:;" ng-click="addThisRoom(room.roomId,room.roomDesc,room.rateroom.rateroom.rate,'greenPoints')">select</a>
+                                        <a ng-if="roomCode!=room.roomId && isUpgradedToNewRoom == false" class="btn1 likeAdd btn1_mbl" id="customizeYourStay{{room.roomId}}" href="javascript:;" ng-click="addThisRoom(room.roomId,room.roomDesc,room.rateroom.rateroom.rate,'greenPoints')">select</a>
+                                        <a ng-if="roomCode!=room.roomId && isUpgradedToNewRoom == true" class="btn1 likeAdd btn1_mbl" data-toggle="popover" data-placement="bottom" data-content="kindly remove the upgraded room & upgrade to this rooms" href="javascript:;" ng-click="displayThisPopUp($event)">select</a>
+                                    </div>
+                                    <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions" ng-bind-html="room.textContent">
+                                        <!--<p class="rmDtlsPara" ></p>
+                                        <div class="inclsnCnt">
+                                            &lt;!&ndash;p class="inclsnHdng" id="roomInclusionHeading">{{room.inclusionDesc}}</p&ndash;&gt;
+                                            <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                            </ul>
+                                        </div>-->
+                                    </div>
+                                </li>
+
+                                <!-- code for offline hotels end-->
+
+                            </ul>
+                            <!-- hotels  end /-->
+                            <div class="clear"></div>
+                        </div>
+                        <!-- dinTab end /-->
+                    </div>
+                    <a href="#/personalDetails" class="btn1 likeAddSubmit">continue</a>
+                </div>
+                <!-- Upgrade end /-->
+
+
+            </div>
+            <!-- hotelRight end /-->
+        </div>
+        <!-- htlDtlCntIn end /-->
+
+
+    </div>
+    <!-- Hotel detail end /-->
+</div>
+
+<script type="text/javascript">
+
+	var GL_checkInDate = new Array();
+	var GL_checkOutDate = new Array();
+
+	GL_checkInDate[0] = new Date("2015,07,26,12:00:00");
+	GL_checkOutDate[0] = new Date("2015,07,30,12:00:00");
+
+
+$(window).load(function(){loadJ();});
+$(window).resize(function(){
+if ($('.wrapper').is(":visible")) {
+    loadJ();
+    resPos();
+	//jwplayer('video_player_1').remove();
+	//$('#player_holder_1').show();
+	//$('#video_player_1').hide();
+}
+});
+
+function loadJ(){
+    $('body').css('overflow', 'scroll');
+    var heightWithScrollBars = $(window).height();
+    var widthWithScrollBars = $(window).width();
+    $('body').css('overflow', 'auto');
+
+if ($(window).width()>=1263){
+        var x = $(".galary").width();
+
+        var col1_width = (x * 31.6)/100;
+        var col2_width = (x * 64.9)/100;
+        var col3_width = (x * 64.9)/100;
+        var col0_width = x;
+
+
+        var col1_height = col1_width;
+        var col2_height = col1_width;
+        var col3_height = col2_width;
+
+        $(".glryIn.col1").each(function(){
+            $(this).css({width:col1_width,height:col1_height});
+        });
+        $(".glryIn.col2").each(function(){
+            $(this).css({width:col2_width,height:col2_height});
+            $(this).find('.glryImg').css({height:col2_height});
+        });
+        $(".glryIn.col3").each(function(){
+            $(this).css({width:col3_width,height:col3_height});
+            $(this).find('.glryImg').css({height:col3_height});
+        });
+        $(".glryIn.col0").each(function(){
+            $(this).css({width:col0_width,height:col1_height});
+        });
+    }
+    else if($(window).width() >= 768 && $(window).width() <= 1262){
+            var x = $(".galary").width();
+            var col1_width = (x * 47.5)/100;
+            var col2_width = (x * 47.5)/100;
+            var col3_width = (x * 47.5)/100;
+            var col0_width =(x * 97.3)/100;
+
+
+            var col1_height = col1_width;
+            var col2_height = col1_width;
+            var col3_height = col1_width;
+
+            $(".glryIn.col1").each(function(){
+                $(this).css({width:col1_width,height:col1_height});
+            });
+            $(".glryIn.col2").each(function(){
+                $(this).css({width:col2_width,height:col2_height});
+                $(this).find('.glryImg').css({height:col2_height});
+				$(this).find('.colLst li').css({height:col2_height});
+            });
+            $(".glryIn.col3").each(function(){
+                $(this).css({width:col3_width,height:col3_height});
+                $(this).find('.glryImg').css({height:col3_height});
+				$(this).find('.colLst li').css({height:col3_height});
+            });
+            $(".glryIn.col0").each(function(){
+				$(this).css({width:col0_width,height:col1_height});
+			});
+
+    }
+
+    else if($(window).width() <= 767){
+            var x = $(".galary").width();
+
+            var col1_width = x;
+            var col2_width = x;
+            var col3_width = x;
+
+
+            var gWidth = (x * 1.6)/100;
+
+            var col1_height = col1_width;
+            var col2_height = col1_width;
+            var col3_height = col3_width;
+
+            $(".glryIn.col1").each(function(){
+                $(this).css({width:col1_width,height:col1_height});
+            });
+            $(".glryIn.col2").each(function(){
+                $(this).css({width:col2_width,height:col2_height});
+                $(this).find('.glryImg').css({height:col2_height});
+				$(this).find('.colLst li').css({height:col2_height});
+            });
+            $(".glryIn.col3").each(function(){
+                $(this).css({width:col3_width,height:col3_height});
+                $(this).find('.glryImg').css({height:col3_height});
+				$(this).find('.colLst li').css({height:col3_height});
+            });
+
+    }
+
+}
+</script>
+<script type="text/javascript">
+
+	$(window).load(function() {
+		checkEleApp ();
+		resPos();
+		topFixNav()
+		mobSliderfn();
+		mobArrPlaFn();
+		setVal(); // resetting rooms and adult input field
+		addBlc(); // adding blcMenu class to main top navigation
+		changeTab();
+
+		$("#resCheckIn").datepick({
+			minDate: 0,
+			rangeSelect: false,
+			changeMonth: false,
+			defaultDate: new Date(2015,6,25),
+			selectDefaultDate: true,
+			onSelect:function (d){
+				$('.checkIn .day').text(monthNames[d[0].getMonth()]);
+				$('.checkIn .date').text(d[0].getDate());
+				$('.checkIn .year').text(d[0].getFullYear());
+
+				$("#resCheckOut").datepick('option', {minDate:d[0]});
+				$('.resCheckInWp').hide();
+				$("#resCheckIn .dp"+d[0].getTime()).addClass("datepick-selected");
+			}
+		});
+		$("#resCheckIn .dp"+GL_checkInDate[0].getTime()).addClass("datepick-selected");
+
+
+		$("#resCheckOut").datepick({
+			minDate: 0,
+			rangeSelect: false,
+			changeMonth: false,
+			onDate: codates,
+			onSelect:function (dates){
+				$('.checkOut .day').text(monthNames[dates[0].getMonth()]);
+				$('.checkOut .date').text(dates[0].getDate());
+				$('.checkOut .year').text(dates[0].getFullYear());
+
+				$('.resCheckInWp').hide();
+			},
+			onShow: $.datepick.hoverCallback(showHoverDays)
+		});
+
+	});
+
+	$(window).scroll(function() {
+		checkEleApp();
+		topFixNav();
+	});
+	$(window).resize(function() {
+		resPos();
+		mobSliderfn();
+		mobArrPlaFn();
+		submenuSlid();
+		addBlc() // adding blcMenu class to main top navigation;
+		changeTab();
+		hideBotFix(); // hiding bottom fix nav for mobile sections
+
+
+
+	});
+
+function showHoverDays(date, selectable) {
+		if (selectable) {
+			var checkInDate = $("#resCheckIn").datepick('getDate');
+
+			var startHover = Date.daysBetween(checkInDate[0],date);
+			$("#resCheckOut .datepick-selected-hover").removeClass("datepick-selected-hover");
+			$("#resCheckOut .datepick-selected-hover-last").removeClass("datepick-selected-hover-last");
+			$("#resCheckOut .datepick-selected-hover-first").removeClass("datepick-selected-hover-first");
+			if (startHover > 0) {
+			 for (i=0;i<=startHover;i++) {
+					var highlight = new Date(checkInDate[0]).setDate(checkInDate[0].getDate()+i).toString();
+					if (i == 0) {
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover-first");
+					}
+					else if (i == startHover) {
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover-last");
+					}
+					else{
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover");
+					}
+				}
+			}
+		}
+
+	}
+
+function codates(date, inMonth) {
+	var checkInDate = new Array();
+	var checkOutDate = new Array();
+
+	var checkInDate__ = $("#resCheckIn").datepick('getDate');
+	if (checkInDate__.length > 0){
+	checkInDate[0] = checkInDate__[0];
+	}
+	else {
+		checkInDate[0] = new Date("2015/07/26");
+	}
+	checkOutDate[0] = new Date("2015/07/30");
+
+    /*var checkInDate = $("#checkin-date").datepick('getDate');
+    var checkOutDate = $("#checkout-date").datepick('getDate');*/
+
+    var selected = "";
+    var lfRdius = '';
+    var rgRdius = '';
+
+    if (typeof(checkInDate[0]) == "object"){
+        if (date.getTime() == checkInDate[0].getTime()) {
+            selected = " m-selected";
+        }
+    }
+
+    if (typeof(checkOutDate[0]) == "object"){
+        if (checkInDate[0].yyyymmdd() == date.yyyymmdd()) {
+            lfRdius = ' lfRdius';
+        }
+        if (checkOutDate[0].yyyymmdd() == date.yyyymmdd()) {
+            rgRdius = ' rgRdius';
+        }
+
+        if (date.getTime() >= checkInDate[0].getTime() && date.getTime() <= checkOutDate[0].getTime() && inMonth){
+            selected = " datepick-selected";
+        }
+    }
+
+    if (typeof(aHolidayList[date.yyyymmdd()]) == "object"){
+    	var css = "";
+        if(date.getDay() == 5 ||  date.getDay() == 6) {
+            css = "rigDr";
+        }
+        return {content:date.getDate() + '<span class="tooltip '+css+'"><span class="tolTpCnt"><span class="tolTipArrow"></span><span class="tolTipInner">'+aHolidayList[date.yyyymmdd()].name+'</span></span></span>',dateClass: 'txtDUndLn '+selected + lfRdius + rgRdius, selectable: true,title:' '};
+    }else {
+        return {dateClass:selected + lfRdius + rgRdius};
+    }
+}
+
+$(document).ready(function() {
+
+	hideBotFix(); // hiding bottom fix nav for mobile sections
+
+	// resetting
+	$('body').click(function(e) {
+		customizeRestFn();
+		resMainReset();
+	});
+
+
+
+	$(document).on('touchstart', function (event) {
+		if (!$(event.target).closest('.autoSugg:visible').length) {
+			$('.autoSugg:visible').hide()
+		}
+
+		if (!$(event.target).closest('.prsFltr').length) {
+			$('.prsFltrLst:visible').hide();
+			$('.prsFltrInn').removeClass('act');
+		}
+
+		if (!$(event.target).closest('.glVw').length) {
+            resMainTabReset();
+		}
+
+	});
+
+
+});
+
+$("input:radio[name=smoking]").click(function() {
+    $(".prefrenceMessage").hide();
+});
+
+$("input:radio[name=floorType]").click(function() {
+    $(".prefrenceMessage").hide();
+});
+
+
+$('input:checkbox[name=interConnectingRoom]').click(function(){
+    $(".prefrenceMessage").hide();
+});
+
+
+$('input:checkbox[name=arrivalOrCheckout]').click(function(){
+    $(".arrivalCheckoutInput").hide();
+    $('input:checkbox[name=arrivalOrCheckout]:checked').each(function(){
+        var arrivalOrCheckout=$(this).val();
+        $("."+arrivalOrCheckout+"Input").show();
+    });
+    $(".prefrenceMessage").hide();
+});
+
+
+</script>
+<style>
+.gold
+{
+text-decoration: none !important;
+}
+</style>

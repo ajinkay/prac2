@@ -1,0 +1,500 @@
+
+<div class="htlDtlCntIn flexiblDt clearfix">
+    <!-- hotelLeft started /-->
+    <div class="hotelLeft">
+        <div class="nmst clearfix" style="display:none;">
+            <p class="nmstTxt">Namaste</p>
+            <p class="font22Bl fL">Mr. T. Srinivasa Varadhan Jagannathan</p>
+            <p class="font22Bl fR">2,22,222 <span class="font14Bl nmstTxt2">Club ITC Green Points</span></p>
+        </div>
+        <div class="clear"></div>
+        <div class="resChkInOut clearfix">
+            <p class="font1_4em">New Delhi</p>
+            <div class="clear"></div>
+            <p id="m_checkindate" class="font1_2em fL">Check In: February 20, 2015</p>
+            <p id="m_checkoutdate" class="font1_2em fR">Check Out: February 22, 2015</p>
+        </div>
+        <div class="clear"></div>
+        <div class="yourSelReftWrp yrslk">
+            <div class="yourSelCont clearfix ">
+                <!-- hotLefInn started /-->
+                <div class="hotLefInn clearfix">
+                    <p class="font22Bl">YOUR SELECTION</p>
+                    <div class="clear"></div>
+                    <h2 class="font16Bl">Destination, Hotel, Airport</h2>
+                    <div class="destiWrp">
+                        <div id="hotelSelectionValue"><input type="text" placeholder="New Delhi" class="destInp  itc_custom_input" onfocus="$(this).parent().next().show(); $('.slctLst').jScrollPane();" id="destinationSelection"></div>
+                        <ul class="slctLst autoSugg" id="dynamicDropdownAppendRe" style="overflow:scroll !important;">
+                            <li class="hed"><a href="#">Destination</a></li>
+                            <li ng-repeat="(key, value) in dropDownList[0]"><a id="selectedValueRes" ng-click="capLet(key);">{{key}}</a></li>
+                            <li class="hed"><a href="#">Hotels</a></li>
+                            <li ng-repeat="(key, value) in dropDownList[1]"><a id="selectedHotelValue" ng-click="capLet(key);">{{key}}</a></li>
+                            <li class="hed"><a href="#">Airport Code</a></li>
+                            <li ng-repeat="(key, value) in dropDownList[2]"><a id="selectedAirportName" ng-click="capLet(key);">{{key}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="ysWp1 clearfix">
+                        <div class="checkIn">
+                            <h2 class="font16Bl">Check In</h2>
+                            <!-- changes done by 24371 for maintaining los  from leftside calender on flexibledate page  -->
+                            <div class="whitCont" onclick="event.stopPropagation(); updateReserveSpan(getcheckinDate(), getcheckoutDate());$('.resCheckInWp:visible').hide(); $(this).next().show();">
+                                <a href="#" class="preArr"></a>
+                                <div class="innContent">
+                                    <p class="font16Bl day" id='checkinMonth'>February</p>
+                                    <p class="font28Bl date" id='checkinDay'>20</p>
+                                    <p class="font16Bl year" id='checkinYear'>2015</p>
+                                </div>
+                                <a  class="nextArr"></a>
+                            </div>
+                            <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                <div class="calArw"></div>
+                                <div id="resCheckIn"></div>
+                            </div>
+                        </div>
+                        <div class="checkOut">
+                            <h2 class="font16Bl">Check Out</h2>
+                            <div class="whitCont" onclick="event.stopPropagation();  $('.resCheckInWp:visible').hide();$(this).next().show();">
+                                <a href="#" class="preArr"></a>
+                                <div class="innContent">
+                                    <p class="font16Bl day"  id='checkoutMonth'>February</p>
+                                    <p class="font28Bl date" id='checkoutDay'>22</p>
+                                    <p class="font16Bl year" id='checkoutYear'>2015</p>
+                                </div>
+                                <a href="#" class="nextArr"></a>
+                            </div>
+                            <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                <div class="calArw"></div>
+                                <div id="resCheckOut"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="chkCnt clearfix">
+                            <input type="checkBox" readonly="true" checked = "true">
+                            <label class="lab2">Flexible Dates</label>
+                        </div>
+                    </div>
+                    <div class="ysWp2 clearfix">
+                        <div class="slctnDtl clearfix">
+                            <div class="slctn mL0 roomJs">
+                                <p class="newresHeading">Rooms / Suites</p>
+                                <div class="slctnWp rsrvDtailWp" style="margin-top: 25px;">
+                                    <div class="slctnWpIn">
+                                        <input type="number"  placeholder="1" class="slctnInp itc_custom_input" id='reservationRooms' readonly="readonly">
+                                        <a class="plIc roomPlusButton" style="cursor:pointer"></a>
+                                        <a class="mnIc inAct roomMinusButton" style="cursor:pointer"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slctn adultJs adultJsnew" style="position:relative">
+                                <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Adults / room 19yrs & above <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                    <div class="ttLfAr"></div>
+                                    <div class="inHvCont">{{infoMessageAdult}}</div>
+                                </div>
+                                <div class="slctnWp rsrvDtailWp">
+                                    <div class="slctnWpIn">
+                                        <input type="number"  placeholder="1" class="slctnInp itc_custom_input totalOccupantss" id='reservationAdults' readonly="readonly">
+                                        <a class="plIc totalOccupantsPlusButton adultplus" style="cursor:pointer"></a>
+                                        <a class="mnIc inAct totalOccupantsMinusButton adultminus" style="cursor:pointer"></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slctn childJs childJsnew" style="position:relative">
+                                <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Children / room 13 - 18yrs <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                    <div class="ttLfAr"></div>
+                                    <div class="inHvCont">{{infoMessageChildren}}</div>
+                                </div>
+                                <div class="slctnWp rsrvDtailWp">
+                                    <div class="slctnWpIn">
+                                        <input type="number"  placeholder="0" class="slctnInp itc_custom_input totalOccupantss" id='reservationChildren' readonly="readonly">
+                                        <a class="plIc totalOccupantsPlusButton childrenplus" style="cursor:pointer" id="childrensCount"></a>
+                                        <a class="mnIc inAct totalOccupantsMinusButton childrenminus" style="cursor:pointer" id="childrensCount"></a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--Alert message to be shown when user tries to enter more than 4 occupants-->
+                        <div class="errwp emsg" style="font-size:13px;width:100%;display:none;" id="messageLabel">
+                            <div class="alrtIc"></div><p style="float:none;font-size:12px;">{{alertMessageOccupants}}</p>
+                        </div>
+                    </div>
+                    <div class="prmCd">
+                        <div class="slctnDtl clearfix">
+                            <div class="slctn mL0">
+                                <!--p class="hdng">Promo Code</p-->
+                                <div class="slctnWp">
+                                    <!--div class="slctnWpIn">
+                                        <input placeholder="Select" class="slctnInp itc_custom_input" readonly="true" id="hotelSelectionPromoType">
+                                        <a href="javascript:void(0);" class="blkDnIc" id="promoTypeArrow"></a>
+                                    </div-->
+                                    <!--div class="clear"></div-->
+                                    <!--ul class="slctnLst autoSugg">
+                                        <li><a ng-click="promo('Corporate')">Corporate</a></li>
+                                        <li><a ng-click="promo('Promotional')">Promotional</a></li>
+                                        <li><a ng-click="promo('Travel Agent')">Travel Agent</a></li>
+                                        <li><a ng-click="promo('None')">None</a></li>
+                                    </ul-->
+                                    <!--div class="slctnWpIn">
+                                        <input type="text" placeholder="Type Your Code" class="slctnInp alphaNum" onkeyup="showClsBtn(this);">
+                                        <a class="cls5" href="javascript:;" onclick="deleteCode(this);"></a>
+                                    </div-->
+                                    <div class="errwp" id="promoError">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="btn6">Update</a> -->
+                    <!-- Added by ICF, Default is commented above. -->
+                    <a class="btn1 likeAddSubmit" ng-click="getHotelSearchResults()">Update</a>
+                </div>
+                <!-- hotLefInn end /-->
+            </div>
+        </div>
+        <!--yrBkAmtWpr Started -->
+        <div class="yrBkAmtWpr clearfix">
+            <div class="yrBkHd clearfix">
+                <p class="prcHd">Your Current booking amount</p>
+                <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{total}}</p>
+            </div>
+            <!-- ptRdblWpr Started -->
+            <ul class="ptRdblWpr clearfix">
+                <li ng-repeat="(key, value) in amountList">
+                    <p class="mtDt">{{key}}</p>
+                    <p class="amt"><span class="WebRupee">Rs.</span>{{value}}</p>
+                </li>
+            </ul>
+            <!-- ptRdblWpr End -->
+        </div>
+        <!--yrBkAmtWpr End -->
+        <!--yrBkAmtWpr Started -->
+        <div class="yrBkAmtWpr icfMod clearfix" style="display:none">
+            <div class="yrBkHd nBdrabc clearfix">
+                <p class="prcHd">Your new booking amount</p>
+                <p class="tlPrcHd"><span class="WebRupee">Rs.</span>0</p>
+            </div>
+            <!-- ptRdblWpr Started -->
+            <ul class="ptRdblWpr custCls clearfix">
+            </ul>
+            <!-- ptRdblWpr End -->
+        </div>
+        <!--yrBkAmtWpr End -->
+        <div class="rfnSrchWpr ref" style="display: none;">
+            <div class="rfnSrchCnt">
+                <div class="rfnSrchInn clearfix">
+                    <p class="font22Bl">Refine Your Search</p>
+                    <div class="rfnLstCntLf">
+                        <div class="rfnLstCnt">
+                            <p class="font16Bl">Brands</p>
+                            <ul class="rfnLst">
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="brnd1">
+                                        <label class="lab2" for="brnd1">All</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="brnd2">
+                                        <label class="lab2" for="brnd2">ITC Hotels – The Luxury Collection (4)</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="brnd3">
+                                        <label class="lab2" for="brnd3">Sheraton/ Welcomhotels (3)</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="brnd4">
+                                        <label class="lab2" for="brnd4">Fortune(2)</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="brnd5">
+                                        <label class="lab2" for="brnd5">WelcomHeritage</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="rfnLstCnt prs">
+                            <p class="font16Bl">Price</p>
+                            <ul class="rfnLst">
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="prs1">
+                                        <label class="lab2" for="prs1">All</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="prs2">
+                                        <label class="lab2" for="prs2">Low - High</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="prs3">
+                                        <label class="lab2" for="prs3">High - Low</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rfnLstCntLf">
+                        <div class="rfnLstCnt">
+                            <p class="font16Bl">Rate Preference</p>
+                            <ul class="rfnLst">
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="kms3">
+                                        <label class="lab2" for="kms3">All</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rfnLstCntRf">
+                        <div class="rfnLstCnt">
+                            <p class="font16Bl">Distance from airport (kms)</p>
+                            <ul class="rfnLst">
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="kms1">
+                                        <label class="lab2" for="kms1">All</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="kms2">
+                                        <label class="lab2" for="kms2">0 to 15 (3)</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="kms3">
+                                        <label class="lab2" for="kms3">15 to 30 (1)</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chkCnt clearfix">
+                                        <input type="checkBox" id="kms4">
+                                        <label class="lab2" for="kms4">30 & more (1)</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="botBtn">
+                        <a href="#" class="btn6">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- hotelLeft end /-->
+    <div class="rfnsrhWp clearfix">
+        <a class="rfnsrh" rel="yrslk" href="javascript:;" onclick="refineSrc(this);">your selection</a>
+        <a class="rfnsrh fR" rel="ref" href="javascript:;" onclick="refineSrc(this);">Refine search</a>
+    </div>
+    <!--yrBkAmtWpr Started -->
+    <div class="yrBkAmtWpr noDIsp clearfix">
+        <div class="yrBkHd clearfix">
+            <p class="prcHd">your current booking amount</p>
+            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>21,200</p>
+        </div>
+        <!-- ptRdblWpr Started -->
+        <ul class="ptRdblWpr clearfix">
+            <li>
+                <p class="mtDt">Feb 20, 2015</p>
+                <p class="amt"><span class="WebRupee">Rs.</span>10,600</p>
+            </li>
+            <li>
+                <p class="mtDt">Feb 21, 2015</p>
+                <p class="amt"><span class="WebRupee">Rs.</span>10,600</p>
+            </li>
+        </ul>
+        <!-- ptRdblWpr End -->
+    </div>
+    <!--yrBkAmtWpr End -->
+    <!--yrBkAmtWpr Started -->
+    <div class="yrBkAmtWpr noDIsp clearfix">
+        <div class="yrBkHd clearfix">
+            <p class="prcHd">your new booking amount</p>
+            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>25,200</p>
+        </div>
+        <!-- ptRdblWpr Started -->
+        <ul class="ptRdblWpr clearfix">
+            <li>
+                <p class="mtDt">Feb 26, 2015</p>
+                <p class="amt"><span class="WebRupee">Rs.</span>13,000</p>
+            </li>
+            <li>
+                <p class="mtDt">Feb 27, 2015</p>
+                <p class="amt"><span class="WebRupee">Rs.</span>12,000</p>
+            </li>
+        </ul>
+        <!-- ptRdblWpr End -->
+    </div>
+    <!--yrBkAmtWpr End -->
+    <!-- hotelRight started /-->
+    <div class="hotelRight">
+        <div class="htlDtl clearfix">
+            <p class="font1_2em fL">HOTEL DETAILS</p>
+            <p class="font1_2em fR">Step 1 of 5</p>
+        </div>
+        <div class="clear"></div>
+        <div class="chkhtlFiltrWp clearfix" style="display: none;">
+            <div class="chkWp">
+                <input type="checkbox" id="cigp" class="chk" name="remember me">
+                <label for="cigp" class="lab1">Club ITC Green Points</label>
+            </div>
+        </div>
+        <!-- flexDate  started /-->
+        <div class="flexDate clearfix">
+            <p class="font25Bl"> flexible dates</p>
+            <a class="lnkGold" href="{{redirect}}">Go Back</a>
+            <div class="clear"></div>
+            <!-- calendarWrap started /-->
+            <div class="calendarWrap">
+                <div id="webcal" class="calendarNav clearfix">
+                    <a href="javascript:;" onclick="DVcalPrev();" ng-click="appendRates()" class="calPreBtn"></a>
+                    <p class="font25Bl">february 2015</p>
+                    <a href="javascript:;" onclick="DVcalNext();" ng-click="appendRates()" class="calNxtBtn"></a>
+                </div>
+                <!-- calDesk started /-->
+                <div class="calDesk">
+                    <ul class="calHeadLi clearfix">
+                        <li>SUNDAY</li>
+                        <li>MONDAY</li>
+                        <li>TUESDAY</li>
+                        <li>WEDNESDAY</li>
+                        <li>THURSDAY</li>
+                        <li>FRIDAY</li>
+                        <li>SATURDAY</li>
+                    </ul>
+                    <ul id="G_calendar" class="calDaysLi clearfix">
+                    </ul>
+                </div>
+                <!-- calDesk end /-->
+                <!-- calMob started /-->
+                <div id="mobilecalHead" class="calendarNav clearfix">
+                    <a href="javascript:;" onclick="mobi.prev();" ng-click= "appendRates()" class="calPreBtn"></a>
+                    <p class="font25Bl">february 2015</p>
+                    <a href="javascript:;" onclick="mobi.next();" ng-click= "appendRates()" class="calNxtBtn"></a>
+                </div>
+                <div id="mobilecal" class="calMob"></div>
+                <!-- calMob end /-->
+                <ul class="calHintUl clearfix">
+                    <li>
+                        <span class="checkInHint"></span>
+                        <p class="font17Bl">Check-in Date</p>
+                    </li>
+                    <li>
+                        <span class="lowestHint"></span>
+                        <p class="font17Bl">Lowest Price</p>
+                    </li>
+                    <li>
+                        <span class="selChkInHint"></span>
+                        <p class="font17Bl">Your Selected Check-in Dates</p>
+                    </li>
+                </ul>
+                <div class="noteCont">
+                    <h4 class="font14Bl">Note:</h4>
+                    <ul class="noteUl">
+                        <li ng-repeat="x in disclaimer">{{x.disc}}</li>
+
+                    </ul>
+                </div>
+                <a href="javascript:;" class="btn1 likeAddSubmit" id="flexidates{{data.hotelId || data.hotelCode}}" data-toggle="popover" data-placement="left" data-content="Rooms are not available for one (or more) dates, during the stay duration as per your check in. Kindly select another check in date" ng-click="flexibleDateSelection();redirectToRoomSelectionPage(data.hotelImage,data.hotelCategory,data.chainCode,data.hotelCode,data.hotelPagePath,data.hotelId,data.hotelName,data.hotelEmail,data.hotelPhone,data.hotelAddress,data.hotelLocation,data.ratePlanCode,data.isOnlinePg)">PROCEED TO ROOM SELECTION</a>
+                <!--div class="hvrCont pgPopUp" style="display:block;">
+                   <div class="ttArDwn"></div>
+                   <div class="inHvCont">
+                        Rooms are not available for one (or more) dates, during the stay duration as per your check in.
+                        Kindly select another check in date.
+                   </div>
+                   </div-->
+            </div>
+            <!-- calendarWrap end /-->
+        </div>
+        <!-- flexDate  end /-->
+    </div>
+    <!-- hotelRight end /-->
+
+    <div class="modal fade in new-modal" id="myFlexDateModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body text-center">
+                    <h4 class="reserHd"></h4>
+                    <div class="clear"></div>
+                    <div class="newBook clearfix">
+                        <p class="font16Bl successFlexData"></p>
+                        <p>&nbsp;</p>
+                        <button type="button" class="btn btn-default clseButton" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Hotel detail end /-->
+<div class="rsrvSrchWrp">
+    <ul class="rsrvSrch">
+        <li  rel="mobRes">
+            reservations
+            <div class="uparrw"></div>
+        </li>
+        <li rel="sear">
+            Search
+            <div class="uparrw"></div>
+        </li>
+    </ul>
+</div>
+<!-- rsrvSrchWrp end /-->
+<!-- overlayCont started /-->
+<div class="overlayCont">
+    <a class="overlayCloBtn"></a>
+    <!-- mobile Start /-->
+    <div class="mob">
+        <div class="tpCnt">
+            <div class="logo"><img alt="" src="/etc/designs/itchotelsonline/clientlibs/images/logoBlk.png"></div>
+            <a class="menuCloBtn"></a>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- mobile end /-->
+</div>
+
+<style>
+    @media only screen and (max-width: 1024px) and (min-width: 0px)
+{
+   #questionIcon
+   {display:none;}
+}
+@media only screen and (max-width: 479px) and (min-width: 0px){
+.adultJsnew{margin-right:10px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 767px) and (min-width: 480px){
+.adultJsnew{margin-right:70px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 1262px) and (min-width: 768px){
+.adultJsnew{margin-right:17px !important;}
+.childJsnew{float:left !important;}
+}
+</style>

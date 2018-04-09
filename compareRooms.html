@@ -1,0 +1,482 @@
+<div class="wrapper hideForMenu">
+    <div class="htlDtlCntIn compare clearfix">
+        <!-- hotelLeft started /-->
+        <div class="hotelLeft">
+            <div class="nmst clearfix" id="welcomeMessageLoggedIn" style="display:none;">
+            </div>
+            <div class="clear"></div>
+            <div class="resChkInOut clearfix">
+                <p class="font1_4em">{{selected}}</p>
+                <div class="clear"></div>
+                <p class="font1_2em fL">Check In: {{checkIn}}</p>
+                <p class="font1_2em fR">Check Out: {{checkOut}}</p>
+            </div>
+            <div class="clear"></div>
+            <div class="yourSelReftWrp yrslk">
+                <div class="yourSelCont clearfix ">
+                    <!-- hotLefInn started /-->
+                    <div class="hotLefInn clearfix">
+                        <p class="font22Bl">YOUR SELECTION</p>
+                        <div class="clear"></div>
+                        <h2 class="font16Bl">Destination, Hotel, Airport</h2>
+                        <div class="destiWrp">
+                            <div id="compareRoomSelectionValue"><input type="text" placeholder="Select Your Destination" class="destInp  itc_custom_input" onfocus="$(this).next().show(); $('.slctLst').jScrollPane();" id="destinationSelection"></div>
+                            <ul class="slctLst autoSugg" id="dynamicDropdownAppendRe" style="overflow:scroll !important;">
+                                <li ng-if="hotelLevelOffer!='Y'" class="hed"><a href="#">Destination</a></li>
+                                <li ng-if="hotelLevelOffer!='Y'" ng-repeat="(key, value) in dropDownList[0]"><a id="selectedValueRes" ng-click="capLet(key);">{{key}}</a></li>
+                                <li class="hed"><a href="#">Hotels</a></li>
+                                <li ng-repeat="(key, value) in dropDownList[1]"><a id="selectedHotelValue" ng-click="capLet(key);">{{key}}</a></li>
+                                <li ng-if="hotelLevelOffer!='Y'" class="hed"><a href="#">Airport Code</a></li>
+                                <li ng-if="hotelLevelOffer!='Y'" ng-repeat="(key, value) in dropDownList[2]"><a id="selectedAirportName" ng-click="capLet(key);">{{key}}</a></li>
+                            </ul>
+                        </div>
+                        <div class="ysWp1 clearfix">
+                            <div class="checkIn">
+                                <h2 class="font16Bl">Check In</h2>
+                                <div class="whitCont" onclick="event.stopPropagation(); $('.resCheckInWp:visible').hide(); $(this).next().show();">
+                                    <a href="#" class="preArr"></a>
+                                    <div class="innContent">
+                                        <p class="font16Bl day" id='checkinMonth'>February</p>
+                                        <p class="font28Bl date" id='checkinDay'>20</p>
+                                        <p class="font16Bl year" id='checkinYear'>2015</p>
+                                    </div>
+                                    <a  class="nextArr"></a>
+                                </div>
+                                <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                    <div class="calArw"></div>
+                                    <div id="resCheckIn"></div>
+                                </div>
+                            </div>
+                            <div class="checkOut">
+                                <h2 class="font16Bl">Check Out</h2>
+                                <div class="whitCont" onclick="event.stopPropagation();  $('.resCheckInWp:visible').hide();$(this).next().show();">
+                                    <a href="#" class="preArr"></a>
+                                    <div class="innContent">
+                                        <p class="font16Bl day"  id='checkoutMonth'>February</p>
+                                        <p class="font28Bl date" id='checkoutDay'>22</p>
+                                        <p class="font16Bl year" id='checkoutYear'>2015</p>
+                                    </div>
+                                    <a href="#" class="nextArr"></a>
+                                </div>
+                                <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                    <div class="calArw"></div>
+                                    <div id="resCheckOut"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <!--div class="chkCnt clearfix">
+                                <input type="checkBox" id="fxdt" class="">
+                                <label for="fxdt" class="lab2">Flexible Dates</label>
+                            </div-->
+                        </div>
+                        <div class="ysWp2 clearfix">
+                            <div class="slctnDtl clearfix">
+                                <div class="slctn mL0 roomJs">
+                                    <p class="newresHeading">Rooms / Suites</p>
+                                    <div class="slctnWp rsrvDtailWp" style="margin-top: 25px;">
+                                        <div class="slctnWpIn">
+                                            <input type="number"  placeholder="1" class="slctnInp itc_custom_input" id='reservationRoomsSelection' readonly="readonly">
+                                            <a class="plIc roomPlusButton" style="cursor:pointer"></a>
+                                            <a class="mnIc inAct roomMinusButton" style="cursor:pointer"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slctn adultJs adultJsnew" style="position:relative" onmouseover="showPopupMessage(this)" onmouseout="hidePopupMessage(this)">
+                                    <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Adults / room 19yrs & above <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                    <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                        <div class="ttLfAr"></div>
+                                        <div class="inHvCont">{{infoMessageAdult}}</div>
+                                    </div>
+                                    <div class="slctnWp rsrvDtailWp">
+                                        <div class="slctnWpIn">
+                                            <input type="number"  placeholder="1" class="slctnInp itc_custom_input totalOccupantss" id='reservationAdultsSelection' readonly="readonly">
+                                            <a class="plIc totalOccupantsPlusButton adultplus" style="cursor:pointer"></a>
+                                            <a class="mnIc inAct totalOccupantsMinusButton adultminus" style="cursor:pointer"></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slctn childJs childJsnew" style="position:relative" onmouseover="showPopupMessage(this)" onmouseout="hidePopupMessage(this)">
+                                    <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Children / room 13 - 18yrs <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                    <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                        <div class="ttLfAr"></div>
+                                        <div class="inHvCont">{{infoMessageChildren}}</div>
+                                    </div>
+                                    <div class="slctnWp rsrvDtailWp">
+                                        <div class="slctnWpIn">
+                                            <input type="number"  placeholder="0" class="slctnInp itc_custom_input totalOccupantss" id='reservationChildrenSelection' readonly="readonly">
+                                            <a class="plIc totalOccupantsPlusButton childrenplus" style="cursor:pointer" id="childrensCount"></a>
+                                            <a class="mnIc inAct totalOccupantsPlusButton childrenplus" style="cursor:pointer" id="childrensCount" ></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Alert message to be shown when user tries to enter more than 4 occupants-->
+                            <div class="errwp emsg" style="font-size:13px;width:100%;display:none;" id="messageLabel">
+                                <div class="alrtIc"></div><p style="float:none;font-size:12px;">{{alertMessageOccupants}}</p>
+                            </div>
+                        </div>
+
+                        <div class="prmCd">
+                            <div class="slctnDtl clearfix">
+                                <div class="slctn mL0">
+                                    <!--p class="hdng">Promo Code</p-->
+                                    <div class="slctnWp">
+                                        <!--div class="slctnWpIn">
+                                            <input placeholder="Select" class="slctnInp itc_custom_input" readonly="true" id="hotelSelectionPromoType">
+                                            <a href="javascript:void(0);" class="blkDnIc" id="promoTypeArrow"></a>
+                                        </div-->
+                                        <!--div class="clear"></div-->
+                                        <!--ul class="slctnLst autoSugg">
+                                            <li><a ng-click="promo('Corporate')">Corporate</a></li>
+                                            <li><a ng-click="promo('Promotional')">Promotional</a></li>
+                                            <li><a ng-click="promo('Travel Agent')">Travel Agent</a></li>
+                                            <li><a ng-click="promo('None')">None</a></li>
+                                        </ul-->
+                                        <!--div class="slctnWpIn">
+                                            <input type="text" placeholder="Type Your Code" class="slctnInp alphaNum" onkeyup="showClsBtn(this);">
+                                            <a class="cls5" href="javascript:;" onclick="deleteCode(this);"></a>
+                                        </div-->
+                                        <div class="errwp" id="compareRUpdateError">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a ng-click="getCompareRoomSearchResult()" class="btn6">Update</a>
+                    </div>
+                    <!-- hotLefInn end /-->
+                </div>
+            </div>
+        </div>
+        <!-- hotelLeft end /-->
+        <div class="rfnsrhWp clearfix">
+            <a class="rfnsrh" rel="yrslk" href="javascript:;" onclick="refineSrc(this);">your selection</a>
+            <a class="rfnsrh fR" rel="ref" href="javascript:;" onclick="refineSrc(this);">Refine search</a>
+        </div>
+        <!-- hotelRight started /-->
+        <div class="hotelRight">
+            <div class="htlDtl clearfix">
+                <p class="font1_2em fL">rooms &amp; rates</p>
+                <p class="font1_2em fR">Step 2 of 5</p>
+            </div>
+            <div class="clear"></div>
+            <div class="chkhtlFiltrWp clearfix rooms-comp-area">
+
+                <div class="htlFiltr clearfix">
+                    <a href="#/roomSelection" class="lnkGold">Go Back</a>
+
+                </div>
+            </div>
+            <div class="clear"></div>
+            <!-- compareList started -->
+            <!-- compareList image started -->
+            <div class="compareLst clearfix">
+                <div class="lefImg" ng-repeat="rooms in compareRooms.rooms">
+                    <div class="htImgWp"><img class="htlImg" ng-src="{{rooms.roomImage}}" alt="{{rooms.roomName}}" title="{{rooms.roomName}}"></div>
+                    <!-- galWp started /-->
+                    <div class="galWp">
+                        <a href="javascript:;" ng-if="!rooms.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                        <a href="javascript:;" ng-if="rooms.tavelClickVideo" class="vidTravelClick byCompreVid" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                        <div class="rsvGalry">
+                            <div class="wrapper">
+                                <a ng-if="!rooms.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                <a ng-if="rooms.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                            </div>
+                            <div class="wrapper">
+                                <div class="tvs_wrapper" ng-if="rooms.tavelClickVideo">
+                                    <div class="tvs_main" ng-bind-html="getVideoUrl(rooms.tavelClickVideo)">
+
+                                    </div>
+                                </div>
+                                <div class="glVw" onclick="event.stopPropagation();">
+                                    <ul class="glVwUl" ng-if="rooms.tavelClickVideo == null || rooms.tavelClickVideo == undefined || rooms.tavelClickVideo ==''">
+                                        <li ng-repeat="(key, value) in rooms.galleryImages">
+                                            <figure>
+                                                <img  ng-src="{{value}}" alt="{{rooms.roomName}}" title="{{rooms.roomName}}">
+                                                <figcaption>
+                                                    <p>{{rooms.roomName}}</p>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- galWp end /-->
+                    <a class="removeBtn" title="Atleast 2 Rooms should be there to Compare" ng-click="removeThisRoom(rooms.roomId,rooms.uniqueRoomId)"><span class="removeCls"></span><span>Remove</span></a>
+                </div>
+            </div>
+            <!-- compareList image End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font22Bl">{{rooms.roomName}}</p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol" ng-repeat="rooms in compareRooms.rooms" ng-if="hotelType=='online' && tabName=='byRoom'">
+                    <div class="clbPoints">
+                        <p class="prc" ng-if="rooms.displayIn=='cash'">
+                            <span class="rps"><span class="WebRupee">Rs.</span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Onwards</span>
+                        </p>
+                        <p class="prc" ng-if="rooms.displayIn=='points'">
+                            <span class="rps"><span class=""></span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points Onwards</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="compareRowCol" ng-repeat="rooms in compareRooms.rooms" ng-if="hotelType=='online' && tabName=='byRate'">
+                    <div class="clbPoints" ng-if="rooms.pointsPerNight && rooms.costPerNight">
+                        <p class="prc">
+
+                            <span class="rps ng-binding"><span class="WebRupee">Rs.</span>{{rooms.costPerNight}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Per Night</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="rooms.pointsPerNight && rooms.costPerNight">
+                        <p class="prc">
+                            <span class="ptSml">+</span>
+                            <span class="rps ng-binding">{{rooms.pointsPerNight}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="rooms.pointsPerNight && !rooms.costPerNight">
+                        <p class="prc">
+                            <span class="rps ng-binding">{{rooms.pointsPerNight}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="!rooms.pointsPerNight && !rooms.costPerNight">
+                        <p class="prc">
+
+                            <span class="rps ng-binding"><span class="WebRupee">Rs.</span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Per Night</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="compareRowCol" ng-repeat="rooms in compareRooms.rooms" ng-if="hotelType=='offline' && tabName=='byRoom'">
+                    <div class="clbPoints">
+                        <p class="prc" ng-if="rooms.redemptionType=='P' || rooms.redemptionType==' '|| rooms.redemptionType==''">
+                            <span class="rps"><span class="WebRupee">Rs.</span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Onwards</span>
+                        </p>
+                        <p class="prc" ng-if="rooms.redemptionType=='F'">
+                            <span class="rps"><span class=""></span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points Onwards</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="compareRowCol" ng-repeat="rooms in compareRooms.rooms" ng-if="hotelType=='offline' && tabName=='byRate'">
+                    <div class="clbPoints" ng-if="rooms.redemptionType=='P'">
+                        <p class="prc">
+
+                            <span class="rps ng-binding"><span class="WebRupee">Rs.</span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Per Night</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="rooms.redemptionType=='P'">
+                        <p class="prc">
+                            <span class="ptSml">+</span>
+                            <span class="rps ng-binding">{{rooms.points}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="rooms.redemptionType=='F'">
+                        <p class="prc">
+                            <span class="rps ng-binding">{{rooms.points}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Points</span>
+                        </p>
+                    </div>
+                    <div class="clbPoints" ng-if="rooms.redemptionType==' ' || rooms.redemptionType==''">
+                        <p class="prc">
+
+                            <span class="rps ng-binding"><span class="WebRupee">Rs.</span>{{rooms.minRate}}</span>
+                            <br class="noDIsp">
+                            <span class="ptSml">Per Night</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol size" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">Size</p>
+                    <p class="hd1"><span class="font8Bl">{{rooms.roomSize}}</span><sup><sup></span></p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol location" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">Location</p>
+                    <p class="hd1"><sup class="font9Bl"></sup> <span class="font9Bl"></span> <sup class="font9Bl"></sup> <span class="font9Bl">{{rooms.location}}</span></p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol type" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">bed type</p>
+                    <p class="font14Bl subtype">{{rooms.bedType}}</p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol type" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">occupancy</p>
+                    <p class="font14Bl subtype">{{rooms.roomOccupancy}}</p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol type" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">Privileges</p>
+                    <p class="font14Bl subtype" ng-repeat="(key, value) in rooms.privileges track by $index">{{value}}</p>
+                    <!--p class="font14Bl subtype mT0">Shower</p>
+                    <p class="font14Bl subtype mT0">Bath Amenities</p-->
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol type" ng-repeat="rooms in compareRooms.rooms">
+                    <p class="font14Bl">Services</p>
+                    <p class="font14Bl subtype" ng-repeat="(key, value) in rooms.services track by $index">{{value}}</p>
+                </div>
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList Txt started -->
+            <div class="compareRow clearfix">
+                <div class="compareRowCol compareRoomsReserve" ng-repeat="rooms in compareRooms.rooms" style="position:relative;">
+                    <a class="btn6" id="compareRooms{{rooms.roomId || rooms.roomCode}}" href="javascript:;" title="Info"  data-placement="bottom" data-content="" ng-click="reserveThisRoom(rooms.roomName,rooms.ratePlanName,rooms.indexNumber,rooms.tabName,rooms.roomCost,rooms.hotelType,rooms.roomId,rooms.roomCode,rooms.ratePlanCode,rooms.planId,$event)">reserve</a>
+                    <div class="popover fade bottom in" role="tooltip" id="popoverCompare" style=""><div class="arrow" style="left: 50%;"></div>
+                        <h3 class="popover-title">Info</h3>
+
+                        <div class="popover-content"></div>
+
+                    </div>
+
+
+            </div>
+            <!-- compareList Txt End -->
+            <!-- compareList End -->
+
+            <!-- Other Accommodation Options Start -->
+
+                <!-- two break added so that text below will come in one line when we compare two hotel date 13/11/2017 time 3:03 PM -->
+                <br><br>
+            <div class="slider_1Cnt  clearfix rooms-comp-carousel" ng-if="compareRoomsList.length > 0">
+                <h1 class="mainHD">Other Accommodation Options</h1>
+                <div class="slider_1Wp">
+                    <!--<ul class="slider_1 clearfix compRoomSlid">
+                        <li ng-repeat="hotels in hotelDetails.hotels" ng-if="checkIdValid(hotels.hotelId) == false">
+                            <div class="imgWp">
+                                <a href="#"><img src="/content/dam/itcassets/maurya/generimaurya/Maurya.jpg" alt="{{hotels.hotelName}}" title="{{hotels.hotelName}}"></a>
+                                <div class="optnTxtWp" ng-click="compareRoomsAndHotels(hotels.hotelId)"><p class="optnTxt">{{hotels.hotelName}}</p></div>
+                            </div>
+                        </li>
+                    </ul>-->
+                    <div angularbxroom="compareRoomsList">
+
+                    </div>
+                </div>
+            </div>
+
+            <!--div class="slider_1Cnt  clearfix">
+                <h1 class="mainHD">Other Accommodation Options</h1>
+                <div class="slider_1Wp">
+                    <ul class="slider_1 compRoomSlid clearfix">
+                        <li>
+                            <div class="imgWp">
+                                <a href="#"><img src="images/itcone.jpg" alt="itcone" title="itcone"></a>
+                                <div class="optnTxtWp"><p class="optnTxt">ITC One</p></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="imgWp">
+                                <a href="#"><img src="images/cholasuite.jpg" alt="Chola Suites" title="Chola Suites"></a>
+                                <div class="optnTxtWp"><p class="optnTxt">Chola Suites</p></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="imgWp">
+                                <a href="#"><img src="images/presisuite.jpg" alt="Karikalan Presidential Suite" title="Karikalan Presidential Suite"></a>
+                                <div class="optnTxtWp"><p class="optnTxt">Karikalan Presidential Suite</p></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="imgWp">
+                                <a href="#"><img src="images/presisuite2.jpg" alt="Raja Raja Chola Grand Presidential Suite" title="Raja Raja Chola Grand Presidential Suite"></a>
+                                <div class="optnTxtWp"><p class="optnTxt">Raja Raja Chola Grand Presidential Suite</p></div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div-->
+            <!-- Other Accommodation Options End -->
+
+        </div>
+        <!-- hotelRight end /-->
+
+    </div>
+</div>
+<!-- Hotel detail end /-->
+</div>
+<style>
+    .font14Bl {
+    font-size: 1em;
+    font-weight: 400;
+    }
+    .font14Bl.subtype{
+    font-weight: 300;
+    }
+
+    .compareRoomsReserve
+    {
+        position:relative;
+    }
+
+    #popoverCompare
+    {
+       top: 50px;
+    }
+    @media only screen and (max-width: 1024px) and (min-width: 0px)
+{
+   #questionIcon
+   {display:none;}
+}
+@media only screen and (max-width: 479px) and (min-width: 0px){
+.adultJsnew{margin-right:10px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 767px) and (min-width: 480px){
+.adultJsnew{margin-right:70px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 1262px) and (min-width: 768px){
+.adultJsnew{margin-right:17px !important;}
+.childJsnew{float:left !important;}
+}
+</style>

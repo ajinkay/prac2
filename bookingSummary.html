@@ -1,0 +1,816 @@
+<div class="wrapper hideForMenu">
+    <!-- Hotel detail start /-->
+    <div class="htlDtlCnt  ">
+        <!-- review and Pay started /-->
+        <div class="reviewPay ">
+            <div class="fRow clearfix">
+                <div class="htlDtl clearfix">
+                    <p class="font1_2em fL">review &amp; pay</p>
+                    <p class="font1_2em fR">Step 5 of 5</p>
+                </div>
+                <div class="RowImg">
+                    <div class="htImgWp"><img class="htlImg" ng-src="{{hotelImage}}"></div>
+                    <div class="galWp">
+                        <a href="javascript:;" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                        <div class="rsvGalry">
+                            <div class="wrapper"><a href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a></div>
+                            <div class="wrapper">
+                                <div class="glVw" onclick="event.stopPropagation();">
+                                    <ul class="glVwUl">
+                                        <li ng-repeat="(key, value) in galleryImages">
+                                            <figure>
+                                                <img  ng-src="{{value}}">
+                                                <figcaption>
+                                                    <p>{{hotelName}}</p>
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rpDtls clearfix">
+                    <div class="dtls">
+                        <a href="javascript:;" class="clsTog act" onclick="if($(window).width()<768) { $(this).closest('.dtls').find('.dtlsIn').toggle(); $(this).toggleClass('act'); }" ><span class="dtlsHd">STAY DETAILS</span><span class="plsIc2"></span></a>
+                        <div class="clear"></div>
+
+                        <ul class="dtlsIn clearfix">
+                            <li>
+                                <p class="ttl">Hotel:</p>
+                                <div class="descrp">
+                                    <p><span class="font16Bl fWt400" >{{hotelName}}</span><br>
+                                        <span class="font14Bl"><span ng-bind-html="hotelAddress1"></span><br>(T): {{hotelTelephone}}<br>{{hotelEmail}}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="ttl">Check In:</p>
+                                <p class="descrp font16Bl">{{checkinMonth}} {{checkinDay}}, {{checkinYear}}</p>
+                            </li>
+                            <li>
+                                <p class="ttl">Check Out:</p>
+                                <p class="descrp font16Bl">{{checkOutMonth}} {{checkOutDay}}, {{checkOutYear}}</p>
+                            </li>
+                            <!--li>
+                                <p class="ttl wid">Duration of Stay:</p>
+                                <p class="descrp font16Bl">2 Nights & 3 Days</p>
+                            </li-->
+                            <li>
+                                <p class="ttl">Room Type:</p>
+                                <p class="descrp font16Bl">{{roomName}}</p>
+                            </li>
+                            <li>
+                                <p class="ttl"><label>Room:</label><span class="font16Bl"> {{roomCount}}</span></p>
+                                <p class="ttl rac2"><label>Adult:</label><span class="font16Bl"> {{adultCount}}</span></p>
+                                <p class="ttl rac2"><label>Children:</label><span class="font16Bl"> {{childrenCount}}</span></p>
+                            </li>
+                            <li>
+                                <p class="ttl">Rate Plan:</p>
+                                <p class="descrp font16Bl">{{ratePlanName}}</p>
+                            </li>
+                            <li>
+                                <p class="ttl">Add Ons:</p>
+                                <p class="descrp font16Bl addOnDetails"></p>
+                            </li>
+
+                            <li ng-if="amountDetails.PT == 'fullCash'">
+                                <p class="ttl">Deposit Amount:</p>
+                                <p class="descrp font16Bl">Rs. {{amountDetails.depositAmount}}</p>
+                            </li>
+                            <li ng-if="amountDetails.PT == 'fullPoints'">
+                                <p class="ttl">Deposit Points:</p>
+                                <p class="descrp font16Bl">{{amountDetails.depositAmount}} Points</p>
+                            </li>
+                            <li ng-if="amountDetails.PT == 'fullCash'">
+                                <p class="ttl">Balance Amount:</p>
+                                <p class="descrp font16Bl">Rs. {{amountDetails.balanceAmount}}*</p>
+                            </li>
+                            <li ng-if="amountDetails.PT == 'fullPoints'">
+                                <p class="ttl">Balance Points:</p>
+                                <p class="descrp font16Bl">{{amountDetails.balanceAmount}}</p>
+                            </li>
+                            <!--li ng-if="amountDetails.PT == 'fullPoints'">
+                                <p class="ttl">Balance Points:</p>
+                                <p class="descrp font16Bl">0</p>
+                            </li-->
+                            <li ng-if="amountDetails.PT == 'halfPoints'">
+                                <p class="ttl">Deposit Amount:</p>
+                                <p class="descrp font16Bl">Rs. {{amountDetails.totalRoomRateAmount}}</p>
+                            </li>
+                            <li ng-if="amountDetails.PT == 'halfPoints'">
+                                <p class="ttl">Deposit Points:</p>
+                                <p class="descrp font16Bl">{{amountDetails.totalPoints}}</p>
+                            </li>
+                            <li ng-if="amountDetails.PT == 'halfPoints'">
+                                <p class="ttl">Balance:</p>
+                                <p class="descrp font16Bl">{{amountDetails.balanceAmount}}</p>
+                            </li>
+                            <li ng-if="airport>0"><p>* PAC - Payable at checkout</p></li>
+                            <li></li>
+                            <li>*Additional taxes may apply</li>
+
+                        </ul>
+                    </div>
+                    <div class="dtls gst nBdr">
+                        <a class="clsTog act" onclick="if($(window).width()<768) { $(this).closest('.dtls').find('.ulWrpr').toggle(); $(this).toggleClass('act'); }"><span class="dtlsHd">guest details</span><!--<span class="editIc2" ng-click="showForm($event);"></span><span class="plsIc2"></span>--></a>
+                        <div class="clear"></div>
+                        <div class="ulWrpr">
+                            <ul class="dtlsIn clearfix" id="editDetailsSummaryBlock">
+                                <li>
+                                    <p class="ttl">Name:</p>
+                                    <p class="descrp font16Bl">{{guestNameTitle}} {{guestFirstName}} {{guestLastName}}</p>
+                                </li>
+                                <li>
+                                    <p class="ttl">Address:</p>
+                                    <p class="descrp font16Bl">{{guestAddress1}}<span ng-if="guestAddress2 != '' && guestAddress2 != undefined && guestAddress2 != null">,</span> {{guestAddress2}}, {{guestCity}} {{guestPincode}}, {{guestState}}, {{guestCountry}}</p>
+                                </li>
+                                <li>
+                                    <p class="ttl">Phone:</p>
+                                    <p class="descrp font16Bl">{{guestPhone}}</p>
+                                </li>
+                                <li>
+                                    <p class="ttl">Email:</p>
+                                    <p class="descrp font16Bl">{{guestEmail}}</p>
+                                </li>
+                            </ul>
+                            <!-- Edit Detail Start -->
+                            <!-- <ul class="inputUl clearfix" id="editDetailsSummaryForm">
+                                 <li><input type="text" class="suppInp" id="guestSuNameTitle" placeholder="{{guestNameTitle}}" ng-model="guestNameTitle"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuFirstName" placeholder="{{guestFirstName}}" ng-model="guestFirstName"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuLastName" placeholder="{{guestLastName}}" ng-model="guestLastName"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuAddress1" placeholder="{{guestAddress1}}" ng-model="guestAddress1"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuAddress2" placeholder="{{guestAddress2}}" ng-model="guestAddress2"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuCountry" placeholder="{{guestCountry}}" ng-model="guestCountry"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuState" placeholder="{{guestState}}" ng-model="guestState"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuCity" placeholder="{{guestCity}}" ng-model="guestCity"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuPincode" placeholder="{{guestPincode}}" ng-model="guestPincode"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuPhone" placeholder="{{guestPhone}}" ng-model="guestPhone"></li>
+                                 <li><input type="text" class="suppInp" id="guestSuEmail" placeholder="{{guestEmail}}" ng-model="guestEmail"></li>
+                                 <li>
+                                     <div class="errwp clearfix" style="display: none;" id="reservModErrorMsg">
+                                         <div class="alrtIc"></div><p>Enter all mandatory fields correctly</p>
+                                     </div>
+                                     <div class="botBtn clearfix">
+                                         <a class="btn6" ng-click="updateUserDetails()" style="cursor:pointer;">Update</a>
+                                         <a class="btn6" ng-click=" closeGuestDetailsEditForm();" onclick="event.stopPropagation();" style="cursor:pointer;">CanceL</a>
+                                     </div>
+                                 </li>
+                             </ul>-->
+                            <!-- Edit Detail Start -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rbotDtl clearfix blkDsply">
+                <!--<div class="botDtlWp dsplNn2 clearfix">
+                    &lt;!&ndash;div class="botDtl clearfix noDsply ">
+                        <p class="font22Bl">points</p>
+                        <p class="amnt"><span class="rps">50,000</span></p>
+                    </div&ndash;&gt;
+                    <div class="yrBkAmtWpr clearfix">
+                        <div id="greenPointsTotal">
+                            <p class="prcHd">Points</p>
+                            <p class="tlPrcHd"><span class=""></span>{{greenPoints}}</p>
+                        </div>
+                        <div class="clearfix" id="totalAmount">
+                            <p class="prcHd">Total</p>
+                            <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{totalAmount}}</p>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="botDtlWp dsplNn2 clearfix" ng-if="amountDetails.PT == 'fullPoints'">
+                    <div class="botDtl clearfix noDsply " id="greenPointsTotal">
+                        <p class="font22Bl">Total Points</p>
+                        <p class="amnt"><span class="rps">{{amountDetails.totalAmount}}</span></p>
+                    </div>
+                </div>
+                <div class="botDtlWp dsplNn2 clearfix" ng-if="amountDetails.PT == 'fullCash'">
+                    <div class="botDtl clearfix" id="totalAmount">
+                        <p class="font22Bl">Total Amount</p>
+                        <p class="amnt"><span class="WebRupee">Rs.</span><span class="rps">{{amountDetails.totalAmount}}</span></p>
+                    </div>
+                </div>
+                <div class="botDtlWp dsplNn2 clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                    <div class="botDtl clearfix noDsply " id="greenPointsTotal">
+                        <p class="font22Bl">Total Points</p>
+                        <p class="amnt"><span class="rps">{{amountDetails.totalPoints}}</span></p>
+                    </div>
+                    <div class="botDtl clearfix" id="totalAmount">
+                        <p class="font22Bl">Total Amount</p>
+                        <p class="amnt"><span class="WebRupee">Rs.</span><span class="rps">{{amountDetails.totalRoomRateAmount}}</span></p>
+                    </div>
+                </div>
+                <div class="botDtlWp fR clearfix">
+                    <div class="botDtl clearfix">
+                        <div class="hvrWp point noDsply">
+                            <a class="lnkGold tabPagJs" href="javascript:;" id="" ng-if="amountDetails.PT == 'fullPoints' || amountDetails.PT == 'halfPoints'" onclick="event.stopPropagation(); detailsFn(this,'pointDetRl');">Points Details</a>
+                            <div class="hvr clearfix pointBlock detChildJs pgPopUp" onclick="event.stopPropagation();">
+                                <div class="hvrInr">
+                                    <div class="amtDtWp">
+                                        <div class="amtDInWp clearfix">
+                                            <div class="hvrHdr clearfix">
+                                                <p class="font22Bl">Points Details</p>
+                                                <a class="closeBtn" href="javascript:;" onclick="$(this).closest('.detChildJs').prev().removeClass('act');  $(this).closest('.detChildJs').hide();"></a>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Room Amount:</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalAmount}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWiseRateBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt">{{value}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Room Amount:</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalRoomRatePoints}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWisePointsBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt">{{value}}        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullPoints'||amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Add On Total Amount</p>
+                                                    <p class="tlPrcHd"><span class=""></span>{{addOnTotalAmount}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li  ng-repeat="(key,value) in customizeAddOn">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt" ng-if="key == 'Airport Transfer(Departure)' || key =='Airport Transfer(Arrival)'"><span class=""></span>PAC</p>
+                                                        <p class="amt" ng-if="key != 'Airport Transfer(Departure)' && key !='Airport Transfer(Arrival)'"><span class=""></span>{{value.amount}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix"  ng-if="amountDetails.PT == 'fullPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Points Redeemable</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalAmount}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Points Redeemable</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalPoints}}</p>
+                                                </div>
+                                            </div>
+                                            <!--<a href="#" class="lnkGold">Redeem Points Policy</a>
+                                            <a href="#" class="lnkGold">Cancellation and Refund Policy</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hvrArw"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="hvrWp amount" style="margin-">
+                            <a class="lnkGold tabPagJs" href="javascript:;" id="amountDetails" onclick="event.stopPropagation(); detailsFn(this,'amtDetRl');">Amount Details</a>
+                            <div class="hvr clearfix amountBlock detChildJs pgPopUp" onclick="event.stopPropagation();">
+                                <div class="hvrInr">
+                                    <div class="amtDtWp">
+                                        <div class="amtDInWp clearfix">
+                                            <div class="hvrHdr clearfix">
+                                                <p class="font22Bl">Amount Details</p>
+                                                <a class="closeBtn" href="javascript:;" onclick="$(this).closest('.detChildJs').prev().removeClass('act');  $(this).closest('.detChildJs').hide(); if($(window).width()<768) { $('.mainWrp').removeClass('amntPopup');}"></a>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullCash'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Room Amount:</p>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{amountDetails.totalRoomRate}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWiseRateBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt"><span class="WebRupee">Rs.</span>{{value}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Room Amount:</p>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{amountDetails.roomAmount}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWiseRateBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt"><span class="WebRupee">Rs.</span>{{value}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullCash'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Add On Total Amount</p>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{addOnTotalAmount}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li  ng-repeat="(key,value) in customizeAddOn">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt" ng-if="key == 'Airport Transfer(Departure)' || key =='Airport Transfer(Arrival)'"><span class=""></span>PAC</p>
+                                                        <p class="amt" ng-if="key != 'Airport Transfer(Departure)' && key !='Airport Transfer(Arrival)'"><span class="WebRupee">Rs.</span>{{value.amount}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullPoints'||amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Add On Total Amount</p>
+                                                    <p class="tlPrcHd"><span class=""></span>{{addOnTotalAmount}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li  ng-repeat="(key,value) in customizeAddOn">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt" ng-if="key == 'Airport Transfer(Departure)' || key =='Airport Transfer(Arrival)'"><span class=""></span>PAC</p>
+                                                        <p class="amt" ng-if="key != 'Airport Transfer(Departure)' && key !='Airport Transfer(Arrival)'"><span class=""></span>{{value.amount}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" id="taxAmount" ng-if="amountDetails.PT == 'fullCash'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Total Taxes</p>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{amountDetails.totalTax}}*</p>
+                                                </div>
+                                                <!--<ul class="ptRdblWpr clearfix">
+                                                    <li>
+                                                        <p class="mtDt">Luxury tax</p>
+                                                        <p class="amt"><span class="WebRupee">Rs.</span>{{amountDetails.luxuryTax}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="mtDt"> Service Tax</p>
+                                                        <p class="amt"><span class="WebRupee">Rs.</span>{{amountDetails.serviceTax}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="mtDt"> Vat</p>
+                                                        <p class="amt"><span class="WebRupee">Rs.</span>{{amountDetails.vat}}</p>
+                                                    </li>
+                                                </ul>-->
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'fullPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Total Points</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalRoomRate}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWiseRateBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt">{{value}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <p class="prcHd">Total Points</p>
+                                                    <p class="tlPrcHd">{{amountDetails.totalRoomRatePoints}}</p>
+                                                </div>
+                                                <ul class="ptRdblWpr clearfix">
+                                                    <li ng-repeat="(key,value) in amountDetails.dayWisePointsBreakUp">
+                                                        <p class="mtDt">{{key}}</p>
+                                                        <p class="amt">{{value}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix" ng-if="amountDetails.PT == 'fullCash'">
+                                                <div class="yrBkHd clearfix">
+                                                    <a title="Deposit amount includes current applicable taxes,for details click Terms" href="javascript:;" class="prcHd" style="color: #d2ac67">Deposit Amount Payable</a>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{amountDetails.depositAmount}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix" ng-if="amountDetails.PT == 'fullPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <a title="Deposit amount includes current applicable taxes,for details click Terms" href="javascript:;" class="prcHd" style="color: #d2ac67">Deposit Points Payable</a>
+                                                    <p class="tlPrcHd"><span class=""></span>{{amountDetails.depositAmount}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <a title="Deposit amount includes current applicable taxes,for details click Terms" href="javascript:;" class="prcHd" style="color: #d2ac67">Deposit Amount Payable</a>
+                                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{amountDetails.totalRoomRateAmount}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="yrBkAmtWpr dpAmPy clearfix" ng-if="amountDetails.PT == 'halfPoints'">
+                                                <div class="yrBkHd clearfix">
+                                                    <a title="Deposit amount includes current applicable taxes,for details click Terms" href="javascript:;" class="prcHd" style="color: #d2ac67">Deposit Points Payable</a>
+                                                    <p class="tlPrcHd"><span class=""></span>{{amountDetails.totalPoints}}</p>
+                                                </div>
+                                            </div>
+                                            <span>*Additional taxes may apply</span>
+                                            <!--a href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms')" class="lnkGold">Terms</a-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hvrArw"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botDtl fR clearfix">
+                        <div class="hvrWp fR rateinclsn">
+                            <a class="lnkGold tabPagJs" href="javascript:;" onclick="event.stopPropagation(); detailsFn(this,'rateInclRel');">Rate Inclusions</a>
+                            <div class="hvr clearfix rateinclsnBlock detChildJs pgPopUp">
+                                <div class="hvrInr">
+                                    <div class="hvrHdr clearfix">
+                                        <p class="font22Bl">Rate Inclusions</p>
+                                        <a id="rateinclose" class="closeBtn" href="javascript:;" onclick="$(this).closest('.detChildJs').prev().removeClass('act');  $(this).closest('.detChildJs').hide(); if($(window).width()<768) {$('#main_content').removeClass('rtInclsnPopup');}"></a>
+                                    </div>
+                                    <p class="font16Bl" id="inclusionPoints"></p>
+                                </div>
+                                <div class="hvrArw"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="pmntDtls clearfix">
+                <div class="chkBoxCnt2 clearfix reser-review">
+                    <div class="inpLabWrp">
+                        <input type="checkBox" id="crd4" class="" ng-model="termsCheckbox">
+                        <label for="crd4" class="lab2"><span class="lab2Txt">I have read and accepted the <a href="javascript:;" onclick="event.stopPropagation(); showInclTermPriv(this,'trms')" class="colBlk">Terms & Conditions</a>, <a href="javascript:;" onclick="event.stopPropagation(); showInclTermPriv(this,'disc')" class="colBlk">Disclaimer</a> and <a href="javascript:;" onclick="event.stopPropagation(); showInclTermPriv(this,'privacy')" class="colBlk">Privacy Policy</a></span></label>
+                    </div>
+                    <div class="inpLabWrp">
+                        <input type="checkBox" id="crd5" class="" ng-model="cancellationCheckbox">
+                        <label for="crd5" class="lab2"><span class="lab2Txt">I have read and understood the <a href="javascript:;" onclick="event.stopPropagation(); ShowCanpopup()" class="colBlk">Cancellation and Refund Policy</a></span></label>
+                    </div>
+                    <div class="inpLabWrp">
+                        <input type="checkBox" id="crd6" class="receiveEmailRes">
+                        <label for="crd6" class="lab2"><span class="lab2Txt">I would like to receive information from ITC Hotels about the new offers and updates about the ongoing food promotions and events.</span></label>
+                    </div>
+                </div>
+                <div class="errorcount1">
+
+                </div>
+                <div class="clear"></div>
+                <div class="paymntgtwy clearfix">
+                    <p class="font16Bl">You will now be redirected to a secure payment gateway of your choice. This may take a few minutes depending upon your internet speed. Please do not press Refresh or the Back button.</p>
+                    <div class="se-pre-con-bookingSummary"></div>
+                    <a class="btn1 likeAddSubmit" id="makePaymentBtn" ng-click="redirectToPaymentGateWay()">MAKE PAYMENT</a>
+                </div>
+            </div>
+        </div>
+        <!--rsLuxry Startted -->
+        <div class="rsLuxry termIncJs" onclick="event.stopPropagation();">
+            <div class="wrapper"><a href="javascript:;" class="cls4" onclick=" $(this).closest('.rsLuxry').hide(); $('.mainWrp').removeClass('termInc');"></a></div>
+            <div class="wrapper">
+                <div class="ovrlyIn clearfix ">
+                    <ul class="rRtVwRtsUl clearfix ">
+                        <li style="width:33.3%;">
+                            <a  href="javascript:;" onclick="showInclTermPriv(this,'trms')"><p id = trmtle></p></a>
+                        </li>
+                        <li style="width:33.3%;">
+                            <a  href="javascript:;" onclick="showInclTermPriv(this,'disc')"><p id = distle></p></a>
+                        </li>
+                        <li style="width:33.3%;">
+                            <a  href="javascript:;" onclick="showInclTermPriv(this,'privacy')"><p id = pritle></p></a>
+                        </li>
+                    </ul>
+
+                    <div class="rRtVwRtDt clearfix">
+
+                        <!-- trms Started -->
+                        <div class="trms tabChild1">
+                            <p id = trmdes></p>
+                        </div>
+                        <!-- trms End -->
+                        <div class="disc tabChild2">
+                            <p id = disdes></p>
+                        </div>
+
+                        <div class="privacy tabChild3">
+                            <p id = prides></p>
+                        </div>
+                    </div>
+                    <div class="rRtVwRtDt clearfix">
+                        <div class="trms tabChild4">
+                            <p id = rev_cancel_pol></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--rsLuxry Startted -->
+        <!-- review and Pay end /-->
+        <!-- hotelRight started /-->
+    </div>
+    <!-- Hotel detail end /-->
+</div>
+</div>
+<!-- mainWrp started /-->
+
+
+<div class="clear"></div>
+
+<!-- rsrvSrchWrp started /-->
+<div class="rsrvSrchWrp">
+    <ul class="rsrvSrch">
+        <li  rel="mobRes">reservations<div class="uparrw"></div></li>
+        <li rel="sear">Search<div class="uparrw"></div></li>
+    </ul>
+</div>
+<!-- rsrvSrchWrp end /-->
+
+
+
+<!-- overlayCont started /-->
+<div class="overlayCont">
+    <a class="overlayCloBtn"></a>
+
+
+    <!-- mobile Start /-->
+    <div class="mob">
+
+
+        <div class="tpCnt">
+            <div class="logo"><img alt="" src="/etc/designs/itchotelsonline/clientlibs/images/logoBlk.png"></div>
+            <a class="menuCloBtn"></a>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+
+        <!-- resSearM started /-->
+        <div class="resSearM">
+            <!-- Reservations Start /-->
+            <div class="reserCont" id="mobRes">
+                <!-- resWhiCont started /-->
+                <div class="resWhiCont" id="mstayat_cont">
+                    <!-- resWhiInn started /-->
+                    <div class="resWhiInn">
+                        <div class="reserInnWrp">
+                            <p class="reserHd">Find a hotel</p>
+                            <div class="clear"></div>
+                            <div class="reserInpWrp">
+                                <input id="mstayat_txt" type="text"  class="reserInp" placeholder="Hotel, Destination, Airport">
+                                <a class="reserSerIc" href="#"></a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="reserScrollMob">
+                                <ul id="mstayat" class="reserDrpUl">
+                                    <li><a href="javascript:;" onclick="mselectCity('New Delhi');">New Delhi</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Mumbai');">Mumbai</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Bengaluru');">Bengaluru</a></li>
+                                    <li class="reserBrd"></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Agra');">Agra</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Ahmedabad');">Ahmedabad</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Hyderabad');">Hyderabad</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Kolkotta');">Kolkotta</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Jaipur');">Jaipur</a></li>
+                                    <li><a href="javascript:;" onclick="mselectCity('Pune');">Pune</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- resWhiInn end /-->
+                </div>
+                <!-- resWhiCont end /-->
+                <!-- resWhiCont started /-->
+                <div id="mcheckin_cont" class="resWhiCont">
+                    <div class="resWhiInn">
+                        <div class="reserInpWrp scc mstay-at">
+                            <span class="st">Stay At</span>
+                            <a class="reserEditIc" href="javascript:;" onclick="medit_stayat();"></a>
+                            <div class="clear"></div>
+                            <span class="nd"></span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="resWhiInn">
+                        <p class="reserHd">Check IN</p>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="e3" name="e3"> </div>
+                    <div class="chkCnt">
+                        <input class="" type="checkBox" id="cBxDetM">
+                        <label class="lab2" for="cBxDetM" >Flexible Dates</label>
+                    </div>
+                </div>
+                <!-- resWhiCont end /-->
+                <!-- resWhiCont started /-->
+                <div id="mcheckout_cont" class="resWhiCont">
+                    <div class="resWhiInn">
+                        <div class="reserInpWrp scc mstay-at">
+                            <span class="st">Stay At</span>
+                            <a class="reserEditIc" href="javascript:;" onclick="medit_checkin();"></a>
+                            <div class="clear"></div>
+                            <span class="nd">New Delhi</span>
+                        </div>
+                        <div class="reserInpWrp scc mstay-checkin">
+                            <span class="st">Check IN</span>
+                            <a class="reserEditIc" href="javascript:;" onclick="medit_checkin()"></a>
+                            <div class="clear"></div>
+                            <span class="nd">New Delhi</span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="resWhiInn">
+                        <p class="reserHd">Check OUT</p>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="e4" name="e4"> </div>
+                    <div class="chkCnt">
+                        <input class="" type="checkBox" id="cBxDetM2">
+                        <label class="lab2" for="cBxDetM2" >Flexible Dates</label>
+                    </div>
+                </div>
+                <!-- resWhiCont end /-->
+                <!-- resWhiCont started /-->
+                <div id="mdetails" class="resWhiCont">
+                    <!-- resWhiInn stared /-->
+                    <div class="resWhiInn">
+                        <!-- reserInnWrp started /-->
+                        <div class="reserInnWrp">
+                            <p class="reserHd">Details</p>
+                            <div class="clear"></div>
+                            <div class="rsrvDtailWp wid100">
+                                <div class="reserInpWrp scc mstay-at">
+                                    <span class="st">Stay At</span>
+                                    <a class="reserEditIc" href="javascript:;" onclick="medit_stayat();"></a>
+                                    <div class="clear"></div>
+                                    <span class="nd">New Delhi</span>
+                                </div>
+                            </div>
+                            <div class="rsrvDtailWp wid100">
+                                <div class="reserInpWrp scc mstay-checkin">
+                                    <span class="st">Check IN</span>
+                                    <a class="reserEditIc" href="javascript:;" onclick="medit_checkin();"></a>
+                                    <div class="clear"></div>
+                                    <span class="nd"></span>
+                                </div>
+                            </div>
+                            <div class="rsrvDtailWp wid100">
+                                <div class="reserInpWrp scc mstay-checkout">
+                                    <span class="st">Check OUT</span>
+                                    <a class="reserEditIc" href="javascript:;" onclick="medit_checkout();"></a>
+                                    <div class="clear"></div>
+                                    <span class="nd"></span>
+                                </div>
+                            </div>
+                            <div class="rsrvDtailWp mobsel">
+                                <div class="reserInpWrp">
+                                    <input type="text" placeholder="1 Room" class="reserInp itc_custom_input">
+                                    <a class="plIc" href="#"></a>
+                                    <a class="mnIc inAct" href="#"></a>
+                                </div>
+                                <div class="clear"></div>
+                                <ul class="prmCDd autoSugg">
+                                    <li class="drpAct"><a>1 Room</a></li>
+                                    <li><a>2 Rooms</a></li>
+                                    <li><a>3 Rooms</a></li>
+                                    <li><a>4 Rooms</a></li>
+                                    <li><a>5 Rooms</a></li>
+                                    <li><a>6 Rooms</a></li>
+                                    <li><a>7 Rooms</a></li>
+                                    <li><a>8 Rooms</a></li>
+                                    <li><a>9 Rooms</a></li>
+                                </ul>
+                            </div>
+                            <div class="rsrvDtailWp fRig mobsel">
+                                <div class="reserInpWrp ">
+                                    <input type="text" placeholder="1 Adult" class="reserInp itc_custom_input">
+                                    <a class="plIc" href="#"></a>
+                                    <a class="mnIc inAct" href="#"></a>
+                                </div>
+                                <div class="clear"></div>
+                                <ul class="prmCDd autoSugg">
+                                    <li class="drpAct"><a>1 Adult</a></li>
+                                    <li><a>2 Adults</a></li>
+                                    <li><a>3 Adults</a></li>
+                                    <li><a>4 Adults</a></li>
+                                    <li><a>5 Adults</a></li>
+                                    <li><a>6 Adults</a></li>
+                                    <li><a>7 Adults</a></li>
+                                    <li><a>8 Adults</a></li>
+                                    <li><a>9 Adults</a></li>
+                                    <li><a>10 Adults</a></li>
+                                    <li><a>11 Adults</a></li>
+                                    <li><a>12 Adults</a></li>
+                                    <li><a>13 Adults</a></li>
+                                    <li><a>14 Adults</a></li>
+                                    <li><a>15 Adults</a></li>
+                                    <li><a>16 Adults</a></li>
+                                    <li><a>17 Adults</a></li>
+                                    <li><a>18 Adults</a></li>
+                                </ul>
+                            </div>
+                            <div class="rsrvDtailWp wid100">
+                                <div class="reserInpWrp">
+                                    <input type="text" placeholder="Promo Code" class="reserInp itc_custom_input" readonly>
+                                    <a class="blkDnIc" href="javascript:;"></a>
+                                </div>
+                                <div class="clear"></div>
+                                <ul class="prmCDd autoSugg">
+                                    <li><a href="javascript:;">Corporate</a></li>
+                                    <li><a href="javascript:;">Group</a></li>
+                                    <li><a href="javascript:;">Travel Agent</a></li>
+                                    <li><a href="javascript:;">None</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="cdeWp">
+                                <div class="reserInpWrp">
+                                    <input type="text" placeholder="Type Your Code" class="reserInp alphaNum" onkeyup="showClsBtn(this);">
+                                    <a onclick="deleteCode(this);" href="javascript:;" class="cls5"></a>
+                                </div>
+                                <div class="clear"></div>
+                                <p class="err">Invalid Promo Code</p>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                            <a href="javascript:;" class="btn" onclick="findHotels();">Find</a>
+                        </div>
+                        <!-- reserInnWrp end /-->
+                    </div>
+                    <!-- resWhiInn end /-->
+                </div>
+                <!-- resWhiCont end /-->
+                <div class="clear"></div>
+            </div>
+            <!-- Reservations end /-->
+
+            <!-- searM started /-->
+            <div class="searM" id="searM_01">
+                <div class="searCont_2">
+                    <div class="serPar">
+                        <h2>Search</h2>
+                        <input type="text" placeholder="Search" class="searInput">
+                    </div>
+                    <div class="clear"></div>
+                    <ul class="searUl defaultSrc clearfix " style="display:block;">
+                        <li><a href="#">Hotel & Resorts</a></li>
+                        <li><a href="#"> Luxury Living</a></li>
+                        <li><a href="#">Luxury Cuisine</a></li>
+                        <li><a href="#"> Wellness</a></li>
+                        <li><a href="#"> Offers</a></li>
+                        <li><a href="#"> Meetings</a><div class="clear"></div></li>
+                    </ul>
+                    <div class="atsgt custSrc">
+                        <ul class="asistncUl clearfix ">
+                            <li><a href="javascript:;"><span class="asHd1">ITC Maratha</span></a></li>
+                            <li><a href="javascript:;"><span class="asHd1">ITC Maurya</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- searM end /-->
+
+        </div>
+        <!-- resSearM started /-->
+
+
+
+    </div>
+    <!-- mobile end /-->
+</div>
+<!-- overlayCont end /-->
+
+<script type="text/javascript">
+	$(window).load(function() {
+		checkEleApp ();
+		resPos();
+		topFixNav()
+		mobSliderfn();
+		mobArrPlaFn();
+		setVal() // resetting rooms and adult input field
+		addBlc() // adding blcMenu class to main top navigation
+	});
+
+	$(window).scroll(function() {
+		checkEleApp();
+		topFixNav();
+	});
+
+	$(window).resize(function() {
+		resPos();
+		mobSliderfn();
+		mobArrPlaFn();
+		submenuSlid();
+		addBlc() // adding blcMenu class to main top navigation
+		hideBotFix(); // hiding bottom fix nav for mobile sections
+	});
+
+	$(document).ready(function() {
+
+		hideBotFix(); // hiding bottom fix nav for mobile sections
+
+		// resetting
+		$('body').click(function(e) {
+			revPayRest();
+		});
+
+	});
+    $("#rateinclose").click(function(){
+		$('.mainWrp').removeClass("rtInclsnPopup");
+    });
+</script>
+<style>
+    .lazy{  display:none;  }
+
+</style>

@@ -1,0 +1,1558 @@
+<div class="wrapper hideForMenu" onunload="backToPreviousPage();">
+    <!-- Hotel detail start /-->
+    <div class="htlDtlCnt clearfix">
+        <!-- htlDtlCntIn started /-->
+        <div class="htlDtlCntIn clearfix custamizeStay">
+            <!-- hotelLeft started /-->
+            <div class="hotelLeft">
+                <div class="nmst clearfix" id="welcomeMessageLoggedIn" style="display:none;">
+                </div>
+                <div class="clear"></div>
+                <div class="resChkInOut clearfix">
+                    <p class="font1_4em">{{hotelName}}</p>
+                    <div class="clear"></div>
+                    <p class="font1_2em fL">Check In: {{checkinMonth}} {{checkinDay}}, {{checkinYear}}</p>
+                    <p class="font1_2em fR">Check Out: {{checkOutMonth}} {{checkOutDay}}, {{checkOutYear}}</p>
+                </div>
+                <div class="clear"></div>
+
+                <div class="yourSelReftWrp yrslk">
+                    <div class="yourSelCont clearfix ">
+                        <!-- hotLefInn started /-->
+                        <div class="hotLefInn clearfix">
+                            <p class="font22Bl">YOUR STAY SUMMARY</p>
+                            <div class="clear"></div>
+                            <!--htlInConT Started-->
+                            <div class="htlInConT">
+                                <div class="sumTxt"><p><label>Hotel:</label><span class="font16Bl">{{hotelName}}</span></p></div>
+                                <div class="chInOut">
+                                    <p><label>Check In:</label><span class="font16Bl">{{checkinMonth}} {{checkinDay}}, {{checkinYear}}</span></p>
+                                    <p><label>Check Out:</label> <span class="font16Bl">{{checkOutMonth}} {{checkOutDay}}, {{checkOutYear}}</span></p>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="slctnDtl clearfix">
+                                    <p><label>Room:</label><span class="font16Bl">{{roomCount}}</span></p>
+                                    <p><label>Adult:</label><span class="font16Bl">{{adultCount}}</span></p>
+                                    <p><label>Children:</label><span class="font16Bl">{{childrenCount}}</span></p>
+                                </div>
+
+                                <div class="rmTyPln">
+                                    <p><label>Room Type: </label><span class="font16Bl" id="roomNameCus">{{roomName}}</span></p>
+                                    <p><label>Rate Plan: </label><span class="font16Bl" id="ratePlanCus">{{ratePlanName}}</span></p>
+                                </div>
+
+                                <div class="clear"></div>
+                                <!--inclsWp Started -->
+                                <div class="inclsWp">
+                                    <a href="javascript:;" onclick="$(this).next().slideToggle(); $(this).toggleClass('act');" class="lnkGold act"><span class="gldPlusIc"></span>Inclusions</a>
+                                    <div class="inIncls" id="inclusionPoints" style="display:block">
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <!--inclsWp Started -->
+                            </div>
+                            <!--htlInConT Started-->
+                            <div class="adOnWp">
+                                <p class="font16Bl">Add Ons:</p>
+                                <ul class="inAdO" id="addOnCust">
+                                    <li ng-repeat="(key,value) in customizeAddOn">
+                                        <p ng-if="key=='Airport Transfer(Arrival)'">{{key}}*</p>
+                                        <p ng-if="key=='Airport Transfer(Departure)'">{{key}}*</p>
+                                        <p ng-if="key!='Airport Transfer(Arrival)'&& key!='Airport Transfer(Departure)'">{{key}}</p>
+                                        <a href="javascript:;" ng-click="removeThisAddOn(key,value)">Remove</a></li>
+
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+
+
+                            <div class="clear"></div>
+                            <div class="yrBkAmtWpr clearfix">
+                                <div id="greenPointsTotal">
+                                    <p class="prcHd">Total Points</p>
+                                    <p class="tlPrcHd"><span class=""></span>{{greenPoints | currency:"":0}}</p>
+                                </div>
+                                <div class="clearfix" id="totalAmount">
+                                    <p class="prcHd">Total Amount</p>
+                                    <p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{totalAmount | currency:"":0}}*</p>
+                                    <br><br><br>
+                                    <p style="font-size:0.875em; color:#d2ac67;">*{{taxMessage}}</p>
+                                </div>
+                            </div>
+                            <div ng-if="airport>0"><p>* PAC - Payable at checkout</p></div>
+
+
+                        </div>
+                        <!-- hotLefInn end /-->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- hotelLeft end /-->
+            <div class="rfnsrhWp clearfix">
+                <a class="rfnsrh" rel="yrslk" href="javascript:;" onclick="refineSrc(this);">your stay summary</a>
+                <div class="tlAmT">
+                    <span ng-if="greenPoints == undefined || greenPoints == '' || greenPoints == null"><p class="tlPrcHd"><span class="WebRupee">Rs.</span>{{totalAmount}}</p><p class="prcHd prH"  rel="yrslk" onclick="if( $(window).width()<1264) { refineSrc(this,'totalPoints'); }">Total Amount:</p></span>
+                    <span ng-if="greenPoints"><p class="tlPrcHd"><span class=""></span>{{greenPoints}}</p><p class="prcHd prH"  rel="yrslk" onclick="if( $(window).width()<1264) { refineSrc(this,'totalPoints'); }">Total Points:</p></span>
+                </div>
+            </div>
+            <!-- hotelRight started /-->
+            <div class="hotelRight">
+                <div class="htlDtl clearfix">
+                    <p class="font1_2em fL">customize your stay</p>
+                    <p class="font1_2em fR">Step 3 of 5</p>
+                </div>
+                <div class="clear"></div>
+                <!-- chkhtlFiltrWp started /-->
+                <div class="chkhtlFiltrWp clearfix">
+                    <div class="stsWp">
+                        <!--a class="lnkGold" href="javascript:;" ng-click="checkUpgradeFacility()" style='margin: 5px 50px 0 0;'>Skip Customization</a-->
+                        <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" >
+                            <span class="btn1 likeAdd" ng-click="checkUpgradeFacility()">Continue</span>
+                            <span class="hvrCont pgPopUp">
+							<span class="ttArDwn"></span>
+							<span class="inHvCont">Clicking on this will take you to personal details page</span>
+						</span>
+                        </a>
+                        <!--div class="htlFiltr clearfix">
+                            <div class="prsFltr INR">
+                                <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn6">continue</a>
+                                <ul class="prsFltrLst">
+                                    <li><a href="javascript:;" onclick="drpDwnSel(this)">&#x24; USD</a></li>
+                                    <li><a href="javascript:;" onclick="drpDwnSel(this)"><span class="WebRupee">Rs.</span>INR</a></li>
+                                </ul>
+                            </div>
+                        </div-->
+                    </div>
+
+
+                </div>
+                <!-- chkhtlFiltrWp end /-->
+                <div class="clear"></div>
+
+                <!--  tabWrp customize stay main section started /-->
+                <div class="tabWrp">
+                    <!-- tabNavWrp started /-->
+                    <div class="tabNavWrp custSelParJs clearfix">
+                        <div class="custInpWrp">
+                            <input type="text" class="itc_custom_input customizeTabInp custSelInpJs" readonly="readonly" value="Preferences" onclick="event.stopPropagation(); $(this).parent().next().slideToggle();">
+                            <a class="blkDnIc" href="javascript:;" onclick="event.stopPropagation(); $(this).parent().next().slideToggle();"></a>
+                        </div>
+
+                        <ul class="tabNavUl">
+                            <li class="addonsTabRes"><a class="tabHd act" onclick="tabbing(this,'preTab','Preferences')" href="javascript:;">Preferences</a></li>
+                            <li class="addonsTabRes"><a class="tabHd" onclick="tabbing(this,'airTab','Airport Transfer'); airportFunction();" href="javascript:;">Airport Transfer</a></li>
+                            <!--li id="resInternetHeading"><a class="tabHd" onclick="tabbing(this,'intTab','Internet')" href="javascript:;">internet</a></li-->
+                            <li id="resDiningHeading" class="addonsTabRes"><a class="tabHd" onclick="tabbing(this,'dinTab','Dining')" href="javascript:;">dining</a></li>
+                            <li id="resSpaHeading" class="addonsTabRes"><a class="tabHd" onclick="tabbing(this,'spaTab','Spa treatments')" href="javascript:;">Spa treatments</a></li>
+                        </ul>
+                    </div>
+                    <!-- tabNavWrp end /-->
+
+                    <!-- preTab started /-->
+                    <div class="preTab tabChild" style="display:block;">
+                        <div ng-bind-html="preTabRT"></div>
+                        <ul class="checkBoxUl clearfix">
+                            <li id="specialRequestBed">
+                                <p class="font22Bl act" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Smoking / Non-smoking<span class="plsIc2"></span></p>
+                                <div class="inpMainWrp">
+                                    <div class="inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="SMOK" id="smoking" name="smokingnonsmoking">
+                                        <label class="lab2" for="smoking"><span class="lab2Txt">Smoking</span></label>
+                                    </div>
+                                    <div class="inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="NONS" id="nonsmoking" name="smokingnonsmoking">
+                                        <label class="lab2" for="nonsmoking"><span class="lab2Txt">Non-smoking</span></label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="specialRequestRoom">
+                                <p class="font22Bl" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Room Features<span class="plsIc2"></span></p>
+                                <div class="inpMainWrp">
+                                    <div class=" inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="INTE" id="interConnectingRoom" name="interConnectingRoom">
+                                        <label class="lab2" for="interConnectingRoom"><span class="lab2Txt">Inter connecting</span></label>
+                                    </div>
+
+                                    <div class="inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="HIGH" id="highFloor" name="floorType">
+                                        <label class="lab2" for="highFloor"><span class="lab2Txt">Higher Floor</span></label>
+                                    </div>
+                                    <div class="inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="LOWE" id="lowerFloor" name="floorType">
+                                        <label class="lab2" for="lowerFloor"><span class="lab2Txt">Lower Floor</span></label>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li id="specialRequestAirport">
+                                <p class="font22Bl" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Arrival & Departure<span class="plsIc2"></span></p>
+                                <div class="inpMainWrp">
+
+                                    <div class=" inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="arrival" id="earlyArrival" name="arrivalOrCheckout">
+                                        <label class="lab2" for="earlyArrival"><span class="lab2Txt">Early arrival (before 1400 Hrs IST)</span></label>
+                                    </div>
+                                    <input type="text" class="custInput arrivalCheckoutInput arrivalInput" id="arrivalTime" name="arrivalTime" placeholder="Please enter arrival time" style="display: none;"/>
+
+
+                                    <div class=" inpLabWrp clearfix">
+                                        <input type="checkBox" class="" value="checkout" id="lateCheckout" name="arrivalOrCheckout">
+                                        <label class="lab2" for="lateCheckout"><span class="lab2Txt">Late check-out (after 1200 Hrs.IST)</span></label>
+                                    </div>
+                                    <input type="text" class="custInput arrivalCheckoutInput checkoutInput" id="checkoutTime" name="checkoutTime" placeholder="Please enter checkout time" style="display: none;"/>
+
+                                </div>
+                            </li>
+                        </ul>
+
+
+                        <div class="fullWid">
+                            <p class="font22Bl">Additional requests (Some
+                                requests may be chargeable)</p>
+                            <textarea class="cmtTxAra" id="additionalRequestText" maxlength="1000" placeholder="Anything special we can do for you ?"></textarea>
+                        </div>
+
+                        <div class="wid100 botNav">
+
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="lnkGold">Skip Customization</a!-->
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn6">continue</a-->
+                            <div class="stsWp">
+                                <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" style="pointer-events:visible">
+                                    <!-- changes by Pranav/sagar -->
+                                    <span class="btn1 likeAdd" ng-click="checkUpgradeFacility()" style="margin-top:-11px;">Continue</span>
+                                    <span class="hvrCont pgPopUp">
+                                    <span class="ttArDwn"></span>
+                                    <span class="inHvCont">Clicking on this will take you to personal details page</span>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                            <div class="stsWp" style="margin-left:10px;margin-right: 15px;">
+                                <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" style="pointer-events:visible">
+                                    <!-- changes by Pranav/sagar -->
+                                    <span class="btn1 likeAdd" ng-click="addThisSpecialRequest()" style="margin-top:-11px;">Add</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="prefrenceMessage" style="display:none;">
+                            <p class="font22Bl preAddSel">Your preferences added successfully. Please proceed with other steps.</p>
+                        </div>
+                        <div class="noprefrenceMessage" style="display:none;">
+                            <p class="font22Bl">No preference selected</p>
+                        </div>
+                        <div class="noprefrenceMessageonarrivalorcheckout" style="display:none;">
+                            <p class="font22Bl">Please enter arrival/checkout time</p>
+                        </div>
+                        <div id="networkErrorRes" style="display:none;">
+                            <p class="font22Bl">Uh-oh! Something went wrong. Happens to the best of us. Please reload the page.</p>
+                        </div>
+                        <div id="networkErrorResOD" style="display:none;">
+                            <p class="font22Bl">Uh-oh! Something went wrong. Happens to the best of us. Please try again.​</p>
+                        </div>
+
+
+                    </div>
+                    <!-- preTab end /-->
+
+                    <!-- airTab started /-->
+                    <div class="airTab tabChild">
+                        <div ng-bind-html="airportTabRT"></div>
+                        <ul class="hotels">
+                            <li>
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <p class="font18Bl">Arrival Information</p>
+                                    <div class="col1">
+                                        <h2 class="font16Bl">Airline/Flight Number</h2>
+                                        <input type="text" id="arrivalFlightNo" class="custInput" ng-model='arrivalFlightNumber'>
+                                    </div>
+                                    <div class="col2">
+                                        <h2 class="font16Bl">Arrival Time </h2>
+                                        <!-- col2Inn started /-->
+                                        <div class="col2Inn mR5">
+                                            <div class="selcArp">
+                                                <input type="number" id="arrivalTimeHour" class="itc_custom_input" placeholder="HH" onclick="event.stopPropagation();" ng-model='arrivalTimeHr' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>00</a></li>
+                                                <li><a>01</a></li>
+                                                <li><a>02</a></li>
+                                                <li><a>03</a></li>
+                                                <li><a>04</a></li>
+                                                <li><a>05</a></li>
+                                                <li><a>06</a></li>
+                                                <li><a>07</a></li>
+                                                <li><a>08</a></li>
+                                                <li><a>09</a></li>
+                                                <li><a>10</a></li>
+                                                <li><a>11</a></li>
+                                                <li><a>12</a></li>
+                                                <li><a>13</a></li>
+                                                <li><a>14</a></li>
+                                                <li><a>15</a></li>
+                                                <li><a>16</a></li>
+                                                <li><a>17</a></li>
+                                                <li><a>18</a></li>
+                                                <li><a>19</a></li>
+                                                <li><a>20</a></li>
+                                                <li><a>21</a></li>
+                                                <li><a>22</a></li>
+                                                <li><a>23</a></li>
+                                            </ul>
+
+                                        </div>
+                                        <!-- col2Inn end /-->
+                                        <!-- col2Inn started /-->
+                                        <div class="col2Inn">
+                                            <div class="selcArp">
+                                                <input type="number" class="itc_custom_input" id="arrivalTimeMinute" placeholder="MM" onclick="event.stopPropagation();" ng-model='arrivalTimeMin' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>00</a></li>
+                                                <li><a>01</a></li>
+                                                <li><a>02</a></li>
+                                                <li><a>03</a></li>
+                                                <li><a>04</a></li>
+                                                <li><a>05</a></li>
+                                                <li><a>06</a></li>
+                                                <li><a>07</a></li>
+                                                <li><a>08</a></li>
+                                                <li><a>09</a></li>
+                                                <li><a>10</a></li>
+                                                <li><a>11</a></li>
+                                                <li><a>12</a></li>
+                                                <li><a>13</a></li>
+                                                <li><a>14</a></li>
+                                                <li><a>15</a></li>
+                                                <li><a>16</a></li>
+                                                <li><a>17</a></li>
+                                                <li><a>18</a></li>
+                                                <li><a>19</a></li>
+                                                <li><a>20</a></li>
+                                                <li><a>21</a></li>
+                                                <li><a>22</a></li>
+                                                <li><a>23</a></li>
+                                                <li><a>24</a></li>
+                                                <li><a>25</a></li>
+                                                <li><a>26</a></li>
+                                                <li><a>27</a></li>
+                                                <li><a>28</a></li>
+                                                <li><a>29</a></li>
+                                                <li><a>30</a></li>
+                                                <li><a>31</a></li>
+                                                <li><a>32</a></li>
+                                                <li><a>33</a></li>
+                                                <li><a>34</a></li>
+                                                <li><a>35</a></li>
+                                                <li><a>36</a></li>
+                                                <li><a>37</a></li>
+                                                <li><a>38</a></li>
+                                                <li><a>39</a></li>
+                                                <li><a>40</a></li>
+                                                <li><a>41</a></li>
+                                                <li><a>42</a></li>
+                                                <li><a>43</a></li>
+                                                <li><a>44</a></li>
+                                                <li><a>45</a></li>
+                                                <li><a>46</a></li>
+                                                <li><a>47</a></li>
+                                                <li><a>48</a></li>
+                                                <li><a>49</a></li>
+                                                <li><a>50</a></li>
+                                                <li><a>51</a></li>
+                                                <li><a>52</a></li>
+                                                <li><a>53</a></li>
+                                                <li><a>54</a></li>
+                                                <li><a>55</a></li>
+                                                <li><a>56</a></li>
+                                                <li><a>57</a></li>
+                                                <li><a>58</a></li>
+                                                <li><a>59</a></li>
+                                            </ul>
+
+                                        </div>
+                                        <!-- col2Inn end /-->
+                                    </div>
+
+                                    <!-- col3 started /-->
+                                    <div class="col3">
+                                        <h2 class="font16Bl">Arriving At</h2>
+                                        <!-- col3Inn Started -->
+                                        <div class="col3Inn">
+                                            <div class="selcArp" >
+                                                <input type="text" class="itc_custom_input" id="arrivalAirportName" placeholder="Select Airport" onclick="event.stopPropagation();"ng-model='arrivalAirportName' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul id="" class="arri_drp_custom drpDwn autoSugg" onclick="hasWordMatch();">
+                                                <!--function added in customizeStay.js, error message will be shown when hotel&airport selection does not match 12/10/2017-->
+                                                <li ng-repeat="(key, value) in dropDownList[2]" id="airportID" ><a ng-click="capLet(key);" class="airportclass">{{key}}</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- col3Inn End -->
+                                    </div>
+                                    <!-- col3 end /-->
+                                    <div class="errorCont1" id="airportArrivalError">
+
+
+                                    </div>
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <!-- hotlPrice started /-->
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <!--span class="rps"><span class="WebRupee">Rs.</span>5,000</span-->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a class="btn1 likeAdd" ng-click='SetAirportArrivalDateAndTime()'>Add</a>
+                                    </div>
+                                </div>
+                                <!-- hotlPrice end /-->
+                            </li>
+                            <li>
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <p class="font18Bl">DEPARTURE Information</p>
+                                    <div class="col1">
+                                        <h2 class="font16Bl">Airline/Flight Number</h2>
+                                        <input type="text" id="departureFlightNo" class="custInput" ng-model='departureFlightNumber'>
+                                    </div>
+                                    <div class="col2">
+                                        <h2 class="font16Bl">Departure Time  </h2>
+                                        <!-- col2Inn started /-->
+                                        <div class="col2Inn mR5">
+                                            <div class="selcArp">
+                                                <input type="number" id="departureTimeHour" class="itc_custom_input" placeholder="HH" onclick="event.stopPropagation();" ng-model='departureTimeHr' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>00</a></li>
+                                                <li><a>01</a></li>
+                                                <li><a>02</a></li>
+                                                <li><a>03</a></li>
+                                                <li><a>04</a></li>
+                                                <li><a>05</a></li>
+                                                <li><a>06</a></li>
+                                                <li><a>07</a></li>
+                                                <li><a>08</a></li>
+                                                <li><a>09</a></li>
+                                                <li><a>10</a></li>
+                                                <li><a>11</a></li>
+                                                <li><a>12</a></li>
+                                                <li><a>13</a></li>
+                                                <li><a>14</a></li>
+                                                <li><a>15</a></li>
+                                                <li><a>16</a></li>
+                                                <li><a>17</a></li>
+                                                <li><a>18</a></li>
+                                                <li><a>19</a></li>
+                                                <li><a>20</a></li>
+                                                <li><a>21</a></li>
+                                                <li><a>22</a></li>
+                                                <li><a>23</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- col2Inn end /-->
+                                        <!-- col2Inn started /-->
+                                        <div class="col2Inn">
+                                            <div class="selcArp">
+                                                <input type="number" id="departureTimeMinute" class="itc_custom_input" placeholder="MM" onclick="event.stopPropagation();" ng-model='departureTimeMin' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>00</a></li>
+                                                <li><a>01</a></li>
+                                                <li><a>02</a></li>
+                                                <li><a>03</a></li>
+                                                <li><a>04</a></li>
+                                                <li><a>05</a></li>
+                                                <li><a>06</a></li>
+                                                <li><a>07</a></li>
+                                                <li><a>08</a></li>
+                                                <li><a>09</a></li>
+                                                <li><a>10</a></li>
+                                                <li><a>11</a></li>
+                                                <li><a>12</a></li>
+                                                <li><a>13</a></li>
+                                                <li><a>14</a></li>
+                                                <li><a>15</a></li>
+                                                <li><a>16</a></li>
+                                                <li><a>17</a></li>
+                                                <li><a>18</a></li>
+                                                <li><a>19</a></li>
+                                                <li><a>20</a></li>
+                                                <li><a>21</a></li>
+                                                <li><a>22</a></li>
+                                                <li><a>23</a></li>
+                                                <li><a>24</a></li>
+                                                <li><a>25</a></li>
+                                                <li><a>26</a></li>
+                                                <li><a>27</a></li>
+                                                <li><a>28</a></li>
+                                                <li><a>29</a></li>
+                                                <li><a>30</a></li>
+                                                <li><a>31</a></li>
+                                                <li><a>32</a></li>
+                                                <li><a>33</a></li>
+                                                <li><a>34</a></li>
+                                                <li><a>35</a></li>
+                                                <li><a>36</a></li>
+                                                <li><a>37</a></li>
+                                                <li><a>38</a></li>
+                                                <li><a>39</a></li>
+                                                <li><a>40</a></li>
+                                                <li><a>41</a></li>
+                                                <li><a>42</a></li>
+                                                <li><a>43</a></li>
+                                                <li><a>44</a></li>
+                                                <li><a>45</a></li>
+                                                <li><a>46</a></li>
+                                                <li><a>47</a></li>
+                                                <li><a>48</a></li>
+                                                <li><a>49</a></li>
+                                                <li><a>50</a></li>
+                                                <li><a>51</a></li>
+                                                <li><a>52</a></li>
+                                                <li><a>53</a></li>
+                                                <li><a>54</a></li>
+                                                <li><a>55</a></li>
+                                                <li><a>56</a></li>
+                                                <li><a>57</a></li>
+                                                <li><a>58</a></li>
+                                                <li><a>59</a></li>
+                                            </ul>
+
+                                        </div>
+                                        <!-- col2Inn end /-->
+                                    </div>
+
+                                    <!-- col3 started /-->
+                                    <div class="col3">
+                                        <h2 class="font16Bl">Departing From</h2>
+                                        <!-- col3Inn Started -->
+                                        <div class="col3Inn">
+                                            <div class="selcArp">
+                                                <input type="text" class="itc_custom_input" id="departureAirportName" placeholder="Select Airport" onclick="event.stopPropagation();" ng-model='departureAirportName' readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="arri_drp_custom drpDwn autoSugg">
+                                                <li ng-repeat="(key, value) in dropDownList[2]"><a ng-click="capLet(key);">{{key}}</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- col3Inn End -->
+                                    </div>
+                                    <!-- col3 end /-->
+                                    <div class="errorCont1" id="airportDepartureError">
+
+
+                                    </div>
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <!-- hotlPrice started /-->
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <!--span class="rps"><span class="WebRupee">Rs.</span>5,000</span-->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a class="btn1 likeAdd" ng-click='SetAirportDepartureDateAndTime()'>Add</a>
+                                    </div>
+                                </div>
+                                <!-- hotlPrice end /-->
+
+                            </li>
+                        </ul>
+                        <div class="wid100">
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="lnkGold mT16">Skip Customization</a!-->
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn1 likeAdd">continue</a-->
+                            <div class="stsWp">
+                                <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" >
+                                    <span class="btn1 likeAdd" ng-click="checkUpgradeFacility()">Continue</span>
+                                    <span class="hvrCont pgPopUp">
+							      <span class="ttArDwn"></span>
+							      <span class="inHvCont">Clicking on this will take you to personal details page</span>
+						    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- airTab end /-->
+
+                    <!-- intTab started /-->
+                    <!--<div class="intTab tabChild" style="display:none">
+                        <p class="font14Bl">In-room High Speed broadband internet, both WIFI and LAN, are available on an hourly and daily basis.<br>Kindly select your preferred internet plan.</p>
+                        <ul class="hotels" id="resInternetTab">
+                            <li ng-repeat="internet in customizeStayData.internetPackage" >
+                                &lt;!&ndash; hotlInfo started /&ndash;&gt;
+                                <div class="hotlInfo">
+                                    <p class="font18Bl">{{internet.packageName}}</p>
+                                    <p class="font14Bl">{{internet.packageDescription}}</p>
+                                    &lt;!&ndash; quantWrp started /&ndash;&gt;
+                                    <div class="quantWrp">
+                                        <label class="font16Bl">Quantity</label>
+                                        &lt;!&ndash; col2Inn started /&ndash;&gt;
+                                        <div class="col2Inn">
+                                            <div class="selcArp">
+                                                <input type="number" class="itc_custom_input" id="internetQuantityCustomize" placeholder="0" onclick="event.stopPropagation();" readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>1</a></li>
+                                                <li><a>2</a></li>
+                                                <li><a>3</a></li>
+                                                <li><a>4</a></li>
+                                                <li><a>5</a></li>
+                                                <li><a>6</a></li>
+                                                <li><a>7</a></li>
+                                                <li><a>8</a></li>
+                                                <li><a>9</a></li>
+                                                <li><a>10</a></li>
+                                            </ul>
+
+                                        </div>
+                                        &lt;!&ndash; col2Inn end /&ndash;&gt;
+                                        <div class="errorCont1 quantityError">
+
+                                        </div>
+                                    </div>
+
+                                    &lt;!&ndash; quantWrp end /&ndash;&gt;
+                                    &lt;!&ndash;
+                                    <div class="errorCont1" style="
+    display: block;
+    float: left;
+    width: 100%;
+">
+						<div class="errwp">
+							 <div class="alrtIc" style="
+    display: inline-block;
+"></div>
+							 <p style="
+    display: inline-block;
+    width: auto;
+">This Email ID is already registered with us.  </p>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+
+
+
+element.style {
+    display: block;
+    float: left;
+    width: 100%;
+}
+                                    &ndash;&gt;
+
+                                </div>
+                                &lt;!&ndash; hotlInfo end /&ndash;&gt;
+
+                                &lt;!&ndash; hotlPrice started /&ndash;&gt;
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class=""></span>{{internet.packageTotalAmount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Package</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints" ng-if="planType=='fullCash'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{internet.packageTotalAmount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml"> Per Package</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" ng-click="addThisAddOn('internet',internet.packageDescription,none,internet.packageName,internet.packageTotalAmount,$event,internet.packageCode,internet.taxAmount,internet.addonCategory)" class="btn6">Add</a>
+                                    </div>
+                                </div>
+                                &lt;!&ndash; hotlPrice end /&ndash;&gt;
+                            </li>
+                            <li ng-repeat="internet in OfflineAddOnDetails.internetDetails" >
+                                &lt;!&ndash; hotlInfo started /&ndash;&gt;
+                                <div class="hotlInfo">
+                                    <p class="font18Bl">{{internet.addOnDesc}}</p>
+                                    <p class="font14Bl">{{internet.longDesc}}</p>
+                                    &lt;!&ndash; quantWrp started /&ndash;&gt;
+                                    <div class="quantWrp">
+                                        <label class="font16Bl">Quantity</label>
+                                        &lt;!&ndash; col2Inn started /&ndash;&gt;
+                                        <div class="col2Inn">
+                                            <div class="selcArp">
+                                                <input type="number" class="itc_custom_input" id="internetQuantityCustomize" placeholder="0" onclick="event.stopPropagation();" readonly>
+                                                <a class="blkDnIc" href="javascript:;"></a>
+                                            </div>
+                                            <ul class="drpDwn autoSugg">
+                                                <li><a>1</a></li>
+                                                <li><a>2</a></li>
+                                                <li><a>3</a></li>
+                                                <li><a>4</a></li>
+                                                <li><a>5</a></li>
+                                                <li><a>6</a></li>
+                                                <li><a>7</a></li>
+                                                <li><a>8</a></li>
+                                                <li><a>9</a></li>
+                                                <li><a>10</a></li>
+                                            </ul>
+
+                                        </div>
+                                        &lt;!&ndash; col2Inn end /&ndash;&gt;
+                                        <div class="errorCont1 quantityError">
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                &lt;!&ndash; hotlInfo end /&ndash;&gt;
+
+                                &lt;!&ndash; hotlPrice started /&ndash;&gt;
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class=""></span>{{internet.amount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Package</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints"ng-if="planType=='fullCash'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{internet.amount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml"> Per Package</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" ng-click="addThisAddOn('internet',internet.longDesc,internet.addOnImage,internet.addOnDesc,internet.amount,$event,internet.addOnId,internet.taxAmt,internet.addOnType,undefined,undefined,undefined,undefined,undefined,internet.longDesc)" class="btn6">Add</a>
+                                    </div>
+                                </div>
+                                &lt;!&ndash; hotlPrice end /&ndash;&gt;
+                            </li>
+                        </ul>
+                        <div class="wid100">
+                            &lt;!&ndash;a class="lnkGold mT16" href="javascript:;" ng-click="checkUpgradeFacility()" >Skip Customization</a&ndash;&gt;
+                            &lt;!&ndash;a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn6">continue</a&ndash;&gt;
+                            <div class="stsWp">
+                                <a class="lnkGold continueJs" href="javascript:void(0)" >
+                                    <span class="nxtStp" ng-click="checkUpgradeFacility()">Continue to Next Step</span>
+						    <span class="hvrCont pgPopUp">
+							      <span class="ttArDwn"></span>
+							      <span class="inHvCont">Clicking on this will take you to personal details page</span>
+						    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!-- intTab end /-->
+
+                    <!-- dinTab started /-->
+                    <div class="dinTab tabChild clearfix">
+                        <div ng-if="customizeStayData.diningPackage.length>0" ng-bind-html="diningTabRT"></div>
+                        <div ng-if="customizeStayData.diningPackage.length<1" ng-bind-html="addOnMsg"></div>
+                        <!-- hotels  started /-->
+                        <ul class="hotels" id="resDiningTab">
+                            <li ng-repeat="dining in customizeStayData.diningPackage" >
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <div class="lefImg">
+                                        <div class="htImgWp"><img alt="{{dining.packageName}}" title="{{dining.packageName}}" ng-src="{{dining.addOnImage}}" class="htlImg"></div>
+                                    </div>
+
+                                    <!-- rigInfo started /-->
+                                    <div class="rigInfo">
+                                        <h2 class="font22Bl">{{dining.packageName}}</h2>
+                                        <!-- <p class="font14Bl">{{dining.packageDescription}}</p> /-->
+                                        <p class="font14Bl" ng-bind-html="dining.packageDescription"></p>
+                                        <!-- col1 started /-->
+                                        <div class="quantWrp">
+                                            <label class="font16Bl">Quantity:</label>
+                                            <!-- col2Inn started /-->
+                                            <div class="col2Inn">
+                                                <div class="selcArp">
+                                                    <input type="number" onclick="event.stopPropagation();" id="dinningQuantityCustomize" placeholder="0" class="itc_custom_input" readonly>
+                                                    <a href="javascript:;" class="blkDnIc"></a>
+                                                </div>
+                                                <ul class="drpDwn autoSugg">
+                                                    <li><a>1</a></li>
+                                                    <li><a>2</a></li>
+                                                    <li><a>3</a></li>
+                                                    <li><a>4</a></li>
+                                                    <li><a>5</a></li>
+                                                    <li><a>6</a></li>
+                                                    <li><a>7</a></li>
+                                                    <li><a>8</a></li>
+                                                    <li><a>9</a></li>
+                                                    <li><a>10</a></li>
+                                                </ul>
+
+                                            </div>
+                                            <!-- col2Inn end /-->
+                                            <div class="errorCont1 quantityError">
+
+                                            </div>
+                                        </div>
+                                        <!-- col1 end /-->
+                                    </div>
+                                    <!-- rigInfo end /-->
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <div class="rate">
+                                    <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                        <p class="prc">
+                                            <span class="rps"><span class=""></span>{{dining.packageTotalAmount | currency:"":0}}</span>
+                                            <br class="noDIsp">
+                                            <span class="ptSml">Points Per Package</span>
+                                        </p>
+                                    </div>
+                                    <div class="clbPoints" ng-if="planType=='fullCash'" style="position:relative">
+                                        <div onmouseover="showPopupMessageOnHover(this)" onmouseout="hidePopupMessageOnOut(this)">
+                                            <p class="prc" style="position:relative">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{dining.packageTotalAmount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml" style="cursor:pointer;" >Per Person </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a class="btn1 likeAdd" id="dining{{dining.packageCode}}" href="javascript:;" ng-click="addThisAddOn('dining',dining.packageDescription,dining.addOnImage,dining.packageName,dining.packageTotalAmount,$event,dining.packageCode,dining.taxAmount,dining.addonCategory)">Add</a>
+                                </div>
+
+
+                            </li>
+                            <div ng-if="OfflineAddOnDetails.dinningDetails.length>0" ng-bind-html="diningTabRT"></div>
+                            <div ng-if="OfflineAddOnDetails.dinningDetails.length<1" ng-bind-html="addOnMsg"></div>
+                            <li ng-repeat="dining in OfflineAddOnDetails.dinningDetails" >
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <div class="lefImg">
+                                        <div class="htImgWp"><img alt="{{dining.addOnDesc}}" title="{{dining.addOnDesc}}" ng-src="{{dining.addOnImage}}" class="htlImg"></div>
+
+                                    </div>
+
+                                    <!-- rigInfo started /-->
+                                    <div class="rigInfo">
+                                        <h2 class="font22Bl">{{dining.addOnDesc}}</h2>
+                                        <p class="font14Bl">{{dining.longDesc}}</p>
+                                        <!-- col1 started /-->
+                                        <!--<div class="col1">
+                                            <label class="font16Bl">Adults: </label>
+
+                                            &lt;!&ndash; col2Inn Started &ndash;&gt;
+                                            <div class="col2Inn">
+                                                <div class="selcArp">
+                                                    <input type="number" class="itc_custom_input" id="dinningQuantityCustomize" placeholder="00" onclick="event.stopPropagation();">
+                                                    <a class="blkDnIc" href="javascript:;"></a>
+                                                </div>
+                                                <ul class="drpDwn autoSugg">
+                                                    <li><a>1</a></li>
+                                                    <li><a>2</a></li>
+                                                    <li><a>3</a></li>
+                                                    <li><a>4</a></li>
+                                                    <li><a>5</a></li>
+                                                    <li><a>6</a></li>
+                                                    <li><a>7</a></li>
+                                                    <li><a>8</a></li>
+                                                    <li><a>9</a></li>
+                                                    <li><a>10</a></li>
+                                                    <li><a>11</a></li>
+                                                    <li><a>12</a></li>
+                                                    <li><a>13</a></li>
+                                                    <li><a>14</a></li>
+                                                    <li><a>15</a></li>
+                                                    <li><a>16</a></li>
+                                                    <li><a>17</a></li>
+                                                    <li><a>18</a></li>
+                                                    <li><a>19</a></li>
+                                                </ul>
+                                            </div>
+                                            &lt;!&ndash; col2Inn End &ndash;&gt;
+                                            <div class="errorCont1 quantityError">
+
+                                            </div>
+                                        </div>-->
+                                        <div class="quantWrp">
+                                            <label class="font16Bl">Quantity: </label>
+                                            <!-- col2Inn started /-->
+                                            <div class="col2Inn">
+                                                <div class="selcArp">
+                                                    <input type="number" onclick="event.stopPropagation();" id="dinningQuantityCustomize" placeholder="0" class="itc_custom_input" readonly>
+                                                    <a href="javascript:;" class="blkDnIc"></a>
+                                                </div>
+                                                <ul class="drpDwn autoSugg">
+                                                    <li><a>1</a></li>
+                                                    <li><a>2</a></li>
+                                                    <li><a>3</a></li>
+                                                    <li><a>4</a></li>
+                                                    <li><a>5</a></li>
+                                                    <li><a>6</a></li>
+                                                    <li><a>7</a></li>
+                                                    <li><a>8</a></li>
+                                                    <li><a>9</a></li>
+                                                    <li><a>10</a></li>
+                                                </ul>
+
+                                            </div>
+                                            <!-- col2Inn end /-->
+                                            <div class="errorCont1 quantityError">
+
+                                            </div>
+                                        </div>
+                                        <!-- col1 end /-->
+                                    </div>
+                                    <!-- rigInfo end /-->
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <div class="rate">
+                                    <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                        <p class="prc">
+                                            <span class="rps"><span class=""></span>{{dining.amount | currency:"":0}}</span>
+                                            <br class="noDIsp">
+                                            <span class="ptSml">Points Per Package</span>
+                                        </p>
+                                    </div>
+                                    <div class="clbPoints" ng-if="planType=='fullCash'" style="position:relative">
+                                        <div onmouseover="showPopupMessageOnHover(this)" onmouseout="hidePopupMessageOnOut(this)">
+                                            <p class="prc" style="position:relative">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{dining.amount | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml" style="cursor:pointer;" >Per Person </span>
+                                            </p>
+                                        </div>
+
+
+
+                                    </div>
+                                    <a class="btn1 likeAdd" id="dining{{dining.addOnId}}" href="javascript:;" ng-click="addThisAddOn('dining',dining.longDesc,dining.addOnImage,dining.addOnDesc,dining.amount,$event,dining.addOnId,dining.taxAmt,dining.addOnType,undefined,undefined,undefined,undefined,undefined,dining.longDesc)">Add</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- hotels  end /-->
+
+                        <!-- wid100 started /-->
+                        <div class="wid100">
+                            <div class="noteCont noteUl" ng-if="OfflineAddOnDetails.dinningDetails.length>0" ng-bind-html="diningTabRTNote">
+
+                            </div>
+                            <div class="noteCont noteUl" ng-if="customizeStayData.diningPackage.length>0" ng-bind-html="diningTabRTNote">
+
+                            </div>
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="lnkGold">Skip Customization</a-->
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn1 likeAdd">continue</a-->
+                            <div class="stsWp">
+                                <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" >
+                                    <span class="btn1 likeAdd" ng-click="checkUpgradeFacility()">Continue</span>
+                                    <span class="hvrCont pgPopUp">
+							      <span class="ttArDwn"></span>
+							      <span class="inHvCont">Clicking on this will take you to personal details page</span>
+						    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- wid100 end /-->
+                        <div class="clear"></div>
+                    </div>
+                    <!-- dinTab end /-->
+
+                    <!-- spaTab started /-->
+                    <div class="spaTab tabChild">
+                        <div ng-if="customizeStayData.spaPackage.length>0" ng-bind-html="spaTabRT"></div>
+                        <div ng-if="customizeStayData.spaPackage.length<1" ng-bind-html="addOnMsg"></div>
+
+                        <!-- hotels  started /-->
+                        <ul class="hotels" id="resSpaTab">
+                            <li ng-repeat="spa in customizeStayData.spaPackage" >
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <div class="lefImg">
+                                        <div class="htImgWp"><img alt="{{spa.packageName}}" title="{{spa.packageName}}" ng-src="{{spa.addOnImage}}" class="htlImg"></div>
+                                    </div>
+
+                                    <!-- rigInfo started /-->
+                                    <div class="rigInfo">
+                                        <h2 class="font22Bl">{{spa.packageName}}</h2>
+                                        <!-- <p class="font14Bl">{{spa.packageDescription}}</p> /-->
+                                        <p class="font14Bl" ng-bind-html="spa.packageDescription"></p>
+                                        <!--quantWrp Started-->
+                                        <div class="quantWrp">
+                                            <label class="font16Bl">Quantity</label>
+                                            <!-- col2Inn started /-->
+                                            <div class="col2Inn">
+                                                <div class="selcArp">
+                                                    <input type="number" onclick="event.stopPropagation();" id="spaQuantityCustomize" placeholder="0" class="itc_custom_input" readonly>
+                                                    <a href="javascript:;" class="blkDnIc"></a>
+                                                </div>
+                                                <ul class="drpDwn autoSugg">
+                                                    <li><a>1</a></li>
+                                                    <li><a>2</a></li>
+                                                    <li><a>3</a></li>
+                                                    <li><a>4</a></li>
+                                                    <li><a>5</a></li>
+                                                    <li><a>6</a></li>
+                                                    <li><a>7</a></li>
+                                                    <li><a>8</a></li>
+                                                    <li><a>9</a></li>
+                                                    <li><a>10</a></li>
+                                                </ul>
+
+                                            </div>
+                                            <!-- col2Inn end /-->
+                                            <div class="errorCont1 quantityError">
+
+                                            </div>
+                                        </div>
+                                        <!--quantWrp end-->
+
+                                    </div>
+                                    <!-- rigInfo started /-->
+
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <!-- hotlPrice started /-->
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class=""></span>{{spa.packageTotalAmount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Package</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints" ng-if="planType=='fullCash'" style="position:relative">
+                                                <div onmouseover="showPopupMessageOnHover(this)" onmouseout="hidePopupMessageOnOut(this)">
+
+                                                    <p class="prc" style="position:relative">
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{spa.packageTotalAmount | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml" style="cursor:pointer;" > Per Package</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" id="spa{{spa.packageCode}}"  ng-click="addThisAddOn('spa',spa.packageDescription,spa.addOnImage,spa.packageName,spa.packageTotalAmount,$event,spa.packageCode,spa.taxAmount,spa.addonCategory)" class="btn1 likeAdd">Add</a>
+                                    </div>
+                                </div>
+                                <!-- hotlPrice end /-->
+                            </li>
+                            <div ng-if="OfflineAddOnDetails.spaDetails.length>0" ng-bind-html="spaTabRT"></div>
+                            <div ng-if="OfflineAddOnDetails.spaDetails.length<1" ng-bind-html="addOnMsg"></div>
+                            <li ng-repeat="spa in OfflineAddOnDetails.spaDetails" >
+                                <!-- hotlInfo started /-->
+                                <div class="hotlInfo">
+                                    <div class="lefImg">
+                                        <div class="htImgWp"><img alt="{{spa.addOnDesc}}" title="{{spa.addOnDesc}}" ng-src="{{spa.addOnImage}}" class="htlImg"></div>
+                                    </div>
+
+                                    <!-- rigInfo started /-->
+                                    <div class="rigInfo">
+                                        <h2 class="font22Bl">{{spa.addOnDesc}}</h2>
+                                        <p class="font14Bl">{{spa.longDesc}}</p>
+
+                                        <!--quantWrp Started-->
+                                        <div class="quantWrp">
+                                            <label class="font16Bl">Quantity</label>
+                                            <!-- col2Inn started /-->
+                                            <div class="col2Inn">
+                                                <div class="selcArp">
+                                                    <input type="number" onclick="event.stopPropagation();" id="spaQuantityCustomize" placeholder="0" class="itc_custom_input" readonly>
+                                                    <a href="javascript:;" class="blkDnIc"></a>
+                                                </div>
+                                                <ul class="drpDwn autoSugg">
+                                                    <li><a>1</a></li>
+                                                    <li><a>2</a></li>
+                                                    <li><a>3</a></li>
+                                                    <li><a>4</a></li>
+                                                    <li><a>5</a></li>
+                                                    <li><a>6</a></li>
+                                                    <li><a>7</a></li>
+                                                    <li><a>8</a></li>
+                                                    <li><a>9</a></li>
+                                                    <li><a>10</a></li>
+                                                </ul>
+
+                                            </div>
+                                            <!-- col2Inn end /-->
+                                            <div class="errorCont1 quantityError">
+
+                                            </div>
+                                        </div>
+                                        <!--quantWrp end-->
+
+                                    </div>
+                                    <!-- rigInfo started /-->
+
+                                </div>
+                                <!-- hotlInfo end /-->
+
+                                <!-- hotlPrice started /-->
+                                <div class="hotlPrice">
+                                    <div class="rate">
+                                        <div class="rateInWp">
+                                            <div class="clbPoints" ng-if="planType=='fullPoints'||planType=='halfPoints'">
+                                                <p class="prc">
+                                                    <span class="rps"><span class=""></span>{{spa.amount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Package</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints" ng-if="planType=='fullCash'" style="position:relative">
+                                                <div onmouseover="showPopupMessageOnHover(this)" onmouseout="hidePopupMessageOnOut(this)">
+
+                                                    <p class="prc" style="position:relative">
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{spa.amount | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml" style="cursor:pointer;" > Per Package </span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" ng-click="addThisAddOn('spa',spa.longDesc,spa.addOnImage,spa.addOnDesc,spa.amount,$event,spa.addOnId,spa.taxAmt,spa.addOnType,undefined,undefined,undefined,undefined,undefined,spa.longDesc)" class="btn1 likeAdd" id="spa{{spa.addOnId}}">Add</a>
+                                    </div>
+                                </div>
+                                <!-- hotlPrice end /-->
+                            </li>
+                        </ul>
+                        <div class="wid100">
+                            <!--a class="lnkGold" href="javascript:;" ng-click="checkUpgradeFacility()">Skip Customization</a-->
+                            <!--a href="javascript:;" ng-click="checkUpgradeFacility()" class="btn1 likeAdd">continue</a-->
+                            <div class="stsWp">
+                                <a class="lnkGold continueJs checkOpRes" href="javascript:void(0)" >
+                                    <span class="btn1 likeAdd" ng-click="checkUpgradeFacility()">Continue</span>
+                                    <span class="hvrCont pgPopUp">
+							      <span class="ttArDwn"></span>
+							      <span class="inHvCont">Clicking on this will take you to personal details page</span>
+						    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- spaTab end /-->
+
+
+
+                </div>
+                <!-- tabWrp customize stay main section end /-->
+
+
+            </div>
+            <!-- hotelRight end /-->
+        </div>
+        <!-- htlDtlCntIn end /-->
+
+
+    </div>
+    <!-- Hotel detail end /-->
+</div>
+
+<script type="text/javascript">
+
+	var GL_checkInDate = new Array();
+	var GL_checkOutDate = new Array();
+
+	GL_checkInDate[0] = new Date("2015,07,26,12:00:00");
+	GL_checkOutDate[0] = new Date("2015,07,30,12:00:00");
+
+
+$(window).load(function(){loadJ();});
+$(window).resize(function(){
+if ($('.wrapper').is(":visible")) {
+    loadJ();
+    resPos();
+	//jwplayer('video_player_1').remove();
+	//$('#player_holder_1').show();
+	//$('#video_player_1').hide();
+}
+});
+
+function loadJ(){
+    $('body').css('overflow', 'scroll');
+    var heightWithScrollBars = $(window).height();
+    var widthWithScrollBars = $(window).width();
+    $('body').css('overflow', 'auto');
+
+if ($(window).width()>=1263){
+        var x = $(".galary").width();
+
+        var col1_width = (x * 31.6)/100;
+        var col2_width = (x * 64.9)/100;
+        var col3_width = (x * 64.9)/100;
+        var col0_width = x;
+
+
+        var col1_height = col1_width;
+        var col2_height = col1_width;
+        var col3_height = col2_width;
+
+        $(".glryIn.col1").each(function(){
+            $(this).css({width:col1_width,height:col1_height});
+        });
+        $(".glryIn.col2").each(function(){
+            $(this).css({width:col2_width,height:col2_height});
+            $(this).find('.glryImg').css({height:col2_height});
+        });
+        $(".glryIn.col3").each(function(){
+            $(this).css({width:col3_width,height:col3_height});
+            $(this).find('.glryImg').css({height:col3_height});
+        });
+        $(".glryIn.col0").each(function(){
+            $(this).css({width:col0_width,height:col1_height});
+        });
+    }
+    else if($(window).width() >= 768 && $(window).width() <= 1262){
+            var x = $(".galary").width();
+            var col1_width = (x * 47.5)/100;
+            var col2_width = (x * 47.5)/100;
+            var col3_width = (x * 47.5)/100;
+            var col0_width =(x * 97.3)/100;
+
+
+            var col1_height = col1_width;
+            var col2_height = col1_width;
+            var col3_height = col1_width;
+
+            $(".glryIn.col1").each(function(){
+                $(this).css({width:col1_width,height:col1_height});
+            });
+            $(".glryIn.col2").each(function(){
+                $(this).css({width:col2_width,height:col2_height});
+                $(this).find('.glryImg').css({height:col2_height});
+				$(this).find('.colLst li').css({height:col2_height});
+            });
+            $(".glryIn.col3").each(function(){
+                $(this).css({width:col3_width,height:col3_height});
+                $(this).find('.glryImg').css({height:col3_height});
+				$(this).find('.colLst li').css({height:col3_height});
+            });
+            $(".glryIn.col0").each(function(){
+				$(this).css({width:col0_width,height:col1_height});
+			});
+
+    }
+
+    else if($(window).width() <= 767){
+            var x = $(".galary").width();
+
+            var col1_width = x;
+            var col2_width = x;
+            var col3_width = x;
+
+
+            var gWidth = (x * 1.6)/100;
+
+            var col1_height = col1_width;
+            var col2_height = col1_width;
+            var col3_height = col3_width;
+
+            $(".glryIn.col1").each(function(){
+                $(this).css({width:col1_width,height:col1_height});
+            });
+            $(".glryIn.col2").each(function(){
+                $(this).css({width:col2_width,height:col2_height});
+                $(this).find('.glryImg').css({height:col2_height});
+				$(this).find('.colLst li').css({height:col2_height});
+            });
+            $(".glryIn.col3").each(function(){
+                $(this).css({width:col3_width,height:col3_height});
+                $(this).find('.glryImg').css({height:col3_height});
+				$(this).find('.colLst li').css({height:col3_height});
+            });
+
+    }
+
+}
+</script>
+<script type="text/javascript">
+
+	$(window).load(function() {
+	    airportFunction();
+		checkEleApp ();
+		resPos();
+		topFixNav()
+		mobSliderfn();
+		mobArrPlaFn();
+		setVal(); // resetting rooms and adult input field
+		addBlc(); // adding blcMenu class to main top navigation
+		changeTab();
+
+		$("#resCheckIn").datepick({
+			minDate: 0,
+			rangeSelect: false,
+			changeMonth: false,
+			defaultDate: new Date(2015,6,25),
+			selectDefaultDate: true,
+			onSelect:function (d){
+				$('.checkIn .day').text(monthNames[d[0].getMonth()]);
+				$('.checkIn .date').text(d[0].getDate());
+				$('.checkIn .year').text(d[0].getFullYear());
+
+				$("#resCheckOut").datepick('option', {minDate:d[0]});
+				$('.resCheckInWp').hide();
+				$("#resCheckIn .dp"+d[0].getTime()).addClass("datepick-selected");
+			}
+		});
+		$("#resCheckIn .dp"+GL_checkInDate[0].getTime()).addClass("datepick-selected");
+
+
+		$("#resCheckOut").datepick({
+			minDate: 0,
+			rangeSelect: false,
+			changeMonth: false,
+			onDate: codates,
+			onSelect:function (dates){
+				$('.checkOut .day').text(monthNames[dates[0].getMonth()]);
+				$('.checkOut .date').text(dates[0].getDate());
+				$('.checkOut .year').text(dates[0].getFullYear());
+
+				$('.resCheckInWp').hide();
+			},
+			onShow: $.datepick.hoverCallback(showHoverDays)
+		});
+
+	});
+
+	$(window).scroll(function() {
+		checkEleApp();
+		topFixNav();
+	});
+	$(window).resize(function() {
+		resPos();
+		mobSliderfn();
+		mobArrPlaFn();
+		submenuSlid();
+		addBlc() // adding blcMenu class to main top navigation;
+		changeTab();
+		hideBotFix(); // hiding bottom fix nav for mobile sections
+
+
+
+	});
+
+function showHoverDays(date, selectable) {
+		if (selectable) {
+			var checkInDate = $("#resCheckIn").datepick('getDate');
+
+			var startHover = Date.daysBetween(checkInDate[0],date);
+			$("#resCheckOut .datepick-selected-hover").removeClass("datepick-selected-hover");
+			$("#resCheckOut .datepick-selected-hover-last").removeClass("datepick-selected-hover-last");
+			$("#resCheckOut .datepick-selected-hover-first").removeClass("datepick-selected-hover-first");
+			if (startHover > 0) {
+			 for (i=0;i<=startHover;i++) {
+					var highlight = new Date(checkInDate[0]).setDate(checkInDate[0].getDate()+i).toString();
+					if (i == 0) {
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover-first");
+					}
+					else if (i == startHover) {
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover-last");
+					}
+					else{
+						$("#resCheckOut .dp"+highlight).addClass("datepick-selected-hover");
+					}
+				}
+			}
+		}
+
+	}
+
+function codates(date, inMonth) {
+	var checkInDate = new Array();
+	var checkOutDate = new Array();
+
+	var checkInDate__ = $("#resCheckIn").datepick('getDate');
+	if (checkInDate__.length > 0){
+	checkInDate[0] = checkInDate__[0];
+	}
+	else {
+		checkInDate[0] = new Date("2015/07/26");
+	}
+	checkOutDate[0] = new Date("2015/07/30");
+
+    /*var checkInDate = $("#checkin-date").datepick('getDate');
+    var checkOutDate = $("#checkout-date").datepick('getDate');*/
+
+    var selected = "";
+    var lfRdius = '';
+    var rgRdius = '';
+
+    if (typeof(checkInDate[0]) == "object"){
+        if (date.getTime() == checkInDate[0].getTime()) {
+            selected = " m-selected";
+        }
+    }
+
+    if (typeof(checkOutDate[0]) == "object"){
+        if (checkInDate[0].yyyymmdd() == date.yyyymmdd()) {
+            lfRdius = ' lfRdius';
+        }
+        if (checkOutDate[0].yyyymmdd() == date.yyyymmdd()) {
+            rgRdius = ' rgRdius';
+        }
+
+        if (date.getTime() >= checkInDate[0].getTime() && date.getTime() <= checkOutDate[0].getTime() && inMonth){
+            selected = " datepick-selected";
+        }
+    }
+
+    if (typeof(aHolidayList[date.yyyymmdd()]) == "object"){
+    	var css = "";
+        if(date.getDay() == 5 ||  date.getDay() == 6) {
+            css = "rigDr";
+        }
+        return {content:date.getDate() + '<span class="tooltip '+css+'"><span class="tolTpCnt"><span class="tolTipArrow"></span><span class="tolTipInner">'+aHolidayList[date.yyyymmdd()].name+'</span></span></span>',dateClass: 'txtDUndLn '+selected + lfRdius + rgRdius, selectable: true,title:' '};
+    }else {
+        return {dateClass:selected + lfRdius + rgRdius};
+    }
+}
+
+$(document).ready(function() {
+
+	hideBotFix(); // hiding bottom fix nav for mobile sections
+
+	// resetting
+	$('body').click(function(e) {
+		customizeRestFn();
+		resMainReset();
+	});
+
+
+
+	$(document).on('touchstart', function (event) {
+		if (!$(event.target).closest('.autoSugg:visible').length) {
+			$('.autoSugg:visible').hide()
+		}
+
+		if (!$(event.target).closest('.prsFltr').length) {
+			$('.prsFltrLst:visible').hide();
+			$('.prsFltrInn').removeClass('act');
+		}
+
+		if (!$(event.target).closest('.glVw').length) {
+            resMainTabReset();
+		}
+
+	});
+
+
+});
+
+$("input:checkbox[name=smokingnonsmoking]").click(function() {
+    $(".prefrenceMessage").hide();
+    $(".noprefrenceMessage").hide();
+});
+
+$("input:checkbox[name=floorType]").click(function() {
+    $(".prefrenceMessage").hide();
+    $(".noprefrenceMessage").hide();
+});
+
+
+$('input:checkbox[name=interConnectingRoom]').click(function(){
+    $(".prefrenceMessage").hide();
+    $(".noprefrenceMessage").hide();
+});
+
+
+$('input:checkbox[name=arrivalOrCheckout]').click(function(){
+    $(".arrivalCheckoutInput").hide();
+    $('input:checkbox[name=arrivalOrCheckout]:checked').each(function(){
+        var arrivalOrCheckout=$(this).val();
+        $("."+arrivalOrCheckout+"Input").show();
+    });
+    $(".prefrenceMessage").hide();
+    $(".noprefrenceMessage").hide();
+});
+
+$('input:checkbox[name=floorType]').change(function () {
+    if ($(this).is(":checked")) {
+        var jsfloorType=$(this).val()
+        if(jsfloorType ==="HIGH"){
+            $('#lowerFloor').attr('disabled', true);
+        }else if(jsfloorType==="LOWE"){
+            $('#highFloor').attr('disabled', true);
+        }
+    }else{
+        $('#lowerFloor').attr('disabled', false);
+        $('#highFloor').attr('disabled', false);
+    }
+
+});
+
+
+$('input:checkbox[name=smokingnonsmoking]').change(function () {
+    if ($(this).is(":checked")) {
+        var jssmokingnonsmoking=$(this).val()
+        if(jssmokingnonsmoking ==="SMOK"){
+            $('#nonsmoking').attr('disabled', true);
+        }else if(jssmokingnonsmoking==="NONS"){
+            $('#smoking').attr('disabled', true);
+        }
+    }else{
+        $('#smoking').attr('disabled', false);
+        $('#nonsmoking').attr('disabled', false);
+    }
+
+});
+
+
+
+</script>
+
+<style>
+    input[type=checkbox][disabled] + label {
+    color: #aaa;
+    }
+
+    .addonsTabRes
+    {
+           width: 25%;
+    }
+     @media only screen and (max-width: 479px) and (min-width: 0px) {
+     .addonsTabRes
+    {
+           width: 100%;
+    }
+     }
+
+     @media only screen and (max-width: 1262px) and (min-width: 768px){
+.tabNavUl li:nth-child(2) a, .tabNavUl li:last-child a {
+    vertical-align: inherit;
+    padding: 0;
+    line-height: 50px;
+}
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 0px)
+{
+.fa
+{
+display:none;
+}
+}
+
+</style>

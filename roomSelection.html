@@ -1,0 +1,1835 @@
+<div class="wrapper hideForMenu">
+    <!-- Hotel detail start /-->
+    <div class="htlDtlCnt clearfix">
+        <div class="htlDtlCntIn rmNdRt clearfix">
+            <!-- hotelLeft started /-->
+            <div class="hotelLeft">
+                <div class="nmst clearfix" id="welcomeMessageLoggedIn" style="display:none;">
+                </div>
+                <div class="clear"></div>
+                <div class="resChkInOut clearfix">
+                    <p class="font1_4em">{{selected}}</p>
+                    <div class="clear"></div>
+                    <p class="font1_2em fL">Check In: {{checkIn}}</p>
+                    <p class="font1_2em fR">Check Out: {{checkOut}}</p>
+                </div>
+                <div class="clear"></div>
+                <div class="yourSelReftWrp yrslk">
+                    <div class="yourSelCont clearfix ">
+                        <!-- hotLefInn started /-->
+                        <div class="hotLefInn clearfix">
+                            <p class="font22Bl">YOUR SELECTION</p>
+                            <div class="clear"></div>
+                            <h2 class="font16Bl">Hotel</h2>
+                            <div class="destiWrp">
+                                <div id="roomSelectionValue"><input type="text" placeholder="Select Your Destination" class="destInp  itc_custom_input" onfocus="$(this).parent().next().show(); $('.slctLst').jScrollPane();" id="destinationSelection"></div>
+                                <ul class="slctLst autoSugg" id="dynamicDropdownAppendRe">
+                                    <!--<li ng-if="hotelLevelOffer!='Y'" class="hed"><a href="#">Destination</a></li> -->
+                                    <li ng-if="hotelLevelOffer!='Y'" ng-repeat="(key, value) in dropDownList[0]"><a id="selectedValueRes" ng-click="capLet(key); $event.stopPropagation();">{{key}}</a></li>
+                                    <!--<li class="hed"><a href="#">Hotels</a></li>-->
+                                    <li ng-repeat="(key, value) in dropDownList[1]"><a id="selectedHotelValue" ng-click="capLet(key); $event.stopPropagation();">{{key}}</a></li>
+                                    <!--<li ng-if="hotelLevelOffer!='Y'" class="hed"><a href="#">Airport Code</a></li> -->
+                                    <li ng-if="hotelLevelOffer!='Y'" ng-repeat="(key, value) in dropDownList[2]"><a id="selectedAirportName" ng-click="capLet(key); $event.stopPropagation();">{{key}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="ysWp1 clearfix">
+                                <div class="checkIn">
+                                    <h2 class="font16Bl">Check In</h2>
+                                    <div class="whitCont" onclick="event.stopPropagation(); $('.resCheckInWp:visible').hide(); $(this).next().show();">
+                                        <a href="#" class="preArr"></a>
+                                        <div class="innContent">
+                                            <p class="font16Bl day" id='checkinMonth'>February</p>
+                                            <p class="font28Bl date" id='checkinDay'>20</p>
+                                            <p class="font16Bl year" id='checkinYear'>2015</p>
+                                        </div>
+                                        <a  class="nextArr"></a>
+                                    </div>
+                                    <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                        <div class="calArw"></div>
+                                        <div id="resCheckIn"></div>
+                                    </div>
+                                </div>
+                                <div class="checkOut">
+                                    <h2 class="font16Bl">Check Out</h2>
+                                    <div class="whitCont" onclick="event.stopPropagation(); $('.resCheckInWp:visible').hide();$(this).next().show();">
+                                        <a  class="preArr"></a>
+                                        <div class="innContent">
+                                            <p class="font16Bl day"  id='checkoutMonth'>February</p>
+                                            <p class="font28Bl date" id='checkoutDay'>22</p>
+                                            <p class="font16Bl year" id='checkoutYear'>2015</p>
+                                        </div>
+                                        <a href="#" class="nextArr"></a>
+                                    </div>
+                                    <div class="resCheckInWp" onclick="event.stopPropagation();">
+                                        <div class="calArw"></div>
+                                        <div id="resCheckOut"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ysWp2 clearfix">
+                                <div class="slctnDtl clearfix">
+                                    <div class="slctn mL0 roomJs">
+                                        <p class="newresHeading">Rooms / Suites</p>
+                                        <div class="slctnWp rsrvDtailWp" style="margin-top: 25px;">
+                                            <div class="slctnWpIn">
+                                                <input type="number"  placeholder="1" class="slctnInp itc_custom_input" id='reservationRoomsSelection' readonly="readonly">
+                                                <a class="plIc roomPlusButton" style="cursor:pointer"></a>
+                                                <a class="mnIc inAct roomMinusButton" style="cursor:pointer"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slctn adultJs adultJsnew" style="position:relative" onmouseover="showPopupMessage(this)" onmouseout="hidePopupMessage(this)">
+                                        <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Adults / room 19yrs & above <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                        <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                            <div class="ttLfAr"></div>
+                                            <div class="inHvCont">{{infoMessageAdult}}</div>
+                                        </div>
+                                        <div class="slctnWp rsrvDtailWp">
+                                            <div class="slctnWpIn">
+                                                <input type="number"  placeholder="1" class="slctnInp itc_custom_input totalOccupantss" id='reservationAdultsSelection' readonly="readonly">
+                                                <a class="plIc totalOccupantsPlusButton adultplus" style="cursor:pointer"></a>
+                                                <a class="mnIc inAct totalOccupantsMinusButton adultminus" style="cursor:pointer"></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slctn childJs childJsnew" style="position:relative" onmouseover="showPopupMessage(this)" onmouseout="hidePopupMessage(this)">
+                                        <p class="newresHeading" style="cursor:pointer" onmouseover="showPopupMessageOnMinus(this)" onmouseout="hidePopupMessageonMinus(this)">Children / room 0-12yrs <i class="fa" id="questionIcon" style="color:#d2ac67;font-size:16px;">&#xf059;</i></p>
+                                        <div class="hvrCont pgPopUp" id="popupChildren" style="display: none;">
+                                            <div class="ttLfAr"></div>
+                                            <div class="inHvCont">{{infoMessageChildren}}</div>
+                                        </div>
+                                        <div class="slctnWp rsrvDtailWp">
+                                            <div class="slctnWpIn">
+                                                <input type="number"  placeholder="0" class="slctnInp itc_custom_input totalOccupantss" id='reservationChildrenSelection' readonly="readonly">
+                                                <a class="plIc totalOccupantsPlusButton childrenplus" style="cursor:pointer" id="childrensCount"></a>
+                                                <a class="mnIc inAct totalOccupantsMinusButton childrenminus" style="cursor:pointer" id="childrensCount"></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Alert message to be shown when user tries to enter more than 4 occupants-->
+                                <div class="errwp emsg" style="font-size:13px;width:100%;display:none;" id="messageLabel">
+                                    <div class="alrtIc"></div><p style="float:none;font-size:12px;">{{alertMessageOccupants}}</p>
+                                </div>
+                            </div>
+                            <div class="prmCd">
+                                <div class="slctnDtl clearfix">
+                                    <div class="slctn mL0">
+                                        <p class="hdng">Promo Code</p>
+                                        <div class="slctnWp">
+                                            <div class="slctnWpIn" id="roomPromoNameErr">
+                                                <input type="text" id="reservationPromocodeName" placeholder="Select" class="slctnInp itc_custom_input" readonly="true">
+                                                <a href="javascript:;" class="blkDnIc"></a>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <ul class="slctnLst autoSugg">
+                                                <!--li><a ng-click="promo('Corporate')">Corporate</a></li-->
+                                                <li><a ng-click="promo('Promotional')" onclick="mynewfunction()">Promotional</a></li>
+                                                <!--<li><a ng-click="promo('Travel Agent')">Travel Agent</a></li>
+                                                <li><a ng-click="promo('Inventory Block')">Inventory Block</a></li>-->
+                                                <li><a ng-click="promo('None')" onclick="myfunction()">None</a></li>
+                                            </ul>
+                                            <div class="slctnWpIn" id="roomPromoValueErr">
+                                                <input type="text" id="reservationPromocodeValue" placeholder="Type Your Code" class="slctnInp alphaNum" onkeyup="showClsBtn(this);">
+                                                <a class="cls5" href="javascript:;" onclick="deleteCode(this);"></a>
+                                            </div>
+                                            <div class="errwp" id="promoError">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a ng-if="specialOffers==true" style="color:#c49a52;pointer-events:visible;" ng-href="javascript:;" ng-click="getRoomSearchResultOnUpdate()" href="javascript:;">View complete set of offers</a>
+                            </div>
+                            <a ng-click="getRoomSearchResultOnUpdate(specialOffers)" style="margin-bottom: 10px;" href="javascript:;" class="btn1 likeAddSubmit">Update</a>
+                        </div>
+                        <!-- hotLefInn end /-->
+                    </div>
+                </div>
+                <div class="rfnSrchWpr ref">
+                    <div class="rfnSrchCnt">
+                        <div class="rfnSrchInn clearfix">
+                            <p class="font22Bl">Refine Your Search</p>
+                            <div class="rfnLstCntLf">
+                                <!--<div class="rfnLstCnt">
+                                    <p class="font16Bl">rate preference</p>
+                                    <ul class="rfnLst">
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="prs1">
+                                                <label class="lab2" for="prs1">All</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="brnd1">
+                                                <label class="lab2" for="brnd1">Lowest Average Rate</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="brnd2">
+                                                <label class="lab2" for="brnd2">WelcomBreak Special Offers</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="brnd3">
+                                                <label class="lab2" for="brnd3">Refundable</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="brnd4">
+                                                <label class="lab2" for="brnd4">Pre Paid</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>-->
+                                <div class="rfnLstCnt prs">
+                                    <p class="font16Bl">Price</p>
+                                    <ul class="rfnLst">
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="prs1">
+                                                <label class="lab2" ng-click="sortByPrice('')" for="prs1">Best selling</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="prs2">
+                                                <label class="lab2" ng-click="sortByPrice('lwtohi')" for="prs2">Low - High</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chkCnt clearfix">
+                                                <input type="checkBox" id="prs3">
+                                                <label class="lab2" ng-click="sortByPrice('hitolw')" for="prs3">High - Low</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <!--<div class="botBtn">
+                                <a href="javascript:;" class="btn6">Update</a>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- hotelLeft end /-->
+            <div class="rfnsrhWp clearfix">
+                <a class="rfnsrh" rel="yrslk" href="javascript:;" onclick="refineSrc(this);">your selection</a>
+                <a class="rfnsrh fR" rel="ref" href="javascript:;" onclick="refineSrc(this);">Refine search</a>
+            </div>
+            <!-- hotelRight started /-->
+            <div class="hotelRight">
+                <div class="htlDtl clearfix">
+                    <p class="font1_2em fL">Rooms & rates</p>
+                    <p class="font1_2em fR">Step 2 of 5</p>
+                </div>
+                <div class="clear"></div>
+                <div class="chkhtlFiltrWp clearfix">
+                    <div ng-show="redeemPointSelection==''" class="chkWp">
+                        <input type="checkbox" id="cigp" class="chk greenPointsIdentity" name="remember me" ng-model="checkSelected" ng-model="ratePreferenceClubItc" ng-change="displayGreenPointsPlan();">
+                        <label for="cigp" id="greenPointsLabel" class="lab1">Redeem through Club ITC Green Points</label>
+                    </div>
+                    <div class="htlFiltr clearfix">
+
+                        <div class="prsFltr INR">
+                            <a class="prsFltrInn" href="http://www.xe.com/pca/input.cgi?Template=full" onclick="window.open(this.href, 'mywin',
+                        'left=20,top=20,width=650,height=235,toolbar=1,resizable=0'); return false;">Currency Convertor</a>
+                        </div>
+
+
+                        <div class="prsFltr">
+                            <a class="prsFltrInn" onclick="event.stopPropagation(); simpDrpDwn(this);">
+                                <span class="prsFltrInp">Best selling</span>
+                                <span class="filArr" href="javascript:;"></span>
+                            </a>
+                            <ul class="prsFltrLst">
+                                <li style="height:29px"><a href="javascript:;" onclick="drpDwnSel(this)" ng-click="sortByPrice('')">Best selling</a></li>
+                                <li><a href="javascript:;" onclick="drpDwnSel(this)" ng-click="sortByPrice('lwtohi')">Price low - high</a></li>
+                                <li><a href="javascript:;" onclick="drpDwnSel(this)" ng-click="sortByPrice('hitolw')">Price high - low</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <!-- tabWrp started /-->
+                <div class="tabWrp" onclick="event.stopPropagation();">
+                    <ul class="rrTabLst clearfix">
+                        <li><a href="javascript:;" onclick="tabbing(this,'byrooms')" id="byRoomTab" class="tabHd">By Room</a></li>
+                        <li><a href="javascript:;" onclick="tabbing(this,'byRate')" id="byRateTab" class="tabHd act">By Rate</a></li>
+                        <li><a href="javascript:;" onclick="tabbing(this,'byChoice')" id="byChoiceTab" class="tabHd">By Choice</a></li>
+                    </ul>
+                    <!-- By Room Start -->
+                    <!--div class="se-pre-con-reservation"></div-->
+                    <ul class="hotels byrooms tabChild clearfix" id="byRoomCompare" style="dispaly:none;">
+                        <!-- online -->
+                        <li id="roomListOnline" rel="dfad" ng-repeat="room in roomDetails.online.rooms | orderBy:myRateOrder" ng-if="room.isGreenPointPlanThere==true || roomDetails.displayOnlyGreenPoints==false">
+                            <div class="hotlInfo">
+                                <!--galWp Started-->
+                                <div class="galWp">
+                                    <a href="javascript:;" ng-if="!room.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                    <a href="javascript:;" ng-if="room.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                    <!-- rsvGalry Started -->
+                                    <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                        <div class="wrapper">
+                                            <a ng-if="!room.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                            <a ng-if="room.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                        </div>
+                                        <div class="wrapper">
+                                            <div class="tvs_wrapper" ng-if="room.tavelClickVideo">
+                                                <div class="tvs_main" ng-bind-html="getVideoUrl(room.tavelClickVideo)">
+
+                                                </div>
+                                            </div>
+                                            <div class="glVw" onclick="event.stopPropagation();">
+
+                                                <ul class="glVwUl" ng-if="room.tavelClickVideo == null || room.tavelClickVideo == undefined || room.tavelClickVideo ==''">
+
+                                                    <li ng-repeat="(key, value) in room.galleryImages">
+                                                        <figure>
+                                                            <img  ng-src="{{value}}" alt="">
+                                                            <figcaption>
+                                                                <p style="color:#ffffff; align:right">{{room.hotelName}},{{room.getMinRateRoomsByHotel}}</p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- rsvGalry End -->
+                                </div>
+                                <!--galWp Started-->
+                                <div class="lefImg">
+                                    <div class="htImgWp"><img class="htlImg" ng-src="{{room.roomImage}}" alt="{{room.roomDesc}}" title="{{room.roomDesc}}"></div>
+                                    <div class="chkCnWp">
+                                        <div class="chkCnt roomCheckbox" ng-mouseover="showToolTipMessage('byRoom','online')">
+                                            <input type="checkBox" class="" ng-model="checkSelectedOnline" ng-change="setCheckedList('online',room.roomCode,room.roomName,room.minRate,room.roomPagePath,this,'byRoom',room.index,'none',room.bedType,room.roomLocation,room.privileges,room.services,room.roomImage,room.roomOccupancy,room.roomSize,'',room.galleryImages,room.displayIn,'','','',room.tavelClickVideo)"  style="display:inline-block !important">
+                                            <label ng-click="compareRooms('byRoom','online')" class="lab2 roomCompareLabelOnline" style="pointer-events: none; color:white ;">Compare</label>
+                                        </div>
+                                        <div class="toltip">
+                                            <p class="reservationOnlineToolTip">Please select at least two rooms to compare</p>
+                                            <span class="tltpArw"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="rigInfo">
+                                    <div class="logoInf">
+                                        <p class="hd1">{{room.roomName}}</p>
+                                        <p class="font14Bl">Size: {{room.roomSize}}</p>
+                                        <p class="font14Bl">Location: {{room.roomLocation}}</p>
+                                        <p class="font14Bl">Bed Type: {{room.bedType}}</p>
+                                    </div>
+                                    <ul class="lnkGoldWp">
+                                        <li ng-click="showRoomDetails($index,room.roomInclusionPoints)"><a class="lnkGold" rel="roomDetjs" href="javascript:;" id="byRoomDetails{{$index}}">Room Details <span class="clsTx">X</span></a></li>
+                                        <li ng-if="room.handicapFacility=='true'"><span class="hndcpIc"></span></li>
+                                        <li class="lstChd" ng-if="room.noAvail < noOfRoomsLeft"><span class="clockIc"></span><span class="font12Bl">Only 1 room left!</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="rate" style="{{room.reserve}}">
+                                <div class="clbPoints">
+                                    <p class="ptSml">From</p>
+                                    <p class="prc" ng-if="room.displayIn=='cash'">
+                                        <span class="rps"><span class="WebRupee">Rs.</span>{{room.minRate | currency:"":0}}</span>
+                                        <br class="noDIsp">
+                                        <span class="ptSml">Per Night</span>
+                                    </p>
+                                    <p class="prc" ng-if="room.displayIn=='points'">
+                                        <span class="rps"><span class=""></span>{{room.minRate | currency:"":0}}</span>
+                                        <br class="noDIsp">
+                                        <span class="ptSml">Points Per Night</span>
+                                    </p>
+                                </div>
+
+                                <a class="btn1 likeAdd btn1_mbl" rel="viewRatejs" href="javascript:;" onclick="rateRoomDt(this);" >view rates</a>
+                            </div>
+                            <div class="clear"></div>
+
+                            <!--viewRtCnt start -->
+                            <div class="viewRtCnt clearfix" id="planDetails">
+                                <!-- viewRateWrp started /-->
+                                <div class="viewRateWrp viewRatejs innerTabJs" style="{{room.viewRate}}">
+                                    <a class="lnkGold act" rel="viewRatejs01"href="javascript:;" onclick="rateRoomDt(this);">View Rates <span class="clsTx">X</span></a>
+                                    <!--rateLst start -->
+                                    <ul class="rateLst clearfix">
+                                        <li ng-repeat="plan in room.ratePlans | orderBy:myRateOrder" ng-if="plan.isGreenPointPlanThere==true || roomDetails.displayOnlyGreenPoints==false">
+                                            <div class="rateleft">
+                                                <p class="rateHdng">{{plan.ratePlanName}}</p>
+                                                <div class="clear"></div>
+                                                <p class="rateTxt">{{plan.ratePlanDescription}}</p>
+                                                <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+                                                <!-- lnkGoldWp started /-->
+                                                <ul class="lnkGoldWp clearfix">
+                                                    <li>
+                                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'incls');$('.hotelRight').show();" ng-click="getPlanInclusions(plan.inclusionDesc,plan.planTerms)">Inclusions</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms');$('.hotelRight').show();" ng-click="getPlanTerms(plan.planTerms,plan.inclusionDesc)">Terms</a>
+                                                    </li>
+                                                    <!-- <li style="font-weight: 400;font-size: 14px;">Non-refundable </li>
+                                                     <li style="font-weight: 400;font-size: 14px;">No penalty for cancellations before *date*</li>-->
+                                                    <li ng-if="plan.wifiFacility=='true'"><span class="wifiIc"></span></li>
+                                                    <!--li><span class="wifiIc"></span></li-->
+                                                </ul>
+                                                <!-- lnkGoldWp end /-->
+
+                                            </div>
+                                            <div class="rateright" ng-if="plan.ratePlanAmount">
+                                                <div class="rate">
+                                                    <div class="clbPoints">
+                                                        <p class="prc">
+                                                            <span class="rps"><span class="WebRupee">Rs.</span>{{plan.ratePlanAmount | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Per Night</span>
+                                                        </p>
+                                                    </div>
+                                                    <a class="btn1 likeAdd btn1_mbl" id="ratePlan{{plan.ratePlanCode}}" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byRoom',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,room.roomCode,plan.ratePlanCode,room.roomName)">reserve</a>
+                                                </div>
+                                            </div>
+                                            <div class="rateright"  ng-if="plan.costPerNight">
+                                                <div class="rate">
+                                                    <div class="clbWp">
+                                                        <div class="clbPoints">
+                                                            <p class="prc">
+                                                                <span class="rps">{{plan.pointsPerNight | currency:"":0}}</span>
+                                                                <br class="noDIsp">
+                                                                <span class="ptSml">Points</span>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="clbPoints">
+                                                            <p class="prc">
+                                                                <span class="ptSml roomRatePlusRes">+</span>
+                                                                <span class="rps"><span class="WebRupee">Rs.</span>{{plan.costPerNight | currency:"":0}}</span>
+                                                                <br class="noDIsp">
+                                                                <span class="ptSml">Per Night</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <!--a ng-if="cui==false && plan.pointsPerNight" id="cui==false && plan.pointsPerNight" class="btn6 mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                                    <a class="btn1 likeAdd btn1_mbl mT6" id="ratePlan{{plan.ratePlanCode}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byRoom',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,room.roomCode,plan.ratePlanCode,room.roomName,'none','halfGreenPoints',plan.pointsPerNight,$event,plan.costPerNight)">reserve</a>
+                                                </div>
+                                            </div>
+                                            <div class="rateright" ng-if="!plan.costPerNight && plan.pointsPerNight ">
+                                                <div class="rate">
+                                                    <div class="clbWp">
+
+
+
+                                                        <div class="clbPoints">
+
+                                                            <p class="prc">
+                                                                <span class="rps">{{plan.pointsPerNight | currency:"":0}}</span>
+                                                                <br class="noDIsp">
+                                                                <span class="ptSml">Points Per Night</span>
+                                                            </p>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--a ng-if="cui==false && plan.pointsPerNight" class="btn6 mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                                    <a class="btn1 likeAdd btn1_mbl mT6" id="ratePlan{{plan.ratePlanCode}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byRoom',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,room.roomCode,plan.ratePlanCode,room.roomName,'none','fullGreenPoints',plan.pointsPerNight,$event)">reserve</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                                <!-- htMLgInWp Started -->
+                                                <div class="htMLgInWp clearfix">
+                                                    <span class="tpDrArw"></span>
+                                                    <!-- login Started /-->
+                                                    <div class="htlLogIn">
+                                                        <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6"></a>
+                                                        <div class="innLgIn">
+
+                                                            <p>Club ITC LOG IN</p>
+                                                            <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                            <div class="inpPs">
+                                                                <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                                <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                            </div>
+
+                                                            <!-- errwp Started -->
+                                                            <div class="errwp" >
+                                                                <div id="errorPicRes"></div>
+
+                                                                <p style="display:none" id="errorMsgRes" ></p>
+                                                            </div>
+                                                            <!-- errwp End -->
+                                                            <div class="clear"></div>
+                                                            <div class="rmFpWp">
+                                                                <div class="chkWp">
+                                                                    <input type="checkbox" name="remember me" class="chk rememberMe" id="cBxLogin2online{{$index}}{{room.roomName}}{{plan.ratePlanName}}">
+                                                                    <label class="lab1" for="cBxLogin2online{{$index}}{{room.roomName}}{{plan.ratePlanName}}">Remember me</label>
+                                                                </div>
+                                                                <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                                <div class="clear"></div>
+                                                            </div>
+
+                                                            <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- login end /-->
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <!-- htMLgInWp End -->
+                                            </div>
+                                            <!--rmRtsLgnWp Started-->
+                                        </li>
+
+
+                                    </ul>
+                                    <!--rateLst end -->
+                                </div>
+                                <!-- viewRateWrp started /-->
+
+                                <!--rateLst start -->
+                                <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions">
+                                    <p class="rmDtlsPara">{{room.roomDescription}}</p>
+                                    <div class="inclsnCnt">
+                                        <p class="inclsnHdng" id="roomInclusionHeading">{{room.roomInclusionHeading}}</p>
+                                        <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                                <!--rateLst end -->
+                            </div>
+                            <!--viewRtCnt end -->
+                        </li>
+                        <li rel="dfad" id="roomListRes" ng-repeat="room in roomDetails.roomDetails.rooms | orderBy:myRateOrder" ng-if="room.isGreenPointPlanThere==true || roomDetails.displayOnlyGreenPoints==false">
+                            <div class="hotlInfo">
+                                <!--galWp Started-->
+                                <div class="galWp">
+                                    <a href="javascript:;" ng-if="!room.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                    <a href="javascript:;" ng-if="room.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                    <!-- rsvGalry Started -->
+                                    <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                        <div class="wrapper">
+                                            <a ng-if="!room.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                            <a ng-if="room.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                        </div>
+                                        <div class="wrapper">
+                                            <div class="tvs_wrapper" ng-if="room.tavelClickVideo">
+                                                <div class="tvs_main" ng-bind-html="getVideoUrl(room.tavelClickVideo)">
+
+                                                </div>
+                                            </div>
+                                            <div class="glVw" onclick="event.stopPropagation();">
+
+                                                <ul class="glVwUl" ng-if="room.tavelClickVideo == null || room.tavelClickVideo == undefined || room.tavelClickVideo ==''">
+                                                    <li ng-repeat="(key, value) in room.galleryImages">
+                                                        <figure>
+                                                            <img  ng-src="{{value}}" alt="">
+                                                            <figcaption>
+                                                                <p style="color:#ffffff; align:right">{{room.hotelName}},{{room.locations}}</p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- rsvGalry End -->
+                                </div>
+                                <!--galWp Started-->
+
+                                <div class="lefImg">
+                                    <div class="htImgWp"><img class="htlImg" ng-src="{{room.roomImage}}" alt="{{room.roomDesc}}" title="{{room.roomDesc}}"></div>
+                                    <div class="chkCnWp">
+                                        <div class="chkCnt roomCheckbox" ng-mouseover="showToolTipMessage('byRoom','offline')">
+                                            <input type="checkBox" class="" ng-model="checkSelectedR" ng-change="setCheckedList('offline',room.roomId,room.roomDesc,room.minRate,room.roomPagePath,this,'byRoom',room.index,'none',room.bedType,room.location,room.privileges,room.services,room.roomImage,room.roomOccupancy,room.size,'',room.galleryImages,'','','',room.redemptionType,room.tavelClickVideo)" style="display:inline-block !important">
+                                            <label class="lab2 roomCompareLabel" ng-click="compareRooms('byRoom','offline')">Compare</label>
+                                        </div>
+                                        <div class="toltip">
+                                            <p class="reservationRToolTip">Please select at least two rooms to compare</p>
+                                            <span class="tltpArw"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rigInfo">
+                                    <div class="logoInf">
+                                        <p class="hd1">{{room.roomDesc}}</p>
+                                        <p class="font14Bl">Size: {{room.size}}</p>
+                                        <p class="font14Bl">Location: {{room.location}}</p>
+                                        <p class="font14Bl">Bed Type: {{room.bedType}}</p>
+                                    </div>
+                                    <ul class="lnkGoldWp">
+                                        <li><a class="lnkGold" rel="roomDetjs" href="javascript:;" onclick="rateRoomDt(this);">Room Details <span class="clsTx">X</span></a></li>
+                                        <!--li><span class="hndcpIc"></span></li-->
+                                        <li class="lstChd" ng-if="room.noAvail < noOfRoomsLeft"><span class="clockIc"></span><span class="font12Bl">Only 1 room left!</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="rate" style="{{room.reserve}}">
+                                <div class="clbPoints">
+                                    <p class="ptSml">From</p>
+                                    <p class="prc" ng-if="room.redemptionType=='P'||room.redemptionType==' '||room.redemptionType==''">
+                                        <span class="rps"><span class="WebRupee">Rs.</span>{{room.minRate}}</span>
+                                        <br class="noDIsp">
+                                        <span class="ptSml">Per Night</span>
+                                    </p>
+                                    <p class="prc" ng-if="room.redemptionType=='F'">
+                                        <span class="rps"><span class=""></span>{{room.minRate | currency:"":0}}</span>
+                                        <br class="noDIsp">
+                                        <span class="ptSml">Points Per Night</span>
+                                    </p>
+                                </div>
+
+
+
+                                <a class="btn1 likeAdd btn1_mbl " rel="viewRatejs" href="javascript:;" onclick="rateRoomDt(this);">view rates</a>
+                            </div>
+                            <div class="clear"></div>
+                            <!--viewRtCnt start -->
+                            <div class="viewRtCnt clearfix">
+                                <!-- viewRateWrp started /-->
+                                <div class="viewRateWrp viewRatejs innerTabJs" style="{{room.viewRate}}">
+                                    <a class="lnkGold act" rel="viewRatejs01"href="javascript:;" onclick="rateRoomDt(this);">View Rates <span class="clsTx">X</span></a>
+                                    <!--rateLst start -->
+                                    <ul class="rateLst clearfix">
+                                        <li ng-repeat="plan in room.plan.plans | orderBy:myRateOrder" ng-if="plan.flagRedemption=='Y' || roomDetails.displayOnlyGreenPoints==false">
+                                            <div class="rateleft">
+                                                <p class="rateHdng">{{plan.planName}}</p>
+                                                <div class="clear"></div>
+                                                <p class="rateTxt">{{plan.planDesc}}</p>
+                                                <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+
+                                                <!-- lnkGoldWp started /-->
+                                                <ul class="lnkGoldWp clearfix">
+                                                    <li>
+                                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'incls');$('.hotelRight').show();" ng-click="getPlanInclusions(plan.inclusionDesc,plan.planTerms)">Inclusions</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms');$('.hotelRight').show();" ng-click="getPlanTerms(plan.planTerms,plan.inclusionDesc)">Terms</a>
+                                                    </li>
+                                                    <!--  <li style="font-weight: 400;font-size: 14px;">Non-refundable </li>
+                                                      <li style="font-weight: 400;font-size: 14px;">No penalty for cancellations before *date*</li>-->
+                                                    <li ng-if="plan.flgWifi=='Y'"><span class="wifiIc"></span></li>
+
+                                                </ul>
+                                                <!-- lnkGoldWp end /-->
+
+                                            </div>
+                                            <div class="rateright">
+                                                <div class="rate" >
+                                                    <div class="clbPoints" ng-if="plan.flagRedemption == 'N' && plan.redemptionType=='' ">
+                                                        <p class="prc">
+                                                            <span class="rps"><span class="WebRupee">Rs.</span>{{plan.minRate | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Per Night</span>
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- li for non opera redemption rateplan dispaly Start-->
+                                                    <div class="clbPoints" ng-if="plan.flagRedemption=='Y' && ( plan.redemptionType=='P' || plan.redemptionType=='F' )">
+                                                        <p class="prc">
+                                                            <span class="rps">{{plan.points | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Points Per Night</span>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="clbPoints" ng-if="plan.flagRedemption=='Y' && plan.redemptionType=='P' ">
+                                                        <p class="prc">
+                                                            <span class="ptSml roomRatePlusRes">+</span>
+                                                            <span class="rps"><span class="WebRupee">Rs.</span>{{plan.minRate | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Per Night</span>
+                                                        </p>
+                                                    </div>
+                                                    <!-- li for non opera redemption rateplan dispaly End-->
+
+                                                    <a class="btn1 likeAdd btn1_mbl" id="ratePlan{{plan.ratePlanCode}}" ng-click="selectedTab();redirectToCustomizeStay('','byRoom','none','none',plan.inclusionDesc,plan.planTerms,'none','offline',plan.planName,plan.minRate,'none','none',room.roomId,plan.planId,room.roomDesc,'NA',undefined,plan.points,$event,plan.minRate,plan.flagRedemption,plan.redemptionType,plan.planId,plan.flgFreeNight,plan.depositType,plan.depositValue,plan.flgBreakfast)">reserve</a>​
+
+                                                </div>
+                                            </div>
+                                            <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                                <!-- htMLgInWp Started -->
+                                                <div class="htMLgInWp clearfix">
+                                                    <span class="tpDrArw"></span>
+                                                    <!-- login Started /-->
+                                                    <div class="htlLogIn">
+                                                        <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6"></a>
+                                                        <div class="innLgIn">
+
+                                                            <p>Club ITC LOG IN</p>
+                                                            <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                            <div class="inpPs">
+                                                                <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                                <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                            </div>
+
+                                                            <!-- errwp Started -->
+                                                            <div class="errwp" >
+                                                                <div id="errorPicRes"></div>
+
+                                                                <p style="display:none" id="errorMsgRes" ></p>
+                                                            </div>
+                                                            <!-- errwp End -->
+                                                            <div class="clear"></div>
+                                                            <div class="rmFpWp">
+                                                                <div class="chkWp">
+                                                                    <input type="checkbox" name="remember me" class="chk rememberMe" id="cBxLogin2offline{{$index}}{{room.roomDesc}}{{plan.planName}}">
+                                                                    <label class="lab1" for="cBxLogin2offline{{$index}}{{room.roomDesc}}{{plan.planName}}">Remember me</label>
+                                                                </div>
+                                                                <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                                <div class="clear"></div>
+                                                            </div>
+
+                                                            <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- login end /-->
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <!-- htMLgInWp End -->
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <!--rateLst end -->
+                                </div>
+                                <!-- viewRateWrp started /-->
+
+                                <!--rateLst start -->
+                                <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" ng-bind-html="room.textContent">
+                                    <!--p class="rmDtlsPara" text="{{room.textContent}}" ></p>
+                                    <div class="inclsnCnt">
+                                        <p class="rmDtlsPara">{{room.roomInclusionHeading}}</p>
+
+                                        {{room.roomInclusionHeading.roomInclusionPoints | currency:"":0}}
+
+                                    </div-->
+
+
+                                </div>
+                                <!--rateLst end -->
+                            </div>
+                            <!--viewRtCnt end -->
+                        </li>
+                        <div ng-if="roomDetails.roomDetails == undefined && roomDetails.online.rooms == undefined && specialOffers==false" ><a class="ycBtn"  style="!important; cursor: default" href="javascript:;" onclick="$(this).toggleClass('act'); $(this).next().toggle();"><span style='!important;font-size: 70%;'>{{noRoomSearchResults}}</span></a></div>
+                        <div ng-if="roomDetails.roomDetails == undefined && roomDetails.online.rooms == undefined && specialOffers==true" class="ycBtn"><span style='!important;font-size: 70%;'>The offer selected by you is not
+available for these dates. To view complete set of offers, <a style="color:#c49a52" ng-href="javascript:;" ng-click="getRoomSearchResultOnUpdate()">please click
+                                here.</a></span></div>
+                    </ul>
+                    <!-- By Room end -->
+                    <!-- By Rate start -->
+                    <ul class="rateLst byRate tabChild clearfix" id="byRateCompare" style="dispaly:block;">
+                        <li id="roomListByRateOnline" ng-repeat="plans in roomDetails.online.plans | orderBy:myRateOrder" ng-if="(plans.isGreenPointPlanThere==true || roomDetails.displayOnlyGreenPoints==false) && plans.minRate !=undefined">
+                            <!-- rateleft started /-->
+                            <div class="byrateInWp clearfix">
+                                <div class="rateleft">
+                                    <p class="rateHdng">{{plans.ratePlanName}}</p>
+                                    <div class="clear"></div>
+                                    <p class="rateTxt">{{plans.ratePlanDescription}}</p>
+                                </div>
+                                <!-- rateleft end /-->
+                                <ul class="lnkGoldWp clearfix">
+                                    <li><a class="lnkGold" onclick="showInclTerm(this,'incls');$('.hotelRight').show();" ng-click="getPlanInclusions(plans.inclusionDesc,plans.planTerms)" href="javascript:;">Inclusions</a></li>
+                                    <li><a class="lnkGold" onclick="showInclTerm(this,'trms');$('.hotelRight').show();" href="javascript:;" ng-click="getPlanTerms(plans.planTerms,plans.inclusionDesc)">Terms</a></li>
+                                    <!--    <li style="font-weight: 400;font-size: 14px;">Non-refundable </li>
+                                        <li style="font-weight: 400;font-size: 14px;">No penalty for cancellations before *date*</li>-->
+                                    <li ng-if="plans.wifiFacility=='true'"><span class="wifiIc"></span></li>
+                                </ul>
+                                <div class="rateright" ng-if="!plans.showPriceInPoints">
+                                    <div class="rate" style="{{plans.reserve}}">
+                                        <div class="clbPoints">
+                                            <p class="ptSml">From</p>
+                                            <p class="prc">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{plans.minRate | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a class="btn1 likeAdd btn1_mbl" href="javascript:;" onclick="rateRoomDt(this)" rel="viewRatejs">view rooms</a>
+                                    </div>
+                                </div>
+                                <div class="rateright" ng-if="plans.showPriceInPoints==true">
+                                    <div class="rate" style="{{plans.reserve}}">
+                                        <div class="clbPoints">
+                                            <p class="ptSml">From</p>
+                                            <p class="prc">
+                                                <span class="rps"><span class=""></span>{{plans.minRate | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Points Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a class="btn1 likeAdd btn1_mbl" href="javascript:;" onclick="rateRoomDt(this)" rel="viewRatejs">view rooms</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <!--viewRtCnt start -->
+                            <div class="viewRtCnt clearfix">
+                                <!-- viewRateWrp started /-->
+                                <div class="viewRateWrp viewRatejs innerTabJs" style="{{plans.viewRate}}">
+                                    <a class="lnkGold act" href="javascript:;" rel="viewRatejs01" onclick="rateRoomDt(this);">View Rooms<span class="clsTx">X</span></a>
+                                    <!--rateLst start -->
+                                    <ul class="hotels clearfix">
+                                        <li ng-repeat="roomByPlan in plans.rooms | orderBy:myRateOrder">
+                                            <div class="hotlInfo">
+                                                <!--galWp Started-->
+                                                <div class="galWp">
+                                                    <a href="javascript:;" ng-if="!roomByPlan.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                                    <a href="javascript:;" ng-if="roomByPlan.tavelClickVideo" class="vidTravelClick byRateVidClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                                    <!-- rsvGalry Started -->
+                                                    <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                                        <div class="wrapper">
+                                                            <a ng-if="!roomByPlan.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                            <a ng-if="roomByPlan.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                        </div>
+                                                        <div class="wrapper">
+                                                            <div class="tvs_wrapper" ng-if="roomByPlan.tavelClickVideo">
+                                                                <div class="tvs_main" ng-bind-html="getVideoUrl(roomByPlan.tavelClickVideo)">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="glVw" onclick="event.stopPropagation();">
+
+                                                                <ul class="glVwUl" ng-if="roomByPlan.tavelClickVideo == null || roomByPlan.tavelClickVideo == undefined || roomByPlan.tavelClickVideo ==''">
+                                                                    <li ng-repeat="(key, value) in roomByPlan.galleryImages">
+                                                                        <figure>
+                                                                            <img  ng-src="{{value}}" alt="">
+                                                                            <figcaption>
+                                                                                <p style="color:#ffffff; align:right">{{roomByPlan.hotelName}},{{roomByPlan.locations}}</p>
+                                                                            </figcaption>
+                                                                        </figure>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- rsvGalry End -->
+                                                </div>
+                                                <!--galWp Started-->
+
+                                                <div class="lefImg">
+                                                    <div class="htImgWp"><img class="htlImg" ng-src="{{roomByPlan.roomImage}}" alt="{{roomByPlan.roomName}}" title="{{roomByPlan.roomName}}"></div>
+                                                    <div class="chkCnWp">
+                                                        <div class="chkCnt" ng-mouseover="showToolTipMessage('byRate','online')">
+
+                                                            <input type="checkBox" id="rrchkBn" class="" ng-model="checkSelectedByRateOnline" style="display:inline-block !important" ng-change="setCheckedList('online',roomByPlan.roomId,roomByPlan.roomName,roomByPlan.ratePlanAmount,roomByPlan.roomPagePath,this,'byRate',none,plans.ratePlanName,roomByPlan.bedType,roomByPlan.roomLocation,roomByPlan.privileges,roomByPlan.services,roomByPlan.roomImage,roomByPlan.roomOccupancy,roomByPlan.roomSize,plans.ratePlanCode,roomByPlan.galleryImages,'',roomByPlan.pointsPerNight,roomByPlan.costPerNight,'',roomByPlan.tavelClickVideo)">
+                                                            <label class="lab2 roomCompareLabelByRateOnline" ng-click="compareRooms('byRate','online',roomByPlan.hotelCode,roomByPlan.chainCode)">Compare</label>
+                                                        </div>
+                                                        <div class="toltip">
+                                                            <p class="reservationToolTipByRateOnline">Please select at least two hotels to compare</p>
+                                                            <span class="tltpArw"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rigInfo">
+                                                    <div class="logoInf" style="margin-top: 0px;">
+                                                        <p class="hd1">{{roomByPlan.roomName}}</p>
+                                                        <p class="font14Bl">Size: {{roomByPlan.roomSize}}</p>
+                                                        <p class="font14Bl">Location: {{roomByPlan.roomLocation}}</p>
+                                                        <p class="font14Bl">Bed Type: {{roomByPlan.bedType}}</p>
+                                                        <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+                                                    </div>
+                                                    <ul class="lnkGoldWp">
+                                                        <li><a class="lnkGold" href="javascript:;" ng-click="showRoomDetails('none',roomByPlan.roomInclusionPoints,$event)">Room Details <span class="clsTx">X</span></a></li>
+                                                        <li ng-if="roomByPlan.handicapFacility=='true'"><span class="hndcpIc"></span></li>
+                                                        <li class="lstChd" ng-if="roomByPlan.noAvail < noOfRoomsLeft"><span class="clockIc"></span><span class="font12Bl">Only 1 room left!</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="rate" ng-if="roomByPlan.ratePlanAmount">
+                                                <div class="clbPoints">
+                                                    <p class="prc">
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{roomByPlan.ratePlanAmount | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Per Night</span>
+                                                    </p>
+                                                </div>
+                                                <a class="btn1 likeAdd btn1_mbl" href="javascript:void(0)" id="{{plans.inclusionDesc}}" ng-click="selectedTab();redirectToCustomizeStayForByRate(plans.freeNightPlan,plans.hasPackage,plans.addOnPackageCode,plans.inclusionDesc,plans.planTerms,'none','online',roomByPlan.roomDescription,roomByPlan.roomId,roomByPlan.hotelCode,roomByPlan.chainCode,roomByPlan.roomTypeCode,plans.ratePlanCode,roomByPlan.roomName,plans.ratePlanName,roomByPlan.ratePlanAmount)">Reserve</a>
+                                            </div>
+                                            <div class="rate pT" ng-if="roomByPlan.costPerNight">
+                                                <div class="clbWp">
+
+                                                    <div class="clbPoints">
+
+                                                        <p class="prc">
+                                                            <span class="rps">{{roomByPlan.pointsPerNight | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Points</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="clbPoints">
+                                                        <p class="prc">
+                                                            <span class="ptSml roomRatePlusRes">+</span>
+                                                            <span class="rps"><span class="WebRupee">Rs.</span>{{roomByPlan.costPerNight | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Per Night</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn1 likeAdd btn1_mbl mT6" href="javascript:;" id="{{plans.inclusionDesc}}" ng-click="selectedTab();redirectToCustomizeStayForByRate(plans.freeNightPlan,plans.hasPackage,plans.addOnPackageCode,plans.inclusionDesc,plans.planTerms,roomByPlan.ratio,'online',roomByPlan.roomDescription,roomByPlan.roomId,roomByPlan.hotelCode,roomByPlan.chainCode,roomByPlan.roomTypeCode,plans.ratePlanCode,roomByPlan.roomName,plans.ratePlanName,roomByPlan.ratePlanAmount,'halfGreenPoints',roomByPlan.pointsPerNight,$event,roomByPlan.costPerNight)">Reserve</a>
+                                            </div>
+                                            <div class="rate pT" ng-if="!roomByPlan.costPerNight && roomByPlan.pointsPerNight">
+                                                <div class="clbWp">
+
+                                                    <div class="clbPoints">
+
+                                                        <p class="prc">
+                                                            <span class="rps">{{roomByPlan.pointsPerNight | currency:"":0}}</span>
+                                                            <br class="noDIsp">
+                                                            <span class="ptSml">Points Per Night</span>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+                                                <a class="btn1 likeAdd btn1_mbl  mT6" href="javascript:;" id="{{plans.inclusionDesc}}" ng-click="selectedTab();redirectToCustomizeStayForByRate(plans.freeNightPlan,plans.hasPackage,plans.addOnPackageCode,plans.inclusionDesc,plans.planTerms,roomByPlan.ratio,'online',roomByPlan.roomDescription,roomByPlan.roomId,roomByPlan.hotelCode,roomByPlan.chainCode,roomByPlan.roomTypeCode,plans.ratePlanCode,roomByPlan.roomName,plans.ratePlanName,roomByPlan.ratePlanAmount,'fullGreenPoints',roomByPlan.pointsPerNight,$event)">Reserve</a>
+                                            </div>
+                                            <!--div class="rmDtlsCnt roomDetjs innerTabJs clearfix" style="display: inline-block;float: left;background: #eeeeee;">
+                                                <p class="rmDtlsPara">The Executive Club is a concept designed with care to meet the needs of the global business traveller. It pioneers a tradition in corporate
+                                                    hospitality,  setting a premium on discreet efficiency and business related services. Located on floors 15th to 17th, these rooms are an
+                                                    elegant combination of comfort and executive workspace </p>
+
+                                                <div class="inclsnCnt">
+                                                    <p class="inclsnHdng">Inclusions and in-room amenities:</p>
+                                                    <ul class="inclsnLst">
+                                                        <li>50% discount on beverages at the Executive Club Exclusive Lobby Lounge between 1800 to 2000 hrs for resident guests.</li>
+                                                        <li>Complimentary coffee/ tea maker in the room</li>
+                                                        <li>Complimentary 04 bottles of 500 ml packaged drinking water, replenished daily.</li>
+                                                        <li>“Fruits of the Season” on request. </li>
+                                                        <li>Iron &amp; ironing board </li>
+                                                        <li>Slippers </li>
+                                                        <li>Bathroom amenities: Exclusive Aqua toiletries and bath linen.</li>
+                                                    </ul>
+                                                </div>
+                                            </div-->
+
+                                            <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions" style="display:none;float: left;background: #eeeeee;">
+                                                <p class="rmDtlsPara">{{roomByPlan.roomDescription}}</p>
+                                                <div class="inclsnCnt">
+                                                    <p class="inclsnHdng" id="roomInclusionHeading">{{roomByPlan.roomInclusionHeading}}</p>
+                                                    <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                                <!-- htMLgInWp Started -->
+                                                <div class="htMLgInWp clearfix">
+                                                    <span class="tpDrArw"></span>
+                                                    <!-- login Started /-->
+                                                    <div class="htlLogIn">
+                                                        <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6"></a>
+                                                        <div class="innLgIn">
+
+                                                            <p>Club ITC LOG IN</p>
+                                                            <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                            <div class="inpPs">
+                                                                <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                                <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                            </div>
+
+                                                            <!-- errwp Started -->
+                                                            <div class="errwp" >
+                                                                <div id="errorPicRes"></div>
+
+                                                                <p style="display:none" id="errorMsgRes" ></p>
+                                                            </div>
+                                                            <!-- errwp End -->
+                                                            <div class="clear"></div>
+                                                            <div class="rmFpWp">
+                                                                <div class="chkWp">
+                                                                    <input type="checkbox" name="remember me" class="chk rememberMe" id="cBxLogin2OnlineByrate{{$index}}{{plans.ratePlanName}}{{roomByPlan.roomName}}">
+                                                                    <label class="lab1" for="cBxLogin2OnlineByrate{{$index}}{{plans.ratePlanName}}{{roomByPlan.roomName}}">Remember me</label>
+                                                                </div>
+                                                                <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                                <div class="clear"></div>
+                                                            </div>
+
+                                                            <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- login end /-->
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <!-- htMLgInWp End -->
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <!--rateLst end -->
+                                </div>
+                                <!-- viewRateWrp end /-->
+                            </div>
+                            <!--viewRtCnt end -->
+                        </li>
+                        <li ng-repeat="plans in roomDetails.planDetails.plans | orderBy:myRateOrder" id="roomListByRate" ng-if="plans.flagRedemption=='Y' || roomDetails.displayOnlyGreenPoints==false">
+                            <!-- rateleft started /-->
+                            <div class="byrateInWp clearfix">
+                                <div class="rateleft">
+                                    <p class="rateHdng">{{plans.descPlan}}</p>
+                                    <div class="clear"></div>
+                                    <p class="rateTxt">{{plans.textContent}}</p>
+                                </div>
+                                <!-- rateleft end /-->
+                                <ul class="lnkGoldWp clearfix">
+                                    <li><a class="lnkGold" onclick="showInclTerm(this,'incls');$('.hotelRight').show();" href="javascript:;" ng-click="getPlanInclusions(plans.inclusionDesc,plans.planTerms)">Inclusions</a></li>
+                                    <li><a class="lnkGold" onclick="showInclTerm(this,'trms');$('.hotelRight').show();" href="javascript:;" ng-click="getPlanTerms(plans.planTerms,plans.inclusionDesc)">Terms</a></li>
+                                    <!-- <li style="font-weight: 400;font-size: 14px;">Non-refundable </li>
+                                     <li style="font-weight: 400;font-size: 14px;">No penalty for cancellations before *date*</li>-->
+                                    <li ng-if="plans.flgWifi=='Y'"><span class="wifiIc"></span></li>
+                                </ul>
+                                <div class="rateright" >
+                                    <div class="rate" style="{{plans.reserve}}">
+                                        <div class="clbPoints" ng-if="plans.flagRedemption=='N'">
+                                            <p class="ptSml">From</p>
+                                            <p class="prc">
+                                                <span class="rps"><span class="WebRupee">Rs.</span>{{plans.minRate | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Per Night</span>
+                                            </p>
+                                        </div>
+                                        <div class="clbPoints" ng-if="plans.flagRedemption=='Y'">
+                                            <p class="ptSml">From</p>
+                                            <p class="prc">
+                                                <span class="rps">{{plans.points | currency:"":0}}</span>
+                                                <br class="noDIsp">
+                                                <span class="ptSml">Points Per Night</span>
+                                            </p>
+                                        </div>
+                                        <a class="btn1 likeAdd btn1_mbl " href="javascript:;" onclick="rateRoomDt(this)" rel="viewRatejs">view rooms</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <!--viewRtCnt start -->
+                            <div class="viewRtCnt clearfix">
+                                <!-- viewRateWrp started /-->
+                                <div class="viewRateWrp viewRatejs innerTabJs" style="{{plans.viewRate}}">
+                                    <a class="lnkGold act" href="javascript:;" rel="viewRatejs01" onclick="rateRoomDt(this);">View Rooms<span class="clsTx">X</span></a>
+                                    <!--rateLst start -->
+                                    <ul class="hotels clearfix">
+                                        <li ng-repeat="roomByPlan in plans.room.roomsByPlan | orderBy:myRateOrder">
+                                            <div class="hotlInfo">
+                                                <!--galWp Started-->
+                                                <div class="galWp">
+                                                    <a href="javascript:;" ng-if="!roomByPlan.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                                    <a href="javascript:;" ng-if="roomByPlan.tavelClickVideo" class="vidTravelClick byRateVidClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                                    <!-- rsvGalry Started -->
+                                                    <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                                        <div class="wrapper">
+                                                            <a ng-if="!roomByPlan.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                            <a ng-if="roomByPlan.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                        </div>
+                                                        <div class="wrapper">
+                                                            <div class="tvs_wrapper" ng-if="roomByPlan.tavelClickVideo">
+                                                                <div class="tvs_main" ng-bind-html="getVideoUrl(roomByPlan.tavelClickVideo)">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="glVw" onclick="event.stopPropagation();">
+
+                                                                <ul class="glVwUl" ng-if="roomByPlan.tavelClickVideo == null || roomByPlan.tavelClickVideo == undefined || roomByPlan.tavelClickVideo == ''">
+                                                                    <li ng-repeat="(key, value) in roomByPlan.galleryImages">
+                                                                        <figure>
+                                                                            <img  ng-src="{{value}}" alt="">
+                                                                            <figcaption>
+                                                                                <p style="color:#ffffff; align:right">{{roomByPlan.hotelName}},{{roomByPlan.locations}}</p>
+                                                                            </figcaption>
+                                                                        </figure>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- rsvGalry End -->
+                                                </div>
+                                                <!--galWp Started-->
+
+                                                <div class="lefImg">
+                                                    <div class="htImgWp"><img class="htlImg" ng-src="{{roomByPlan.roomImage}}" alt="{{roomByPlan.roomDesc}}" title="{{roomByPlan.roomDesc}}"></div>
+                                                    <div class="chkCnWp">
+                                                        <div class="chkCnt" ng-mouseover="showToolTipMessage('byRate','offline')">
+                                                            <input type="checkBox" id="rrchkBn" class="" ng-model="checkSelectedByRate" style="display:inline-block !important" ng-change="setCheckedList('offline',roomByPlan.roomId,roomByPlan.roomDesc,roomByPlan.minRate,roomByPlan.roomPagePath,this,'byRate','none',plans.descPlan,roomByPlan.bedType,roomByPlan.location,roomByPlan.privileges,roomByPlan.services,roomByPlan.roomImage,roomByPlan.roomOccupancy,roomByPlan.size,plans.planId,roomByPlan.galleryImages,'',roomByPlan.points,'',roomByPlan.redemptionType,room.tavelClickVideo)">
+                                                            <label class="lab2 roomCompareLabelByRate" ng-click="compareRooms('byRate','offline',roomByPlan.hotelCode,roomByPlan.chainCode)">Compare</label>
+                                                        </div>
+                                                        <div class="toltip">
+                                                            <p class="reservationToolTipByRate">Please select at least two hotels to compare</p>
+                                                            <span class="tltpArw"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rigInfo">
+                                                    <div class="logoInf" style="margin-top: 0px;">
+                                                        <p class="hd1">{{roomByPlan.roomDesc}}</p>
+                                                        <p class="font14Bl">Size: {{roomByPlan.size}}</p>
+                                                        <p class="font14Bl">Location: {{roomByPlan.location}}</p>
+                                                        <p class="font14Bl">Bed Type: {{roomByPlan.bedType}}</p>
+                                                        <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+                                                    </div>
+                                                    <ul class="lnkGoldWp">
+                                                        <!--li><a class="lnkGold" href="javascript:;">Room Details <span class="clsTx">X</span></a></li -->
+                                                        <li><a class="lnkGold" href="javascript:;" ng-click="showRoomDetailsOffline('none',$event)">Room Details <span class="clsTx">X</span></a></li>
+                                                        <!--li><span class="hndcpIc"></span></li-->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="rate">
+                                                <div class="clbPoints" ng-if="roomByPlan.flagRedemption=='N'">
+                                                    <p class="prc">
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{roomByPlan.minRate | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Per Night</span>
+                                                    </p>
+                                                </div>
+                                                <div class="clbPoints" ng-if="roomByPlan.flagRedemption=='Y' && ( roomByPlan.redemptionType=='P' || roomByPlan.redemptionType=='F' )">
+
+                                                    <p class="prc">
+                                                        <span class="rps">{{roomByPlan.points | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Points Per Night</span>
+                                                    </p>
+                                                </div>
+                                                <div class="clbPoints" ng-if="roomByPlan.flagRedemption=='Y' && roomByPlan.redemptionType=='P'" >
+                                                    <p class="prc">
+                                                        <span class="ptSml roomRatePlusRes">+</span>
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{roomByPlan.minRate | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Per Night</span>
+                                                    </p>
+                                                </div>
+                                                <a class="btn1 likeAdd btn1_mbl" id="room{{roomByPlan.roomId}}" href="javascript:void(0)" ng-click="selectedTab();redirectToCustomizeStayForByRate('','none','none',plans.inclusionDesc,plans.planTerms,'none','offline',roomByPlan.roomDesc,roomByPlan.roomId,plans.descPlan,none,none,none,roomByPlan.roomDesc,plans.descPlan,roomByPlan.minRate,undefined,roomByPlan.points,$event,roomByPlan.minRate,roomByPlan.flagRedemption,roomByPlan.redemptionType,plans.planId,roomByPlan.flgFreeNight,plans.depositType,plans.depositValue,roomByPlan.flgBreakfast)">Reserve</a>
+                                            </div>
+                                            <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions" style="display:none;float: left;background: #eeeeee;" ng-bind-html="roomByPlan.textContent">
+                                                <!--p class="rmDtlsPara">{{roomByPlan.roomDescription}}</p>
+                                                <div class="inclsnCnt">
+                                                    <p class="inclsnHdng" id="roomInclusionHeading">{{roomByPlan.roomInclusionHeading}}</p>
+                                                    <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                                    </ul>
+                                                </div-->
+
+
+                                            </div>
+                                            <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                                <!-- htMLgInWp Started -->
+                                                <div class="htMLgInWp clearfix">
+                                                    <span class="tpDrArw"></span>
+                                                    <!-- login Started /-->
+                                                    <div class="htlLogIn">
+                                                        <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6"></a>
+                                                        <div class="innLgIn">
+
+                                                            <p>Club ITC LOG IN</p>
+                                                            <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                            <div class="inpPs">
+                                                                <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                                <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                            </div>
+
+                                                            <!-- errwp Started -->
+                                                            <div class="errwp" >
+                                                                <div id="errorPicRes"></div>
+
+                                                                <p style="display:none" id="errorMsgRes" ></p>
+                                                            </div>
+                                                            <!-- errwp End -->
+                                                            <div class="clear"></div>
+                                                            <div class="rmFpWp">
+                                                                <div class="chkWp">
+                                                                    <input type="checkbox" name="remember me" class="chk rememberMe" id="cBxLogin2OfflineByrate{{$index}}{{plans.descPlan}}{{roomByPlan.roomDesc}}">
+                                                                    <label class="lab1" for="cBxLogin2OfflineByrate{{$index}}{{plans.descPlan}}{{roomByPlan.roomDesc}}">Remember me</label>
+                                                                </div>
+                                                                <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                                <div class="clear"></div>
+                                                            </div>
+
+                                                            <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- login end /-->
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <!-- htMLgInWp End -->
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <!--rateLst end -->
+                                </div>
+                                <!-- viewRateWrp end /-->
+                            </div>
+                            <!--viewRtCnt end -->
+                        </li>
+                        <div ng-if="roomDetails.planDetails == undefined && roomDetails.online.plans == undefined && specialOffers==false" ><a class="ycBtn"  style="!important; cursor: default" href="javascript:;" onclick="$(this).toggleClass('act'); $(this).next().toggle();"><span style='!important;font-size: 70%;'>{{noRoomSearchResults}}</span></a></div>
+                        <div ng-if="roomDetails.roomDetails == undefined && roomDetails.online.rooms == undefined && specialOffers==true" class="ycBtn"><span style='!important;font-size: 70%;'>The offer selected by you is not
+available for these dates. To view complete set of offers, <a style="color:#c49a52" ng-href="javascript:;" ng-click="getRoomSearchResultOnUpdate()">please click
+                                here.</a></span></div>
+                    </ul>
+                    <!-- By Rate end -->
+
+                    <!-- By Choice start -->
+                    <div class="byChoice tabChild">
+                        <div class="byChoiceSearch clearfix">
+                            <div class="bcsrchHide clearfix" style="display:block">
+                                <p style="text-align: center" class="configByChoiceText" ng-bind-html="byChoiceDesc"></p>
+                                <div class="byChoiceHdng clearfix">
+                                    <a href="javascript:;" class="lnkGold" ng-click="resetCheckBox()">Reset</a>
+                                </div>
+
+                                <ul id="resetCheckbox" class="checkBoxUl clearfix">
+                                    <li id="roomTypes">
+                                        <p class="clsTog act" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Room Types <span class="plsIc2"></span></p>
+                                        <!-- inpMainWrp started /-->
+                                        <div class="inpMainWrp">
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="doubleBedSmoking" id="bed1" category="roomTypes" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2" for="bed1"><span class="lab2Txt">Double Bed Smoking</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="doubleBedNonSmoking" id="bed2" category="roomTypes" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2" for="bed2"><span class="lab2Txt">Double Bed Non - Smoking</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="twinSmoking" id="bed3" category="roomTypes"  ng-click="setCheckedOptions($event)">
+                                                <label class="lab2" for="bed3"><span class="lab2Txt">Twin Smoking</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="twinNonSmoking" id="bed4" category="roomTypes" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2" for="bed4"><span class="lab2Txt">Twin Non-smoking</span></label>
+                                            </div>
+                                        </div>
+                                        <!-- inpMainWrp started /-->
+                                    </li>
+                                    <li id="inclusions">
+                                        <p class="clsTog" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Inclusions <span class="plsIc2"></span></p>
+                                        <!-- inpMainWrp started /-->
+                                        <div class="inpMainWrp">
+                                            <!--<div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="roomOnly" id="rm2" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm2" style="pointer-events: none;"><span class="lab2Txt">Room only</span></label>
+                                            </div>-->
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="wifi" id="rm4" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm4" style="pointer-events: none;"><span class="lab2Txt">Wi-Fi</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="breakfast" id="rm3" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm3" style="pointer-events: none;"><span class="lab2Txt">Breakfast</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="singleOrDoubleSameRate" id="rm9" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm9" style="pointer-events: none;"><span class="lab2Txt">No extra charges for double occupancy</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="diningAndSpa" id="rm10" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm10" style="pointer-events: none;"><span class="lab2Txt">Savings on Dining and Spa</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="oneMajorMeal" id="rm6" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm6" style="pointer-events: none;"><span class="lab2Txt">One Major meal (Lunch or Dinner)</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="twoMajorMeals" id="rm7" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm7" style="pointer-events: none;"><span class="lab2Txt">Two Major meals (Lunch / Dinner)</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="spaTreatment" id="rm8" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm8" style="pointer-events: none;"><span class="lab2Txt">Spa treatment</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="airportTransfers" id="rm5" category="inclusions" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rm5" style="pointer-events: none;"><span class="lab2Txt">Airport transfers</span></label>
+                                            </div>
+                                        </div>
+                                        <!-- inpMainWrp end /-->
+                                    </li>
+                                    <li id="rateFeatures">
+                                        <p class="clsTog" onclick="if($(window).width() < 768) { $(this).next().toggle(); $(this).toggleClass('act'); }">Rate Features <span class="plsIc2"></span></p>
+                                        <!-- inpMainWrp started /-->
+                                        <div class="inpMainWrp">
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="flexibleDepositPolicy" id="rf3" category="rateFeatures" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rf3" style="pointer-events: none;"><span class="lab2Txt">Flexible Deposit policy</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="flexibleCancellationPolicy" id="rf4" category="rateFeatures" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rf4" style="pointer-events: none;"><span class="lab2Txt">Flexible Cancellation policy</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="earlyCheckIn" id="rf5" category="rateFeatures" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rf5" style="pointer-events: none;"><span class="lab2Txt">Early check-in and late check-out</span></label>
+                                            </div>
+                                            <div class="inpLabWrp clearfix">
+                                                <input type="checkBox" class="bestSellingRate" id="rf7" category="rateFeatures" ng-click="setCheckedOptions($event)">
+                                                <label class="lab2New dsbl" for="rf7" style="pointer-events: none;"><span class="lab2Txt">Best rates / Non-Refundable</span></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <a ng-click="getMatchedRooms();showErrMsg()"class="btn1 likeAddSubmit">submit</a>
+                                <div id="byChoiceError"></div>
+                            </div>
+                            <div class="nrstMtch clearfix">
+                                <p ng-if="byChoiceNearest==true" class="font22Bl" id="byChoiceHeading">nearest match</p>
+                                <ul class="hotels clearfix" id="matchedResults">
+                                    <li ng-repeat="plan in byChoiceResult| orderBy:myRateOrder track by $index">
+                                        <div class="hotlInfo">
+                                            <div class="lefImg">
+                                                <div class="htImgWp"><img class="htlImg" ng-src="{{plan.roomImage}}" alt="{{plan.roomName}}"></div>
+                                            </div>
+                                            <div class="galWp">
+                                                <a href="javascript:;" ng-if="!plan.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                                <a href="javascript:;" ng-if="plan.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                                <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                                    <div class="wrapper">
+                                                        <a ng-if="!plan.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                        <a ng-if="plan.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                    </div>
+                                                    <div class="wrapper">
+                                                        <div class="tvs_wrapper" ng-if="plan.tavelClickVideo">
+                                                            <div class="tvs_main" ng-bind-html="getVideoUrl(plan.tavelClickVideo)">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="glVw" onclick="event.stopPropagation();">
+
+                                                            <ul class="glVwUl" ng-if="plan.tavelClickVideo == null || plan.tavelClickVideo == undefined || plan.tavelClickVideo == ''">
+                                                                <li ng-repeat="(key, value) in plan.galleryImages">
+                                                                    <figure>
+                                                                        <img  ng-src="{{value}}" alt="">
+                                                                        <figcaption>
+                                                                            <p style="color:#ffffff; align:right">{{plan.roomName}}</p>
+                                                                        </figcaption>
+                                                                    </figure>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="rigInfo">
+                                                <div class="logoInf">
+                                                    <p class="hd1">{{plan.roomName}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Size: {{plan.roomSize}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Location: {{plan.roomLocation}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Bed Type: {{plan.bedType}}</p>
+                                                    <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+                                                </div>
+                                                <ul class="lnkGoldWp">
+                                                    <li><a class="lnkGold" href="javascript:;" ng-click="showRoomDetails(this,plan.roomInclusionPoints,$event)">Room Details <span class="clsTx">X</span></a></li>
+                                                    <li><a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'incls');$('.hotelRight').show();" ng-click="getPlanInclusions(plan.inclusionDesc,plan.planTerms)">Inclusions</a></li>
+                                                    <li><a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms');$('.hotelRight').show();"  ng-click="getPlanTerms(plan.planTerms,plan.inclusionDesc)">Terms</a></li>
+
+                                                    <li ng-if="plan.wifiFacility=='true'"><span class="wifiIc"></span></li>
+                                                    <li ng-if="plan.handicapFacility=='true'"><span class="hndcpIc"></span></li>
+                                                    <li class="lstChd" ng-if="plan.noAvail < noOfRoomsLeft"><span class="clockIc"></span><span class="font12Bl">Only 1 room left!</span></li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <div class="rate" ng-if="plan.ratePlanAmount">
+                                            <p class="hdG">{{plan.ratePlanName}}</p>
+                                            <div class="clear"></div>
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{plan.ratePlanAmount | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Per Night</span>
+                                                </p>
+                                            </div>
+                                            <a class="btn1 likeAdd btn1_mbl" id="ratePlan{{plan.ratePlanCode}}" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byChoice',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,plan.roomCode,plan.ratePlanCode,plan.roomName)">reserve</a>
+                                        </div>
+
+                                        <div class="rate ByChoiceCashPoints" ng-if="plan.costPerNight">
+                                            <!--p class="hdG">{{plan.ratePlanName}}</p>
+                                            <div class="clbWp">
+                                                <div class="clbPoints">
+                                                    <p class="prc">
+                                                        <span class="rps">{{plan.pointsPerNight | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Points</span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="clbPoints">
+                                                    <p class="prc">
+                                                        <span class="ptSml">+</span>
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{plan.costPerNight | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Per Night</span>
+                                                    </p>
+                                                </div>
+                                            </div-->
+                                            <p class="hdG">{{plan.ratePlanName}}</p>
+                                            <div class="clear"></div>
+
+
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps">{{plan.pointsPerNight | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints">
+                                                <p class="roomRatePlusRes">+</p>
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{plan.costPerNight | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Per Night</span>
+                                                </p>
+                                            </div>
+                                            <!--a ng-if="cui==false && plan.pointsPerNight" id="cui==false && plan.pointsPerNight" class="btn1 likeAdd mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                            <a class="btn1 likeAdd btn1_mbl mT6" id="ratePlan{{plan.ratePlanCode}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byChoice',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,plan.roomCode,plan.ratePlanCode,plan.roomName,'none','halfGreenPoints',plan.pointsPerNight,$event,plan.costPerNight)">reserve</a>
+                                        </div>
+
+
+                                        <div class="rate" ng-if="!plan.costPerNight && plan.pointsPerNight ">
+                                            <!--p class="hdG">{{plan.ratePlanName}}</p>
+                                            <div class="clbWp">
+
+
+
+                                                <div class="clbPoints">
+
+                                                    <p class="prc">
+                                                        <span class="rps">{{plan.pointsPerNight | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Points Per Night</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div-->
+                                            <p class="hdG">{{plan.ratePlanName}}</p>
+                                            <div class="clear"></div>
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee"></span>{{plan.pointsPerNight | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Night</span>
+                                                </p>
+                                            </div>
+                                            <!--a ng-if="cui==false && plan.pointsPerNight" class="btn1 likeAdd mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                            <a class="btn1 likeAdd btn1_mbl mT6" id="ratePlan{{plan.ratePlanCode}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay(plan.freeNightPlan,'byChoice',plan.hasPackage,plan.addOnPackageCode,plan.inclusionDesc,plan.planTerms,plan.ratio,'online',plan.ratePlanName,plan.ratePlanAmount,plan.hotelCode,plan.chainCode,plan.roomCode,plan.ratePlanCode,plan.roomName,'none','fullGreenPoints',plan.pointsPerNight,$event)">reserve</a>
+                                        </div>
+                                        <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions" style="display:none;float: left;background: #eeeeee;">
+                                            <p class="rmDtlsPara">{{plan.roomDescription}}</p>
+                                            <div class="inclsnCnt">
+                                                <p class="rmDtlsPara" id="roomInclusionHeading">{{plan.roomInclusionHeading}}</p>
+                                                <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                            <!-- htMLgInWp Started -->
+                                            <div class="htMLgInWp clearfix">
+                                                <span class="tpDrArw"></span>
+                                                <!-- login Started /-->
+                                                <div class="htlLogIn">
+                                                    <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6" style="display:block !important"></a>
+                                                    <div class="innLgIn">
+
+                                                        <p>Club ITC LOG IN</p>
+                                                        <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                        <div class="inpPs">
+                                                            <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                            <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                        </div>
+
+                                                        <!-- errwp Started -->
+                                                        <div class="errwp" >
+                                                            <div id="errorPicRes"></div>
+
+                                                            <p style="display:none" id="errorMsgRes" ></p>
+                                                        </div>
+                                                        <!-- errwp End -->
+                                                        <div class="clear"></div>
+                                                        <div class="rmFpWp">
+                                                            <div class="chkWp">
+                                                                <input type="checkbox" name="remember me"  class="chk rememberMe" id="cBxLogin2OnlineByChoice{{$index}}{{plan.ratePlanName}}{{plan.roomDescription}}">
+                                                                <label class="lab1" for="cBxLogin2OnlineByChoice{{$index}}{{plan.ratePlanName}}{{plan.roomDescription}}">Remember me</label>
+                                                            </div>
+                                                            <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                            <div class="clear"></div>
+                                                        </div>
+
+                                                        <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                                <!-- login end /-->
+                                                <div class="clear"></div>
+                                            </div>
+                                            <!-- htMLgInWp End -->
+                                        </div>
+                                    </li>
+                                    <li ng-repeat="plan in offlineByChoiceData.plans | orderBy:myRateOrder track by $index">
+                                        <div class="hotlInfo">
+                                            <div class="lefImg">
+                                                <div class="htImgWp"><img class="htlImg" ng-src="{{plan.roomImagePath}}" alt="{{plan.roomDesc}}"></div>
+                                            </div>
+                                            <div class="galWp">
+                                                <a href="javascript:;" ng-if="!plan.tavelClickVideo" class="camSml" onclick="event.stopPropagation(); hotelGall(this);"></a>
+                                                <a href="javascript:;" ng-if="plan.tavelClickVideo" class="vidTravelClick" onclick="event.stopPropagation(); hotelGallTravel(this,'videoPlay');"></a>
+                                                <div class="rsvGalry" onclick="wrapperCloseFunction()">
+                                                    <div class="wrapper">
+                                                        <a ng-if="!plan.tavelClickVideo" href="javascript:;" class="cls4" onclick="$(this).closest('.rsvGalry').hide();"></a>
+                                                        <a ng-if="plan.tavelClickVideo" href="javascript:;" class="cls4" onclick="hotelGallTravel(this,'videoStop');"></a>
+                                                    </div>
+                                                    <div class="wrapper">
+                                                        <div class="tvs_wrapper" ng-if="plan.tavelClickVideo">
+                                                            <div class="tvs_main" ng-bind-html="getVideoUrl(plan.tavelClickVideo)">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="glVw" onclick="event.stopPropagation();">
+
+                                                            <ul class="glVwUl" ng-if="plan.tavelClickVideo == null || plan.tavelClickVideo == undefined || plan.tavelClickVideo ==''">
+                                                                <li ng-repeat="(key, value) in plan.galleryImages track by $index">
+                                                                    <figure>
+                                                                        <img  ng-src="{{value}}" alt="">
+                                                                        <figcaption>
+                                                                            <p style="color:#ffffff; align:right">{{plan.roomDesc}}</p>
+                                                                        </figcaption>
+                                                                    </figure>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="rigInfo">
+                                                <div class="logoInf">
+                                                    <p class="hd1">{{plan.roomDesc}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Size: {{plan.size}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Location: {{plan.location}}</p>
+                                                    <p class="font14Bl" style="margin-top: 0px;">Bed Type: {{plan.bedType}}</p>
+                                                    <p class="font14Bl" id="pointsError" style="color:#ff0000;display:none;margin-top:0px;">Sorry, you don't have sufficient points to book this Room</p>
+                                                </div>
+                                                <ul class="lnkGoldWp">
+                                                    <li><a class="lnkGold" href="javascript:;" ng-click="showRoomDetails(this,plan.points,$event)">Room Details <span class="clsTx">X</span></a></li>
+                                                    <li><a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'incls');$('.hotelRight').show();" ng-click="getPlanInclusions(plan.inclusionDesc,plan.planTerms)">Inclusions</a></li>
+                                                    <li><a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms');$('.hotelRight').show();"  ng-click="getPlanTerms(plan.planTerms,plan.inclusionDesc)">Terms</a></li>
+
+                                                    <!--li><span class="hndcpIc"></span></li-->
+                                                    <li class="lstChd"><span class="clockIc"></span><span class="font12Bl">Only 1 room left!</span></li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <div class="rate" ng-if="plan.flagRedemption=='N'">
+                                            <p class="hdG">{{plan.descPlan}}</p>
+                                            <div class="clear"></div>
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{plan.minRate | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Per Night</span>
+                                                </p>
+                                            </div>
+                                            <a class="btn1 likeAdd btn1_mbl" id="bychoice{{plan.planId}}" ng-click="selectedTab();redirectToCustomizeStay('','byChoice','none','none',plan.inclusionDesc,plan.planTerms,'','offline',plan.descPlan,plan.minRate,plan.hotelId,'',plan.roomId,plan.planId,plan.roomDesc,'',undefined,'','','','',plan.redemptionType,plan.planId,plan.flgFreeNight,plan.depositType,plan.depositValue,plan.flgBreakfast)">reserve</a>
+                                        </div>
+
+                                        <div class="rate ByChoiceCashPoints" ng-if="plan.flagRedemption=='Y' && plan.redemptionType=='P'">
+                                            <!--p class="hdG">{{plan.descPlan}}</p>
+                                            <div class="clbWp">
+                                                <div class="clbPoints">
+                                                    <p class="prc">
+                                                        <span class="rps">{{plan.points | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Points</span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="clbPoints">
+                                                    <p class="prc">
+                                                        <span class="ptSml">+</span>
+                                                        <span class="rps"><span class="WebRupee">Rs.</span>{{plan.rateAmt | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Per Night</span>
+                                                    </p>
+                                                </div>
+                                            </div-->
+                                            <p class="hdG">{{plan.descPlan}}</p>
+                                            <div class="clear"></div>
+
+
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps">{{plan.points | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points</span>
+                                                </p>
+                                            </div>
+                                            <div class="clbPoints">
+                                                <p class="roomRatePlusRes">+</p>
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee">Rs.</span>{{plan.minRate | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Per Night</span>
+                                                </p>
+                                            </div>
+                                            <!--a ng-if="cui==false && plan.pointsPerNight" id="cui==false && plan.pointsPerNight" class="btn1 likeAdd mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                            <a class="btn1 likeAdd btn1_mbl mT6" id="bychoice{{plan.planId}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay('','byChoice','none','none',plan.inclusionDesc,plan.planTerms,'','offline',plan.descPlan,plan.minRate,plan.hotelId,'',plan.roomId,plan.planId,plan.roomDesc,'none','halfGreenPoints',plan.points,$event,plan.minRate,'',plan.redemptionType,plan.planId,plan.flgFreeNight,plan.depositType,plan.depositValue,plan.flgBreakfast)">reserve</a>
+                                        </div>
+
+
+                                        <div class="rate" ng-if="plan.flagRedemption=='Y' && plan.redemptionType=='F'">
+                                            <!--p class="hdG">{{plan.descPlan}}</p>
+                                            <div class="clbWp">
+
+
+
+                                                <div class="clbPoints">
+
+                                                    <p class="prc">
+                                                        <span class="rps">{{plan.points | currency:"":0}}</span>
+                                                        <br class="noDIsp">
+                                                        <span class="ptSml">Points Per Night</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div-->
+                                            <p class="hdG">{{plan.descPlan}}</p>
+                                            <div class="clear"></div>
+                                            <div class="clbPoints">
+                                                <p class="prc">
+                                                    <span class="rps"><span class="WebRupee"></span>{{plan.points | currency:"":0}}</span>
+                                                    <br class="noDIsp">
+                                                    <span class="ptSml">Points Per Night</span>
+                                                </p>
+                                            </div>
+                                            <!--a ng-if="cui==false && plan.pointsPerNight" class="btn6 mT6" href="javascript:;" onclick="logIn(this,'logInrRel');">reserve</a-->
+                                            <a class="btn1 likeAdd btn1_mbl mT6" id="bychoice{{plan.planId}}" href="javascript:;" ng-click="selectedTab();redirectToCustomizeStay('','byChoice','none','none',plan.inclusionDesc,plan.planTerms,'','offline',plan.descPlan,plan.minRate,plan.hotelId,'',plan.roomId,plan.planId,plan.roomDesc,'none','fullGreenPoints',plan.points,$event,'','',plan.redemptionType,plan.planId,plan.flgFreeNight,plan.depositType,plan.depositValue,plan.flgBreakfast)">reserve</a>
+                                        </div>
+                                        <div class="rmDtlsCnt roomDetjs innerTabJs clearfix" id="roomInclusions" style="display:none;float: left;background: #eeeeee;" ng-bind-html="plan.textContent">
+                                            <!--p class="rmDtlsPara" ng-bind-html="plan.textContent"></p>
+                                            <div class="inclsnCnt">
+                                                <p class="rmDtlsPara" id="roomInclusionHeading">{{plan.inclusionDesc}}</p>
+                                                <ul class="inclsnLst" id="roomInclusionPoints">
+
+                                                </ul>
+                                            </div-->
+
+
+                                        </div>
+                                        <div class="rmRtsLgnWp logInrRel clubItcLogin" style="display: none;">
+                                            <!-- htMLgInWp Started -->
+                                            <div class="htMLgInWp clearfix">
+                                                <span class="tpDrArw"></span>
+                                                <!-- login Started /-->
+                                                <div class="htlLogIn">
+                                                    <a href="javascript:;" onclick=" $('.mainWrp').removeClass('logInPop'); $(this).closest('.rmRtsLgnWp').hide();  clsLogIn(this);" class="cls6" style="display:block !important"></a>
+                                                    <div class="innLgIn">
+
+                                                        <p>Club ITC LOG IN</p>
+                                                        <input type="text" id="membershipNumber" placeholder="Membership Number" class="inp memEmail">
+                                                        <div class="inpPs">
+                                                            <input type="Password" placeholder="Password" class="inp" id="userPassword">
+                                                            <a class="rigArw" onclick="getUserIdentification('clubItcUser',this);" href="javascript:;"></a>
+                                                        </div>
+
+                                                        <!-- errwp Started -->
+                                                        <div class="errwp" >
+                                                            <div id="errorPicRes"></div>
+
+                                                            <p style="display:none" id="errorMsgRes" ></p>
+                                                        </div>
+                                                        <!-- errwp End -->
+                                                        <div class="clear"></div>
+                                                        <div class="rmFpWp">
+                                                            <div class="chkWp">
+                                                                <input type="checkbox" name="remember me" class="chk rememberMe" id="cBxLogin2OfflineByChoice{{$index}}{{plan.roomDesc}}{{plan.descPlan}}">
+                                                                <label class="lab1" for="cBxLogin2OfflineByChoice{{$index}}{{plan.roomDesc}}{{plan.descPlan}}">Remember me</label>
+                                                            </div>
+                                                            <a class="frPs" ng-href="{{forgotPasswordPagePath}}">Forgot Password?</a>
+                                                            <div class="clear"></div>
+                                                        </div>
+
+                                                        <p class="noAcc">Not a member? <a ng-href="{{registerPagePath}}">Register </a></p>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                                <!-- login end /-->
+                                                <div class="clear"></div>
+                                            </div>
+                                            <!-- htMLgInWp End -->
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div id="byChoiceSearchErr" ng-if="byChoiceSubmit==true"><a class="ycBtn"  style="!important; cursor: default" href="javascript:;" onclick="$(this).toggleClass('act'); $(this).next().toggle();"><span style='!important;font-size: 70%;'>{{noByChoiceSearchResults}}</span></a></div>
+                                <!--a class="srchMore">View 4 more rooms matching your choice</a-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- By Choice end -->
+
+                    <!-- terms and inclusion started /-->
+                    <!--rsLuxry Startted -->
+                    <div class="rsLuxry termIncJs" onclick="event.stopPropagation();">
+                        <div class="wrapper"><a href="javascript:;" class="cls4" onclick=" $(this).closest('.rsLuxry').hide(); $('.mainWrp').removeClass('termInc');"></a></div>
+                        <div class="wrapper">
+                            <div class="ovrlyIn clearfix ">
+                                <ul class="rRtVwRtsUl clearfix ">
+                                    <li>
+                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'incls')" >Inclusions</a>
+                                    </li>
+                                    <li>
+                                        <a class="lnkGold" href="javascript:;" onclick="event.stopPropagation(); showInclTerm(this,'trms')">Terms</a>
+                                    </li>
+                                    <!--li><span class="wifiIc"></span></li-->
+                                </ul>
+
+                                <div class="rRtVwRtDt clearfix">
+                                    <!-- incls Started -->
+                                    <div class="incls tabChild2">
+                                        <ul class="incsnTmsUl clearfix" id="RoomRatesInclusions" >
+
+                                        </ul>
+                                    </div>
+                                    <!-- incls end -->
+
+                                    <!-- trms Started -->
+                                    <div class="trms tabChild2">
+                                        <ul class="incsnTmsUl  clearfix" id="RoomRatesTerms">
+                                        </ul>
+                                    </div>
+                                    <!-- trms End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--rsLuxry Startted -->
+                    <!-- terms and inclusion end /-->
+
+
+
+                </div>
+                <!-- tabWrp end /-->
+
+            </div>
+        </div>
+    </div>
+    <!-- Hotel detail end /-->
+</div>
+
+<script type="text/javascript">
+   $(window).load(function() {
+      checkEleApp ();
+      resPos();
+      topFixNav()
+      mobSliderfn();
+      mobArrPlaFn();
+      setVal() // resetting rooms and adult input field
+      addBlc() // adding blcMenu class to main top navigation
+      compareTipsFn(); // tool tip for compare
+   });
+
+   $(window).scroll(function() {
+      checkEleApp();
+      topFixNav();
+   });
+   $(window).resize(function() {
+      resPos();
+      mobSliderfn();
+      mobArrPlaFn();
+      submenuSlid();
+      addBlc() // adding blcMenu class to main top navigation
+      clsLogIn() // closing club itc login
+      hideBotFix(); // hiding bottom fix nav for mobile sections
+   });
+
+
+
+
+$(document).ready(function() {
+   hideBotFix(); // hiding bottom fix nav for mobile sections
+   // resetting
+   $('body').click(function(e) {
+    if($('#played_div').length){
+        hotelGallTravel('#played_div', 'videoStop');
+    }
+      resMainReset();
+   });
+
+   // esc key functionality
+   $(document).keyup(function(e) {
+      if($(window).width()>1263) {
+          if (e.keyCode == 27) {
+             // Esc
+            resMainReset();
+          }
+       }
+   });
+
+});
+
+function myfunction()
+{
+$("#roomPromoValueErr").hide();
+}
+
+function mynewfunction()
+{
+$("#roomPromoValueErr").show();
+}
+</script>
+<style>
+    .trms .incsnTmsUl {
+    padding-left: 35px;
+}
+.incls .incsnTmsUl{
+padding-left: 15px;
+}
+.gTU{z-index:10;}
+
+.ByChoiceCashPoints {
+	padding-top: 10px !important;
+}
+
+.ByChoiceCashPoints .roomRatePlusRes {
+	margin-top: -14px !important;
+}
+@media only screen and (max-width: 1024px) and (min-width: 0px)
+{
+   #questionIcon
+   {display:none;}
+}
+@media only screen and (max-width: 479px) and (min-width: 0px){
+.adultJsnew{margin-right:10px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 767px) and (min-width: 480px){
+.adultJsnew{margin-right:70px !important;}
+.childJsnew{float:left !important;}
+}
+@media only screen and (max-width: 1262px) and (min-width: 768px){
+.adultJsnew{margin-right:17px !important;}
+.childJsnew{float:left !important;}
+}
+</style>
